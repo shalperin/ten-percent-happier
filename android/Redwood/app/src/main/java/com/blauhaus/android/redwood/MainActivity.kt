@@ -23,11 +23,12 @@ import retrofit2.http.POST
 import java.util.concurrent.TimeUnit
 
 
-val url = "http://10.0.2.2:5000/"
+//val url = "http://10.0.2.2:5000/"
+val url = "https://redwood-264500.appspot.com"
 /*
 IDEAS:
     + KOIN injection (repo)
-    + GAE backend
+    + Testing
  */
 
 
