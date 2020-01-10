@@ -5,8 +5,7 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class CalculatorViewModel() : ViewModel() {
-    val repo = CalculatorRepoImpl()
+class CalculatorViewModel(val repo:CalculatorRepo) : ViewModel() {
     val result = MutableLiveData<Float>()
     val errorMessage = MutableLiveData<String>()
     val loading = MutableLiveData<Boolean>()
