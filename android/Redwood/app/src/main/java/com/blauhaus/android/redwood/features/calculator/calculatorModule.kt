@@ -1,4 +1,4 @@
-package com.blauhaus.android.redwood.components.calculator
+package com.blauhaus.android.redwood.features.calculator
 
 import com.blauhaus.android.redwood.BuildConfig
 import okhttp3.OkHttpClient

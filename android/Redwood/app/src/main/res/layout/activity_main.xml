@@ -4,12 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android" >
-    <fragment android:name="com.blauhaus.android.redwood.components.calculator.CalculatorFragment"
+    <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/calculator1"
         />
-    <fragment android:name="com.blauhaus.android.redwood.components.calculator.CalculatorFragment"
+    <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/calculator2"

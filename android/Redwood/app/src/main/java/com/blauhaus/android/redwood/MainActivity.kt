@@ -2,7 +2,13 @@ package com.blauhaus.android.redwood
 
 import android.os.Bundle
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import com.blauhaus.android.redwood.features.calculator.CalculatorFragment
+import com.blauhaus.android.redwood.features.calculator.CalculatorViewModel
+import kotlinx.android.synthetic.main.activity_main.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
@@ -16,13 +22,42 @@ IDEAS:
 
 
 class MainActivity : AppCompatActivity() {
-
     val tag = "MAIN_ACTIVITY_ADDER"
+    lateinit var model1: CalculatorViewModel
+    lateinit var model2: CalculatorViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        model1 = addCalculator1()
+        model2 = addCalculator2()
+
+        model1.result.observe(this, Observer {
+            result -> Toast.makeText(this, "model1: " + result.toString(), Toast.LENGTH_LONG).show()
+        })
+        model2.result.observe(this, Observer {
+                result -> Toast.makeText(this, "model2: " + result.toString(), Toast.LENGTH_LONG).show()
+        })
+
     }
+
+    fun addCalculator1():CalculatorViewModel {
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        val frag = CalculatorFragment()
+        fragmentTransaction.add(R.id.calculator1, frag,"calc1tag")
+        fragmentTransaction.commit()
+        return frag.shareModel()
+    }
+
+    fun addCalculator2():CalculatorViewModel {
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        val frag = CalculatorFragment()
+        fragmentTransaction.add(R.id.calculator2, frag,"calc2tag")
+        fragmentTransaction.commit()
+        return frag.shareModel()
+    }
+
 }
 
 

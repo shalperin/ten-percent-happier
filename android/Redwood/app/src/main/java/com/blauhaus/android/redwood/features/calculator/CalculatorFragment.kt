@@ -1,5 +1,6 @@
-package com.blauhaus.android.redwood.components.calculator
+package com.blauhaus.android.redwood.features.calculator
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -59,4 +60,9 @@ class CalculatorFragment : Fragment() {
             model.sum(ra.data ?: 0f, rb.data ?: 0f)
         }
     }
+
+    fun shareModel() : CalculatorViewModel {
+        return model
+    }
+
 }
