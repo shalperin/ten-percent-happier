@@ -5,6 +5,8 @@ import time
 
 app = Flask(__name__)
 
+SIMULATE_ERRORS = False
+
 @app.route('/')
 def hello_world():
     return 'Hello, World!'
@@ -20,18 +22,21 @@ def add():
     except Exception as e:
         emsg = str(e)
         
-    mode = random.randint(0,5)
-    print(f"Mode is {mode}")
     if emsg != "":
-       return make_response(jsonify({"exception": emsg}), 400)
-    elif mode in range(0,4): #add
-        return jsonify({"sum" : a+b})
-    elif mode == 4: #timeout
-        time.sleep(30)
-        return jsonify({"exception": "we should have timed out before seeing this data"}, 400 )
-    elif mode == 5: #service unavailable
-        return make_response(jsonify({}), 503)
+            return make_response(jsonify({"exception": emsg}), 400)
 
+    if not SIMULATE_ERRORS:
+        return jsonify({"sum" : a+b})        
+    else:
+        mode = random.randint(0,5)
+        if mode in range(0,4): #add
+            return jsonify({"sum" : a+b})
+        elif mode == 4: #timeout
+            time.sleep(30)
+            return jsonify({"exception": "we should have timed out before seeing this data"}, 400 )
+        elif mode == 5: #service unavailable
+            return make_response(jsonify({}), 503)
+     
 
 if __name__ == '__main__':
     # This is used when running locally only. When deploying to Google App
