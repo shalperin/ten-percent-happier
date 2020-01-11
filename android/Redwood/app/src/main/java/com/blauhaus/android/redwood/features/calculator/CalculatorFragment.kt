@@ -15,12 +15,27 @@ import kotlinx.android.synthetic.main.calculator_fragment.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CalculatorFragment : Fragment() {
-    val model: CalculatorViewModel by viewModel()
-
+    private val model: CalculatorViewModel by viewModel()
+    private var id:Int? = null
     companion object {
-        fun newInstance() = CalculatorFragment()
+        val ID_KEY = "id"
+
+        fun newInstance(id:Int):CalculatorFragment  {
+            var frag = CalculatorFragment()
+            val args = Bundle()
+            args.putInt(ID_KEY, id)
+            frag.arguments = args
+            return frag
+
+        }
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (arguments != null) {
+            id = arguments!!.getInt(ID_KEY)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,13 +49,13 @@ class CalculatorFragment : Fragment() {
 
         button_add.setOnClickListener(performAddition)
 
-        model.result.observe(this, Observer { result ->
+        model.result(id!!)?.observe(this, Observer { result ->
             field_result.text = result.toString()
         })
-        model.errorMessage.observe(this, Observer { msg ->
+        model.errorMessage(id!!)?.observe(this, Observer { msg ->
             Toast.makeText(activity, "error: " + msg, Toast.LENGTH_LONG).show()
         })
-        model.loading.observe(this, Observer { loading ->
+        model.loading(id!!)?.observe(this, Observer { loading ->
             if (loading) {
                 loading_notification.visibility = View.VISIBLE
             } else {
@@ -49,20 +64,17 @@ class CalculatorFragment : Fragment() {
         })
     }
 
-    val performAddition = { view: View ->
-        var ra = field_a.parseFloat()
-        var rb = field_b.parseFloat()
-        if (ra is Resource.Error) {
-            model.errorMessage.postValue(ra.message)
-        } else if (rb is Resource.Error) {
-            model.errorMessage.postValue(rb.message)
-        } else {
-            model.sum(ra.data ?: 0f, rb.data ?: 0f)
+    val performAddition = object : View.OnClickListener {
+        override fun onClick(v: View?) {
+            var ra = field_a.parseFloat()
+            var rb = field_b.parseFloat()
+            if (ra is Resource.Error) {
+                model.errorMessage(id!!)?.postValue(ra.message)
+            } else if (rb is Resource.Error) {
+                model.errorMessage(id!!)?.postValue(rb.message)
+            } else {
+                model.sum(id!!, ra.data ?: 0f, rb.data ?: 0f)
+            }
         }
     }
-
-    fun shareModel() : CalculatorViewModel {
-        return model
-    }
-
 }

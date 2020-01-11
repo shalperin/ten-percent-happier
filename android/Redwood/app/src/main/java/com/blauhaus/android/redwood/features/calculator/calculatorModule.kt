@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 val calculatorModule = module {
     single<CalculatorRepo> { CalculatorRepoImpl(get()) }
-    factory { CalculatorViewModel(get())}
+    single { CalculatorViewModel(get())}
     factory { CalculatorFragment()}
     factory { CalculatorAuthInterceptor() }
     factory { provideOkHttpClient(get()) }

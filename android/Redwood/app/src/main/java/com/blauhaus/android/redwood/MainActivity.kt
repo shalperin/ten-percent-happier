@@ -23,39 +23,38 @@ IDEAS:
 
 class MainActivity : AppCompatActivity() {
     val tag = "MAIN_ACTIVITY_ADDER"
-    lateinit var model1: CalculatorViewModel
-    lateinit var model2: CalculatorViewModel
+    val calc1Id = 1
+    val calc2Id = 2
+    val model by viewModel<CalculatorViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        model1 = addCalculator1()
-        model2 = addCalculator2()
+        addCalculator1()
+        addCalculator2()
 
-        model1.result.observe(this, Observer {
+        model.result(calc1Id)?.observe(this, Observer {
             result -> Toast.makeText(this, "model1: " + result.toString(), Toast.LENGTH_LONG).show()
         })
-        model2.result.observe(this, Observer {
+        model.result(calc2Id)?.observe(this, Observer {
                 result -> Toast.makeText(this, "model2: " + result.toString(), Toast.LENGTH_LONG).show()
         })
 
     }
 
-    fun addCalculator1():CalculatorViewModel {
+    fun addCalculator1() {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        val frag = CalculatorFragment()
+        val frag = CalculatorFragment.newInstance(calc1Id)
         fragmentTransaction.add(R.id.calculator1, frag,"calc1tag")
         fragmentTransaction.commit()
-        return frag.shareModel()
     }
 
-    fun addCalculator2():CalculatorViewModel {
+    fun addCalculator2() {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        val frag = CalculatorFragment()
+        val frag = CalculatorFragment.newInstance(calc2Id)
         fragmentTransaction.add(R.id.calculator2, frag,"calc2tag")
         fragmentTransaction.commit()
-        return frag.shareModel()
     }
 
 }
