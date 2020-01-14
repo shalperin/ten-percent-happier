@@ -1,11 +1,11 @@
-package com.blauhaus.android.redwood.features.lastfourweeks.views
+package com.blauhaus.android.jazz.lastfourweeks.views
 
 import android.content.Context
 import android.util.AttributeSet
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
-import com.blauhaus.android.redwood.R
+import com.blauhaus.android.jazz.R
 
 
 class DayView : ImageView {

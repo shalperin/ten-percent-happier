@@ -4,8 +4,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
 import com.blauhaus.android.redwood.features.calculator.CalculatorViewModel
-import com.blauhaus.android.redwood.features.lastfourweeks.LastFourWeeksViewModel
-import com.blauhaus.android.redwood.features.lastfourweeks.views.DayView
+import com.blauhaus.android.jazz.lastfourweeks.LastFourWeeksViewModel
+import com.blauhaus.android.jazz.lastfourweeks.demoLastFourWeeksData
+import com.blauhaus.android.jazz.lastfourweeks.views.DayView
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -20,13 +21,7 @@ IDEAS:
 
 
 class MainActivity : AppCompatActivity() {
-    val tag="SQH_MAIN_ACTIVITY"
-    val calculatorViewModel by viewModel<CalculatorViewModel>()
-
-
     val lastFourWeeksViewModel by viewModel<LastFourWeeksViewModel>()
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

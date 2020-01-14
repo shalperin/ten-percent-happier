@@ -1,6 +1,5 @@
-package com.blauhaus.android.redwood.features.lastfourweeks
+package com.blauhaus.android.jazz.lastfourweeks
 
-import com.blauhaus.android.redwood.features.calculator.*
 import org.koin.dsl.module
 
 
