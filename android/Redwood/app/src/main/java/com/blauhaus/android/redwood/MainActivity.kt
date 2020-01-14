@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.blauhaus.android.redwood.features.calculator.CalculatorFragment
 import com.blauhaus.android.redwood.features.calculator.CalculatorViewModel
+import com.blauhaus.android.redwood.features.lastfourweeks.LastFourWeeksViewModel
+import com.blauhaus.android.redwood.features.lastfourweeks.views.DotView
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import retrofit2.http.Field
@@ -22,43 +24,18 @@ IDEAS:
 
 
 class MainActivity : AppCompatActivity() {
-    val tag = "MAIN_ACTIVITY_ADDER"
-    val calc1Id = 1
-    val calc2Id = 2
-    val model by viewModel<CalculatorViewModel>()
+    val tag="SQH_MAIN_ACTIVITY"
+    val calculatorViewModel by viewModel<CalculatorViewModel>()
+    val lastFourWeeksViewModel by viewModel<LastFourWeeksViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        addCalculator1()
-        addCalculator2()
-
-        model.result(calc1Id)?.observe(this, Observer {
-            result -> Toast.makeText(this, "model1: " + result.toString(), Toast.LENGTH_LONG).show()
-        })
-        model.result(calc2Id)?.observe(this, Observer {
-                result -> Toast.makeText(this, "model2: " + result.toString(), Toast.LENGTH_LONG).show()
-        })
-
-    }
-
-    fun addCalculator1() {
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        val frag = CalculatorFragment.newInstance(calc1Id)
-        fragmentTransaction.add(R.id.calculator1, frag,"calc1tag")
-        fragmentTransaction.commit()
-    }
-
-    fun addCalculator2() {
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        val frag = CalculatorFragment.newInstance(calc2Id)
-        fragmentTransaction.add(R.id.calculator2, frag,"calc2tag")
-        fragmentTransaction.commit()
+        lastFourWeeksViewModel.dayData.postValue(demoLastFourWeeksData)
     }
 
 }
-
 
 sealed class Resource<T>(
     val data: T? = null,
@@ -68,6 +45,33 @@ sealed class Resource<T>(
     class Loading<T>(data: T? = null, var refreshing: Boolean = false) : Resource<T>(data)
     class Error<T>(data: T? = null, message: String) : Resource<T>(data, message)
 }
+
+
+val demoLastFourWeeksData = listOf(
+    DotView.DotViewState.Skipped(),
+    DotView.DotViewState.Met(),
+    DotView.DotViewState.Skipped(),
+    DotView.DotViewState.Met(),
+    DotView.DotViewState.Met(),
+    DotView.DotViewState.Met(),
+    DotView.DotViewState.Skipped(),
+    DotView.DotViewState.Met(),
+    DotView.DotViewState.Met(),
+    DotView.DotViewState.Met(),
+    DotView.DotViewState.Skipped(),
+    DotView.DotViewState.Met(),
+    DotView.DotViewState.Met(),
+    DotView.DotViewState.Met(),
+    DotView.DotViewState.Met(),
+    DotView.DotViewState.Skipped(),
+    DotView.DotViewState.Skipped(),
+    DotView.DotViewState.Skipped(),
+    DotView.DotViewState.Met(),
+    DotView.DotViewState.Met(),
+    DotView.DotViewState.Met(),
+    DotView.DotViewState.Met(),
+    DotView.DotViewState.MetToday()
+)
 
 
 
