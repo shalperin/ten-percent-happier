@@ -25,8 +25,8 @@ class DotView : ImageView {
     private val notMetVector = R.drawable.ic_last4weeks_x_mark
     private val notMetTodayVector = R.drawable.ic_last4weeks_stroked_circle
 
-    private var d: DotViewState =
-        DotViewState.Future()
+    private var d: ViewState =
+        ViewState.Future()
 
     private val metTodayAnim = AnimationUtils.loadAnimation(context, android.R.anim.fade_out).apply{
         setAnimationListener(object: Animation.AnimationListener {
@@ -41,26 +41,26 @@ class DotView : ImageView {
         })
     }
 
-    fun show (d: DotViewState) {
+    fun show (d: ViewState) {
         this.d = d
         show()
     }
 
     private fun show() {
         when(d) {
-            is DotViewState.Skipped -> {
+            is ViewState.Skipped -> {
                 setImageResource(notMetVector)
             }
-            is DotViewState.Met -> {
+            is ViewState.Met -> {
                 setImageResource(metVector)
             }
-            is DotViewState.MetToday -> {
+            is ViewState.MetToday -> {
                 startAnimation(metTodayAnim)
             }
-            is DotViewState.NotMetToday -> {
+            is ViewState.DidntMeetYetToday -> {
                 setImageResource(notMetTodayVector)
             }
-            is DotViewState.Future -> {
+            is ViewState.Future -> {
                 setImageResource(futureVector)
             }
         }
@@ -74,12 +74,12 @@ class DotView : ImageView {
 //        return d
 //    }
 
-    sealed class DotViewState() {
-        class Skipped() : DotViewState()
-        class Met(): DotViewState()
-        class MetToday(): DotViewState()
-        class NotMetToday(): DotViewState()
-        class Future(): DotViewState()
+    sealed class ViewState() {
+        class Skipped() : ViewState()
+        class Met(): ViewState()
+        class MetToday(): ViewState()
+        class DidntMeetYetToday(): ViewState()
+        class Future(): ViewState()
    }
 
 }
