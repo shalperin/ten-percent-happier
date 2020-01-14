@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".features.lastfourweeks.LastFourWeeksFragment"
-    android:background="@android:color/background_dark"
+    android:background="@color/lastFourWeeksBackgroundColor"
     android:padding="40dp"
     >
 
@@ -22,9 +22,9 @@
             android:id="@+id/head0"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:text="M"
+            android:text="S"
             android:gravity="center"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/lastFourWeeksTextColor"
             />
         <Space
             android:layout_width="wrap_content"
@@ -35,9 +35,9 @@
             android:id="@+id/head1"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:text="T"
+            android:text="M"
             android:gravity="center"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/lastFourWeeksTextColor"
             />
         <Space
             android:layout_width="wrap_content"
@@ -48,9 +48,9 @@
             android:id="@+id/head2"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:text="W"
+            android:text="T"
             android:gravity="center"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/lastFourWeeksTextColor"
             />
 
         <Space
@@ -62,9 +62,9 @@
             android:id="@+id/head3"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:text="R"
+            android:text="W"
             android:gravity="center"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/lastFourWeeksTextColor"
             />
 
         <Space
@@ -76,9 +76,9 @@
             android:id="@+id/head4"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:text="F"
+            android:text="T"
             android:gravity="center"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/lastFourWeeksTextColor"
             />
 
         <Space
@@ -90,9 +90,9 @@
             android:id="@+id/head5"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:text="S"
+            android:text="F"
             android:gravity="center"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/lastFourWeeksTextColor"
             />
 
         <Space
@@ -106,7 +106,7 @@
             android:layout_height="25dp"
             android:text="S"
             android:gravity="center"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/lastFourWeeksTextColor"
             />
     </LinearLayout>
 

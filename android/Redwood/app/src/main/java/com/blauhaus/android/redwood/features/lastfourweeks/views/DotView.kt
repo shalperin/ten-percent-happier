@@ -1,14 +1,10 @@
 package com.blauhaus.android.redwood.features.lastfourweeks.views
 
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
-import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.DrawableCompat
-import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
 import com.blauhaus.android.redwood.R
 
 
@@ -27,6 +23,7 @@ class DotView : ImageView {
     private val futureVector = R.drawable.ic_last4weeks_circle_future
     private val metTodayVector = R.drawable.ic_last4weeks_check_circle
     private val notMetVector = R.drawable.ic_last4weeks_x_mark
+    private val notMetTodayVector = R.drawable.ic_last4weeks_stroked_circle
 
     private var d: DotViewState =
         DotViewState.Future()
@@ -34,7 +31,7 @@ class DotView : ImageView {
     private val metTodayAnim = AnimationUtils.loadAnimation(context, android.R.anim.fade_out).apply{
         setAnimationListener(object: Animation.AnimationListener {
             override fun onAnimationStart(animation: Animation?) {
-                setImageResource(metVector)
+               // setImageResource(metVector)
             }
             override fun onAnimationRepeat(animation: Animation?) {}
             override fun onAnimationEnd(animation: Animation?) {
@@ -60,6 +57,9 @@ class DotView : ImageView {
             is DotViewState.MetToday -> {
                 startAnimation(metTodayAnim)
             }
+            is DotViewState.NotMetToday -> {
+                setImageResource(notMetTodayVector)
+            }
             is DotViewState.Future -> {
                 setImageResource(futureVector)
             }
@@ -78,6 +78,7 @@ class DotView : ImageView {
         class Skipped() : DotViewState()
         class Met(): DotViewState()
         class MetToday(): DotViewState()
+        class NotMetToday(): DotViewState()
         class Future(): DotViewState()
    }
 
