@@ -7,6 +7,7 @@
 
     >
     <fragment
+        android:layout_marginTop="24dp"
         android:name="com.blauhaus.android.redwood.features.lastfourweeks.LastFourWeeksFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
