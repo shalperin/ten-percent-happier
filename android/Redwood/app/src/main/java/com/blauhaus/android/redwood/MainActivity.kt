@@ -4,12 +4,17 @@ import android.os.Bundle
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.blauhaus.android.redwood.features.calculator.CalculatorFragment
 import com.blauhaus.android.redwood.features.calculator.CalculatorViewModel
 import com.blauhaus.android.redwood.features.lastfourweeks.LastFourWeeksViewModel
+import com.blauhaus.android.redwood.features.lastfourweeks.lastFourWeeksModule
 import com.blauhaus.android.redwood.features.lastfourweeks.views.DotView
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -32,46 +37,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        lastFourWeeksViewModel.dayData.postValue(demoLastFourWeeksData)
+        GlobalScope.launch {
+            doLastFourWeeksDemo(demoLastFourWeeksData, lastFourWeeksViewModel.dayData)
+        }
     }
 
 }
 
-sealed class Resource<T>(
-    val data: T? = null,
-    val message: String? = null
-) {
-    class Success<T>(data: T) : Resource<T>(data)
-    class Loading<T>(data: T? = null, var refreshing: Boolean = false) : Resource<T>(data)
-    class Error<T>(data: T? = null, message: String) : Resource<T>(data, message)
+private suspend fun doLastFourWeeksDemo(startData: MutableList<DotView.DotViewState>, stream: MutableLiveData<List<DotView.DotViewState>>) {
+    stream.postValue(startData)
+    delay(3600)
+    startData[startData.size -1 ]= DotView.DotViewState.MetToday()
+    stream.postValue(startData)
 }
 
-
-val demoLastFourWeeksData = listOf(
-    DotView.DotViewState.Skipped(),
-    DotView.DotViewState.Met(),
-    DotView.DotViewState.Skipped(),
-    DotView.DotViewState.Met(),
-    DotView.DotViewState.Met(),
-    DotView.DotViewState.Met(),
-    DotView.DotViewState.Skipped(),
-    DotView.DotViewState.Met(),
-    DotView.DotViewState.Met(),
-    DotView.DotViewState.Met(),
-    DotView.DotViewState.Skipped(),
-    DotView.DotViewState.Met(),
-    DotView.DotViewState.Met(),
-    DotView.DotViewState.Met(),
-    DotView.DotViewState.Met(),
-    DotView.DotViewState.Skipped(),
-    DotView.DotViewState.Skipped(),
-    DotView.DotViewState.Skipped(),
-    DotView.DotViewState.Met(),
-    DotView.DotViewState.Met(),
-    DotView.DotViewState.Met(),
-    DotView.DotViewState.Met(),
-    DotView.DotViewState.MetToday()
-)
 
 
 
