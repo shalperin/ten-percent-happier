@@ -1,6 +1,5 @@
 package com.blauhaus.android.redwood.features.lastfourweeks
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,15 +8,14 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 
 import com.blauhaus.android.redwood.R
-import com.blauhaus.android.redwood.features.calculator.CalculatorViewModel
-import com.blauhaus.android.redwood.features.lastfourweeks.views.DotView
+import com.blauhaus.android.redwood.features.lastfourweeks.views.DayView
 import kotlinx.android.synthetic.main.last_four_weeks_fragment.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LastFourWeeksFragment : Fragment() {
     private val model: LastFourWeeksViewModel by viewModel()
 
-    lateinit var views: List<DotView>
+    lateinit var views: List<DayView>
 
 
     companion object {
@@ -43,7 +41,7 @@ class LastFourWeeksFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         model.dayData.observe(this, Observer { states ->
-            views.forEach{it.show(DotView.DotViewState.Future())}
+            views.forEach{it.show(DayView.ViewState.Future())}
             views.zip(states).forEach{ (day, state) ->
                 day.show(state)
             }

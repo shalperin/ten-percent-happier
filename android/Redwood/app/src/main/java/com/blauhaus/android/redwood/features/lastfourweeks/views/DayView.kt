@@ -8,7 +8,7 @@ import android.widget.ImageView
 import com.blauhaus.android.redwood.R
 
 
-class DotView : ImageView {
+class DayView : ImageView {
 
     // Note to self: get more muscle memory of the Code->Generate menu above.
     constructor(context: Context?) : super(context)

@@ -1,30 +1,30 @@
 package com.blauhaus.android.redwood
 
-import com.blauhaus.android.redwood.features.lastfourweeks.views.DotView
+import com.blauhaus.android.redwood.features.lastfourweeks.views.DayView
 
 
-val demoLastFourWeeksData = mutableListOf(
-    DotView.DotViewState.Skipped(),
-    DotView.DotViewState.Met(),
-    DotView.DotViewState.Skipped(),
-    DotView.DotViewState.Met(),
-    DotView.DotViewState.Met(),
-    DotView.DotViewState.Met(),
-    DotView.DotViewState.Skipped(),
-    DotView.DotViewState.Met(),
-    DotView.DotViewState.Met(),
-    DotView.DotViewState.Met(),
-    DotView.DotViewState.Skipped(),
-    DotView.DotViewState.Met(),
-    DotView.DotViewState.Met(),
-    DotView.DotViewState.Met(),
-    DotView.DotViewState.Met(),
-    DotView.DotViewState.Skipped(),
-    DotView.DotViewState.Skipped(),
-    DotView.DotViewState.Skipped(),
-    DotView.DotViewState.Met(),
-    DotView.DotViewState.Met(),
-    DotView.DotViewState.Met(),
-    DotView.DotViewState.Met(),
-    DotView.DotViewState.NotMetToday()
+val demoLastFourWeeksData = listOf(
+    DayView.ViewState.Skipped(),
+    DayView.ViewState.Met(),
+    DayView.ViewState.Skipped(),
+    DayView.ViewState.Met(),
+    DayView.ViewState.Met(),
+    DayView.ViewState.Met(),
+    DayView.ViewState.Skipped(),
+    DayView.ViewState.Met(),
+    DayView.ViewState.Met(),
+    DayView.ViewState.Met(),
+    DayView.ViewState.Skipped(),
+    DayView.ViewState.Met(),
+    DayView.ViewState.Met(),
+    DayView.ViewState.Met(),
+    DayView.ViewState.Met(),
+    DayView.ViewState.Skipped(),
+    DayView.ViewState.Skipped(),
+    DayView.ViewState.Skipped(),
+    DayView.ViewState.Met(),
+    DayView.ViewState.Met(),
+    DayView.ViewState.Met(),
+    DayView.ViewState.Met(),
+    DayView.ViewState.DidntMeetYetToday()
 )
