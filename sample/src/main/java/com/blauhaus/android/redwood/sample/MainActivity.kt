@@ -3,9 +3,9 @@ package com.blauhaus.android.redwood.sample
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
-import com.blauhaus.android.jazz.lastfourweeks.LastFourWeeksViewModel
-import com.blauhaus.android.jazz.lastfourweeks.demoLastFourWeeksData
-import com.blauhaus.android.jazz.lastfourweeks.views.DayView
+import com.blauhaus.android.redwood.lastfourweeks.LastFourWeeksViewModel
+import com.blauhaus.android.redwood.lastfourweeks.demoLastFourWeeksData
+import com.blauhaus.android.redwood.lastfourweeks.views.DayView
 import com.blauhaus.android.redwood.R
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay

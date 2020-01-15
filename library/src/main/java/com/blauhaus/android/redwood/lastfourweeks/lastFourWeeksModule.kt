@@ -1,4 +1,4 @@
-package com.blauhaus.android.jazz.lastfourweeks
+package com.blauhaus.android.redwood.lastfourweeks
 
 import org.koin.dsl.module
 

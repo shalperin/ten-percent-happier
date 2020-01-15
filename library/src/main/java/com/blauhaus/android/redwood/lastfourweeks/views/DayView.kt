@@ -1,4 +1,4 @@
-package com.blauhaus.android.jazz.lastfourweeks.views
+package com.blauhaus.android.redwood.lastfourweeks.views
 
 import android.content.Context
 import android.util.AttributeSet

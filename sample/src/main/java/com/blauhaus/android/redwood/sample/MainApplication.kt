@@ -1,7 +1,7 @@
 package com.blauhaus.android.redwood.sample
 
 import android.app.Application
-import com.blauhaus.android.jazz.lastfourweeks.lastFourWeeksModule
+import com.blauhaus.android.redwood.lastfourweeks.lastFourWeeksModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin

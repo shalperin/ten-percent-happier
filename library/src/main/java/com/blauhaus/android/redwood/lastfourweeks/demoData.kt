@@ -1,6 +1,6 @@
-package com.blauhaus.android.jazz.lastfourweeks
+package com.blauhaus.android.redwood.lastfourweeks
 
-import com.blauhaus.android.jazz.lastfourweeks.views.DayView
+import com.blauhaus.android.redwood.lastfourweeks.views.DayView
 
 
 val demoLastFourWeeksData = listOf(

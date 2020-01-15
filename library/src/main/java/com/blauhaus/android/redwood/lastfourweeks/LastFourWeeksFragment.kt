@@ -1,4 +1,4 @@
-package com.blauhaus.android.jazz.lastfourweeks
+package com.blauhaus.android.redwood.lastfourweeks
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import com.blauhaus.android.jazz.R
-import com.blauhaus.android.jazz.lastfourweeks.views.DayView
+import com.blauhaus.android.redwood.lastfourweeks.views.DayView
 import kotlinx.android.synthetic.main.last_four_weeks_fragment.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -18,7 +18,8 @@ class LastFourWeeksFragment : Fragment() {
 
 
     companion object {
-        fun newInstance() = LastFourWeeksFragment()
+        fun newInstance() =
+            LastFourWeeksFragment()
     }
 
     override fun onCreateView(
