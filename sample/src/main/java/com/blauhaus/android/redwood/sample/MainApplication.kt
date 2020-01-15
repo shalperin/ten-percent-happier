@@ -1,4 +1,4 @@
-package com.blauhaus.android.redwood
+package com.blauhaus.android.redwood.sample
 
 import android.app.Application
 import com.blauhaus.android.jazz.lastfourweeks.lastFourWeeksModule

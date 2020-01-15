@@ -1,4 +1,4 @@
-package com.blauhaus.android.redwood
+package com.blauhaus.android.redwood.sample
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.blauhaus.android.jazz.lastfourweeks.LastFourWeeksViewModel
 import com.blauhaus.android.jazz.lastfourweeks.demoLastFourWeeksData
 import com.blauhaus.android.jazz.lastfourweeks.views.DayView
+import com.blauhaus.android.redwood.R
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -20,7 +21,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         GlobalScope.launch {
-            doLastFourWeeksDemo(demoLastFourWeeksData, lastFourWeeksViewModel.dayData)
+            doLastFourWeeksDemo(
+                demoLastFourWeeksData,
+                lastFourWeeksViewModel.dayData
+            )
         }
     }
 
