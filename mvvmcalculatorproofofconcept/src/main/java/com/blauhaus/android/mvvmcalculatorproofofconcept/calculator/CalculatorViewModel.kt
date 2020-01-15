@@ -1,4 +1,4 @@
-package com.blauhaus.android.redwood.features.calculator
+package com.blauhaus.android.mvvmcalculatorproofofconcept.calculator
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

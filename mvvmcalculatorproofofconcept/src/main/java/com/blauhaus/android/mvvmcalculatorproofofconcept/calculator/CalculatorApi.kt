@@ -1,4 +1,4 @@
-package com.blauhaus.android.redwood.features.calculator
+package com.blauhaus.android.mvvmcalculatorproofofconcept.calculator
 
 import okhttp3.Interceptor
 import okhttp3.Response

@@ -1,4 +1,4 @@
-package com.blauhaus.android.redwood
+package com.blauhaus.android.mvvmcalculatorproofofconcept.calculator
 
 
 sealed class Resource<T>(

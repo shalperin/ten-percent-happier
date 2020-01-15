@@ -1,4 +1,4 @@
-package com.blauhaus.android.redwood.features.calculator
+package com.blauhaus.android.mvvmcalculatorproofofconcept.calculator
 
 interface CalculatorRepo {
     suspend fun sum(a: Float, b:Float): CalculatorModel
