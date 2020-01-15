@@ -1,2 +1,0 @@
-include ':app', ':jazz'
-rootProject.name='Redwood'
