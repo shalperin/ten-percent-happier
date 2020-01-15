@@ -8,11 +8,6 @@
 
     <!-- You can override the colors from other modules
     here -->
-    <color name="lastFourWeeksMetCircleColor">#E91E63</color>
-    <color name="lastFourWeeksTextColor">#cccccc</color>
-    <color name="lastFourWeeksSkippedColor">#009688</color>
-    <color name="lastFourWeeksDisabledColor">#00BCD4</color>
-    <color name="lastFourWeeksCheckColor">#FFEB3B</color>
-    <color name="lastFourWeeksBackgroundColor">#222222</color>
+
 
 </resources>
