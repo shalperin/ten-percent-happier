@@ -1,2 +1,2 @@
-include ':app', ':jazz', ':mvvmcalculatorproofofconcept'
+include ':app', ':jazz'
 rootProject.name='Redwood'
