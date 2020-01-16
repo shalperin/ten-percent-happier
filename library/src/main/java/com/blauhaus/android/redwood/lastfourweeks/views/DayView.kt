@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
-import com.blauhaus.android.jazz.R
+import com.blauhaus.android.redwood.R
 
 
 class DayView : ImageView {
