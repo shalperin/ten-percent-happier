@@ -5,6 +5,7 @@
     <color name="colorAccent">#D81B60</color>
     <color name="backedOffWhite">#eeeeee</color>
     <color name="backedOffBlack">#222222</color>
+    <color name="overlayBackgroundColor">#222222</color>
 
     <!-- You can override the colors from other modules
     here -->

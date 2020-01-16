@@ -1,20 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout android:orientation="vertical"
+<ScrollView android:layout_height="wrap_content"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="#000000"
-
-    >
-    <fragment
-        android:layout_marginTop="24dp"
-        android:name="com.blauhaus.android.redwood.lastfourweeks.LastFourWeeksFragment"
-        android:layout_width="wrap_content"
+    android:background="#000000">
+    <LinearLayout android:orientation="vertical"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/last4weeks"
-        android:layout_gravity="center"
-        />
+        >
 
+        <!-- Note - I have put a fair amount of styling responsibilities on the
+        container.  For example the fragment is unpadded, and doesn't have a background color
+        set.  To see the raw fragment, comment out this Frame Layout. -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="40dp"
+            android:background="@color/overlayBackgroundColor"
+            android:layout_marginTop="24dp"
+            >
 
-</LinearLayout>
+        <fragment
+                android:name="com.blauhaus.android.redwood.lastfourweeks.LastFourWeeksFragment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/last4weeks"
+
+                android:layout_gravity="center"
+                />
+
+        </FrameLayout>
+        
+    </LinearLayout>
+</ScrollView>
