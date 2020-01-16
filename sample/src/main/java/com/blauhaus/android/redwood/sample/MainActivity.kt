@@ -3,6 +3,8 @@ package com.blauhaus.android.redwood.sample
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
+import com.blauhaus.android.redwood.barchart.BarChartViewModel
+import com.blauhaus.android.redwood.barchart.demoData
 import com.blauhaus.android.redwood.lastfourweeks.LastFourWeeksViewModel
 import com.blauhaus.android.redwood.lastfourweeks.demoLastFourWeeksData
 import com.blauhaus.android.redwood.lastfourweeks.views.DayView
@@ -14,17 +16,22 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
     val lastFourWeeksViewModel by viewModel<LastFourWeeksViewModel>()
+    val barChartViewModel by viewModel<BarChartViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //pump some data into the LastFourWeeks feature
         GlobalScope.launch {
             doLastFourWeeksDemo(
                 demoLastFourWeeksData,
                 lastFourWeeksViewModel.dayData
             )
         }
+
+        //Same thing for the bar chart.
+        barChartViewModel.dayData.postValue(demoData)
     }
 
 }

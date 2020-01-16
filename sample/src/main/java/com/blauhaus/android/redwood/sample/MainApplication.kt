@@ -1,6 +1,7 @@
 package com.blauhaus.android.redwood.sample
 
 import android.app.Application
+import com.blauhaus.android.redwood.barchart.barChartModule
 import com.blauhaus.android.redwood.lastfourweeks.lastFourWeeksModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -14,7 +15,7 @@ class MainApplication : Application(){
         startKoin{
             androidLogger()
             androidContext(this@MainApplication)
-            modules(listOf(lastFourWeeksModule))
+            modules(listOf(lastFourWeeksModule, barChartModule))
         }
     }
 
