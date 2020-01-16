@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import com.blauhaus.android.redwood.lastfourweeks.LastFourWeeksViewModel
 import com.blauhaus.android.redwood.lastfourweeks.demoLastFourWeeksData
 import com.blauhaus.android.redwood.lastfourweeks.views.DayView
-import com.blauhaus.android.redwood.R
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
