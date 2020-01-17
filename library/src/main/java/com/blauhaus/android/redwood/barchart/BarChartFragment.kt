@@ -41,7 +41,7 @@ class BarChartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         model.dayData.observe(this, Observer {
-            
+
             bar_chart_view.setData(it)
         })
     }

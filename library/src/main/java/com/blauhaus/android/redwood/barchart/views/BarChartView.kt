@@ -11,8 +11,6 @@ import com.blauhaus.android.redwood.R
 
 class BarChartView: View {
 
-    //TODO: Label text isn't perfect, good enough for a first pass.
-
     constructor(context: Context?) : super(context) {
         init()
     }
@@ -46,13 +44,14 @@ class BarChartView: View {
     private var labelY = 0f
 
     //These are knobs to twiddle.
-    private var barPadFactor = .01f         // as a function of total width
-    private var labelPositionFactor = .5f   // as a function of graph padding
-    private var gridLineStrokeSize = 5f     // absolute
-    private var graphPadding = 100f         // absolute
-    private val labelTextSize = 30f         // absolute
-    private val labelHeight = 70f           // absolute
-    private val labelWidth = 225f           // absolute
+    private var barPaddingFactor = .02f         // percent of total width
+    private var gridLineStrokeSize = 5f
+    private var graphPadding = 100f
+    private var labelPosition = 40f
+    private var labelTextPosition = 12f
+    private val labelTextSize = 30f
+    private val labelHeight = 70f
+    private val labelWidth = 225f
 
 
     fun init() {
@@ -99,7 +98,7 @@ class BarChartView: View {
         oldh: Int
     ) {
         totalWidth = viewWidth.toFloat() - graphPadding * 2
-        barPadding = totalWidth * barPadFactor
+        barPadding = totalWidth * barPaddingFactor
 
         plotAreaTopY = graphPadding
         plotAreaBottomY = viewHeight.toFloat() - graphPadding
@@ -212,14 +211,14 @@ class BarChartView: View {
     private fun createLabel(touchX: Float) {
         val barIndex = whichBarClicked(touchX)
         if (barIndex != null) {
-            val centerX = barCenterX(barIndex)
-            val centerY = graphPadding * labelPositionFactor
-            labelText = model!!.getOrNull(barIndex)?.second ?: null
+            val x = barCenterX(barIndex)
+            val y = labelPosition
+            labelText = model!!.getOrNull(barIndex)?.second
 
             if (labelText != null) {
-                createLabelStem(centerY, centerX)
-                createLabelBackground(centerX, centerY)
-                createLabelText(labelText!!, centerX, centerY)
+                createLabelStem(y, x)
+                createLabelBackground(x, y)
+                createLabelText(labelText!!, x, y)
                 invalidate()
             } else {
                 labelText = null
@@ -229,24 +228,24 @@ class BarChartView: View {
         }
     }
 
-    private fun createLabelBackground(centerX: Float, centerY: Float) {
+    private fun createLabelBackground(x: Float, y: Float) {
         val p = Path()
-        p.moveTo(centerX - .5f * labelWidth, centerY - .5f * labelTextSize)
-        p.lineTo(centerX + .5f * labelWidth, centerY - .5f * labelTextSize)
+        p.moveTo(x - .5f * labelWidth, y)
+        p.lineTo(x + .5f * labelWidth, y)
         labelBackground = p
     }
 
-    private fun createLabelStem(yTop: Float, centerX: Float) {
+    private fun createLabelStem(yTop: Float, x: Float) {
         val yBottom = plotAreaBottomY
         val p = Path()
-        p.moveTo(centerX, yTop)
-        p.lineTo(centerX, yBottom)
+        p.moveTo(x, yTop)
+        p.lineTo(x, yBottom)
         labelLine = p
     }
 
-    private fun createLabelText(text:String, centerX: Float, centerY: Float) {
+    private fun createLabelText(text:String, x: Float, y: Float) {
         labelText = text
-        labelX = centerX
-        labelY = centerY
+        labelX = x
+        labelY = y + labelTextPosition
     }
 }
