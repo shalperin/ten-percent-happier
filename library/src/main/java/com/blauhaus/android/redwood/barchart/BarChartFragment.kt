@@ -27,6 +27,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class BarChartFragment : Fragment() {
+
     private val model: BarChartViewModel by viewModel()
 
     override fun onCreateView(
@@ -40,6 +41,7 @@ class BarChartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         model.dayData.observe(this, Observer {
+            
             bar_chart_view.setData(it)
         })
     }

@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
 import com.blauhaus.android.redwood.barchart.BarChartViewModel
-import com.blauhaus.android.redwood.barchart.demoData
+import com.blauhaus.android.redwood.barchart.barChartDemoData
 import com.blauhaus.android.redwood.lastfourweeks.LastFourWeeksViewModel
 import com.blauhaus.android.redwood.lastfourweeks.demoLastFourWeeksData
 import com.blauhaus.android.redwood.lastfourweeks.views.DayView
@@ -31,7 +31,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         //Same thing for the bar chart.
-        barChartViewModel.dayData.postValue(demoData)
+        GlobalScope.launch {
+            doBarChartDemo(barChartDemoData, barChartViewModel.dayData)
+        }
     }
 
 }
@@ -46,6 +48,21 @@ private suspend fun doLastFourWeeksDemo(startData: List<DayView.ViewState>, stre
 
     stream.postValue(next)
 }
+
+
+private suspend fun doBarChartDemo(startData: List<Pair<Float, String>>, stream: MutableLiveData<List<Pair<Float, String>>>) {
+
+    for (i in 1..4) {
+        stream.postValue(startData)
+        delay(3600)
+        stream.postValue(startData.subList(2, 10))
+        delay(3600)
+        stream.postValue(startData.subList(1, 5))
+        delay(3600)
+        stream.postValue(startData.subList(2, 13))
+    }
+}
+
 
 
 

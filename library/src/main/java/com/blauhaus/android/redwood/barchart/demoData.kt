@@ -2,7 +2,7 @@ package com.blauhaus.android.redwood.barchart
 
 
 // month long list of valuse ranging from 0 to 15
-val demoData = listOf(
+val barChartDemoData = listOf(
     Pair(5f, "5 min @ Jan 1"),
     Pair(10f, "10 min @ Jan 2"),
     Pair(2f, "2 min @ Jan 3"),
