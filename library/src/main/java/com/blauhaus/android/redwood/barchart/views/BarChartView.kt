@@ -29,7 +29,6 @@ class BarChartView: View {
     private lateinit var labelLinePaint: Paint
     private lateinit var labelTextPaint: Paint
     private lateinit var labelBackgroundPaint: Paint
-    private var model: List<Pair<Float, String>>?= null
     private var bar = RectF()
     private var labelLine: Path? = null
     private var labelBackground: Path? = null
@@ -105,22 +104,20 @@ class BarChartView: View {
         plotAreaHeight = plotAreaBottomY - plotAreaTopY
     }
 
-    fun setData(model:List<Pair<Float, String>>?) {
-        if (model != null) {
-            if (model.isEmpty()) {
-                throw(Exception("Model can't be 0 length"))
+    var model: List<Pair<Float,String>>? = null
+        set(value) {
+            if (value != null) {
+                if (value.isEmpty()) {
+                    throw(Exception("Model can't be 0 length."))
+                }
             }
-            this.model = model
-            onModelChanged()
+            labelText = null
+            labelBackground = null
+            labelLine = null
+            field = value
             invalidate()
-        }
-    }
 
-    fun onModelChanged() {
-        labelText = null
-        labelBackground = null
-        labelLine = null
-    }
+        }
 
     fun recomputeProperties() {
         val numbars: Int = model?.size ?: 0
