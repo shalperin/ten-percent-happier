@@ -5,23 +5,24 @@ import android.graphics.*
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
-import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getColor
+
 import com.blauhaus.android.redwood.R
 
 
 class BarChartView: View {
 
     constructor(context: Context?) : super(context) {
-        init()
+        init(null)
     }
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs) {
-        init()
+        init(attrs)
     }
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(
         context,
         attrs,
         defStyleAttr
-    ) { init() }
+    ) { init(attrs) }
 
     //These are calculated - Modifications will be overwritten.
     private lateinit var barPaint: Paint
@@ -41,52 +42,77 @@ class BarChartView: View {
     private var labelX = 0f
     private var labelY = 0f
 
-    //These are knobs to twiddle.
+    //Attrs to twiddle.
+    private var barColor = getColor(context, R.color.barColor)
+    private var gridLineColor = getColor(context, R.color.gridLineColor)
+    private var labelLineColor = getColor(context, R.color.labelColor)
+    private var textColor = getColor(context, R.color.labelTextColor)
     private var barPadding = 8f
     private var gridLineStrokeSize = 5f
     private var graphPadding = 100f
     private var labelPosition = 40f
     private var labelTextPosition = 12f
-    private val labelTextSize = 30f
-    private val labelHeight = 70f
-    private val labelWidth = 225f
+    private var labelTextSize = 30f
+    private var labelHeight = 70f
+    private var labelWidth = 225f
 
 
-    fun init() {
+    fun init(attrs: AttributeSet?) {
+
+        attrs?.let {
+            context.theme.obtainStyledAttributes(
+                attrs,
+                R.styleable.BarChartView,
+                0,0
+            ).apply{
+                try {
+                    barColor = getColor(R.styleable.BarChartView_barColor, getColor(context, R.color.barColor))
+                    gridLineColor = getColor(R.styleable.BarChartView_gridLineColor, getColor(context, R.color.gridLineColor))
+                    labelLineColor = getColor(R.styleable.BarChartView_labelLineColor, getColor(context, R.color.labelColor))
+                    textColor = getColor(R.styleable.BarChartView_textColor, getColor(context, R.color.labelTextColor))
+                    gridLineStrokeSize = getFloat(R.styleable.BarChartView_gridLineStrokeSize, 5f)
+                    barPadding = getFloat(R.styleable.BarChartView_barPadding, 8f)
+                    graphPadding = getFloat(R.styleable.BarChartView_graphPadding, 100f)
+                    labelPosition = getFloat(R.styleable.BarChartView_labelPosition, 40f)
+                    labelTextPosition = getFloat(R.styleable.BarChartView_labelTextPosition, 12f)
+                    labelTextSize = getFloat(R.styleable.BarChartView_labelTextSize, 30f)
+                    labelHeight = getFloat(R.styleable.BarChartView_labelHeight, 70f)
+                    labelWidth = getFloat(R.styleable.BarChartView_labelWidth, 225f)
+                } finally {
+                    recycle()
+                }
+            }
+        }
+
         initPaints()
     }
 
     fun initPaints() {
-        val barColor = ContextCompat.getColor(context, R.color.barColor)
         barPaint = Paint(Paint.ANTI_ALIAS_FLAG)
         barPaint.color = barColor
         barPaint.style = Paint.Style.FILL
 
-        val gridLineColor = ContextCompat.getColor(context, R.color.gridLineColor)
         gridLinesPaint = Paint(Paint.ANTI_ALIAS_FLAG)
         gridLinesPaint.color = gridLineColor
         gridLinesPaint.style = Paint.Style.STROKE
-        gridLinesPaint.setStrokeWidth(gridLineStrokeSize)
+        gridLinesPaint.strokeWidth = gridLineStrokeSize
         gridLinesPaint.pathEffect = DashPathEffect(floatArrayOf(35f, 5f), 0f)
 
-        val labelLineColor = ContextCompat.getColor(context, R.color.labelColor)
         labelLinePaint = Paint(Paint.ANTI_ALIAS_FLAG)
         labelLinePaint.color = labelLineColor
         labelLinePaint.style = Paint.Style.STROKE
-        labelLinePaint.setStrokeWidth(gridLineStrokeSize)
+        labelLinePaint.strokeWidth = gridLineStrokeSize
 
         labelBackgroundPaint = Paint(Paint.ANTI_ALIAS_FLAG)
         labelBackgroundPaint.color = labelLineColor
         labelBackgroundPaint.style = Paint.Style.STROKE
         labelBackgroundPaint.strokeCap = Paint.Cap.ROUND
-        labelBackgroundPaint.setStrokeWidth(labelHeight)
+        labelBackgroundPaint.strokeWidth = labelHeight
 
-        val textPaintColor = ContextCompat.getColor(context, R.color.labelTextColor)
         labelTextPaint = Paint()
-        labelTextPaint.color = textPaintColor
+        labelTextPaint.color = textColor
         labelTextPaint.textAlign = Paint.Align.CENTER
         labelTextPaint.textSize = labelTextSize
-
     }
 
     override fun onSizeChanged(
@@ -168,7 +194,7 @@ class BarChartView: View {
 
     private fun drawGrid(canvas: Canvas, y:Float) {
         val leftX = graphPadding + barPadding
-        val rightX = barPadding * (model!!.size) + barWidth * model!!.size!!  + graphPadding
+        val rightX = barPadding * (model!!.size) + barWidth * model!!.size  + graphPadding
         val path = Path()
         path.moveTo(leftX, y)
         path.lineTo(rightX, y)
