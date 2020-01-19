@@ -3,50 +3,39 @@
 <ScrollView android:layout_height="wrap_content"
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#000000">
     <LinearLayout android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
 
-        <!-- Note - I have put a fair amount of styling responsibilities on the
-        container.  For example the fragment is unpadded, and doesn't have a background color
-        set.  To see the raw fragment, comment out this Frame Layout. -->
 
-        <!-- the bar chart already has padding to account for labels. -->
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="370dp"
-            android:padding="0dp"
-            android:background="@color/overlayBackgroundColor"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="24dp">
-            <fragment
-                android:name="com.blauhaus.android.redwood.barchart.BarChartFragment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/barchart"
-                android:layout_gravity="center"
-                />
-        </FrameLayout>
-
-
-
-        <FrameLayout
-            android:layout_width="match_parent"
+        <com.blauhaus.android.redwood.barchart.BarChartView
+            android:layout_width="wrap_content"
             android:layout_height="300dp"
-            android:padding = "40dp"
-            android:background="@color/overlayBackgroundColor"
-            android:layout_marginTop="24dp"
-            >
-            <fragment
-                android:name="com.blauhaus.android.redwood.lastfourweeks.LastFourWeeksFragment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/last4weeks"
+            android:id="@+id/bar_chart"
+            app:barColor="#33ff33"
+            />
 
-                android:layout_gravity="center"/>
-        </FrameLayout>
+
+
+
+<!--        <FrameLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="300dp"-->
+<!--            android:padding = "40dp"-->
+<!--            android:background="@color/overlayBackgroundColor"-->
+<!--            android:layout_marginTop="24dp"-->
+<!--            >-->
+<!--            <fragment-->
+<!--                android:name="com.blauhaus.android.redwood.lastfourweeks.LastFourWeeksFragment"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:id="@+id/last4weeks"-->
+
+<!--                android:layout_gravity="center"/>-->
+<!--        </FrameLayout>-->
 
 
     </LinearLayout>

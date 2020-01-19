@@ -1,4 +1,4 @@
-package com.blauhaus.android.redwood.barchart.views
+package com.blauhaus.android.redwood.barchart
 
 import android.content.Context
 import android.graphics.*
@@ -30,6 +30,7 @@ class BarChartView: View {
     private lateinit var labelLinePaint: Paint
     private lateinit var labelTextPaint: Paint
     private lateinit var labelBackgroundPaint: Paint
+    private lateinit var noDataWarningPaint: Paint
     private var bar = RectF()
     private var labelLine: Path? = null
     private var labelBackground: Path? = null
@@ -56,8 +57,23 @@ class BarChartView: View {
     private var labelHeight = 70f
     private var labelWidth = 225f
 
+    var model: List<Pair<Float,String>>? = null
+        set(value) {
+            if (value != null) {
+                if (value.isEmpty()) {
+                    throw(Exception("Model can't be 0 length."))
+                }
+            }
+            labelText = null
+            labelBackground = null
+            labelLine = null
+            field = value
+            invalidate()
 
-    fun init(attrs: AttributeSet?) {
+        }
+
+
+    private fun init(attrs: AttributeSet?) {
 
         attrs?.let {
             context.theme.obtainStyledAttributes(
@@ -87,7 +103,7 @@ class BarChartView: View {
         initPaints()
     }
 
-    fun initPaints() {
+    private fun initPaints() {
         barPaint = Paint(Paint.ANTI_ALIAS_FLAG)
         barPaint.color = barColor
         barPaint.style = Paint.Style.FILL
@@ -113,6 +129,11 @@ class BarChartView: View {
         labelTextPaint.color = textColor
         labelTextPaint.textAlign = Paint.Align.CENTER
         labelTextPaint.textSize = labelTextSize
+
+        noDataWarningPaint = Paint()
+        noDataWarningPaint.color = Color.WHITE
+        noDataWarningPaint.textAlign = Paint.Align.LEFT
+        noDataWarningPaint.textSize = 50f
     }
 
     override fun onSizeChanged(
@@ -128,22 +149,9 @@ class BarChartView: View {
         plotAreaHeight = plotAreaBottomY - plotAreaTopY
     }
 
-    var model: List<Pair<Float,String>>? = null
-        set(value) {
-            if (value != null) {
-                if (value.isEmpty()) {
-                    throw(Exception("Model can't be 0 length."))
-                }
-            }
-            labelText = null
-            labelBackground = null
-            labelLine = null
-            field = value
-            invalidate()
 
-        }
 
-    fun recomputeProperties() {
+    private fun recomputeProperties() {
         val numbars: Int = model?.size ?: 0
         barWidth = if (numbars != 0) {
             (totalWidth - (numbars + 1) * barPadding) / numbars
@@ -153,17 +161,28 @@ class BarChartView: View {
     }
 
     override fun onDraw(canvas: Canvas) {
-        recomputeProperties()  //TODO I'm not sure why we can't call this in onModelChanged.
+        recomputeProperties()  //TODO I'm not sure why we can't call this when the model changes.
 
         if (model != null) {
-            drawGrid(canvas, .5f * gridLineStrokeSize + graphPadding)
-            drawGrid(canvas, plotAreaBottomY/2 + graphPadding/2)
-            drawGrid(canvas, plotAreaBottomY - .5f * gridLineStrokeSize)
+            drawGrid(canvas)
             drawLabelLine(canvas)
             drawLabelBackground(canvas)
             drawLabelText(canvas)
             drawBars(canvas)
+        } else {
+            // This is problematic bc we might want a blank display and a loading spinner...
+            drawGrid(canvas)
         }
+    }
+
+    private fun drawGrid(canvas:Canvas) {
+        drawGridLine(canvas, .5f * gridLineStrokeSize + graphPadding)
+        drawGridLine(canvas, plotAreaBottomY/2 + graphPadding/2)
+        drawGridLine(canvas, plotAreaBottomY - .5f * gridLineStrokeSize)
+    }
+
+    private fun drawNoDataWarning(canvas: Canvas) {
+        canvas.drawText("No data", 0f, 70f, noDataWarningPaint)
     }
 
     private fun drawLabelLine(canvas:Canvas) {
@@ -192,9 +211,9 @@ class BarChartView: View {
         }
     }
 
-    private fun drawGrid(canvas: Canvas, y:Float) {
+    private fun drawGridLine(canvas: Canvas, y:Float) {
         val leftX = graphPadding + barPadding
-        val rightX = barPadding * (model!!.size) + barWidth * model!!.size  + graphPadding
+        val rightX = totalWidth + graphPadding
         val path = Path()
         path.moveTo(leftX, y)
         path.lineTo(rightX, y)
