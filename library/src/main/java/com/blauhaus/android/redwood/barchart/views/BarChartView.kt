@@ -37,13 +37,12 @@ class BarChartView: View {
     private var plotAreaTopY = 0f
     private var plotAreaBottomY = 0f
     private var plotAreaHeight = 0f
-    private var barPadding = 0f
     private var labelText: String? = null
     private var labelX = 0f
     private var labelY = 0f
 
     //These are knobs to twiddle.
-    private var barPaddingFactor = .02f         // percent of total width
+    private var barPadding = 8f
     private var gridLineStrokeSize = 5f
     private var graphPadding = 100f
     private var labelPosition = 40f
@@ -97,7 +96,6 @@ class BarChartView: View {
         oldh: Int
     ) {
         totalWidth = viewWidth.toFloat() - graphPadding * 2
-        barPadding = totalWidth * barPaddingFactor
 
         plotAreaTopY = graphPadding
         plotAreaBottomY = viewHeight.toFloat() - graphPadding
