@@ -28,21 +28,11 @@ class BarChartView: View {
     //These are calculated - Modifications will be overwritten.
     private lateinit var barPaint: Paint
     private lateinit var gridLinesPaint: Paint
-    private lateinit var labelLinePaint: Paint
+    private lateinit var labelStemPaint: Paint
     private lateinit var labelTextPaint: Paint
     private lateinit var labelBackgroundPaint: Paint
-    private lateinit var noDataWarningPaint: Paint
-    private var bar = RectF()
-    private var labelLine: Path? = null
-    private var labelBackground: Path? = null
     private var barWidth = 0f
-    private var totalWidth = 0f
-    private var plotAreaTopY = 0f
-    private var plotAreaBottomY = 0f
-    private var plotAreaHeight = 0f
-    private var labelText: String? = null
-    private var labelX = 0f
-    private var labelY = 0f
+    private var plotArea = Rect()
 
     //Attrs to twiddle.
     private var barColor = getColor(context, R.color.barColor)
@@ -65,12 +55,9 @@ class BarChartView: View {
                     throw(Exception("Model can't be 0 length."))
                 }
             }
-            labelText = null
-            labelBackground = null
-            labelLine = null
+            labelIndex = null
             field = value
             invalidate()
-
         }
 
    var listener: BarChartFragmentListener? = null
@@ -81,11 +68,11 @@ class BarChartView: View {
         return field
     }
 
-    var barIndex:Int? = null
-    set(value) {
+    var labelIndex:Int? = null
+     set(value) {
         field = value
         invalidate()
-    }
+     }
 
 
     private fun init(attrs: AttributeSet?) {
@@ -129,10 +116,10 @@ class BarChartView: View {
         gridLinesPaint.strokeWidth = gridLineStrokeSize
         gridLinesPaint.pathEffect = DashPathEffect(floatArrayOf(35f, 5f), 0f)
 
-        labelLinePaint = Paint(Paint.ANTI_ALIAS_FLAG)
-        labelLinePaint.color = labelLineColor
-        labelLinePaint.style = Paint.Style.STROKE
-        labelLinePaint.strokeWidth = gridLineStrokeSize
+        labelStemPaint = Paint(Paint.ANTI_ALIAS_FLAG)
+        labelStemPaint.color = labelLineColor
+        labelStemPaint.style = Paint.Style.STROKE
+        labelStemPaint.strokeWidth = gridLineStrokeSize
 
         labelBackgroundPaint = Paint(Paint.ANTI_ALIAS_FLAG)
         labelBackgroundPaint.color = labelLineColor
@@ -145,10 +132,7 @@ class BarChartView: View {
         labelTextPaint.textAlign = Paint.Align.CENTER
         labelTextPaint.textSize = labelTextSize
 
-        noDataWarningPaint = Paint()
-        noDataWarningPaint.color = Color.WHITE
-        noDataWarningPaint.textAlign = Paint.Align.LEFT
-        noDataWarningPaint.textSize = 50f
+
     }
 
     override fun onSizeChanged(
@@ -157,85 +141,67 @@ class BarChartView: View {
         oldw: Int,
         oldh: Int
     ) {
-        totalWidth = viewWidth.toFloat() - graphPadding * 2
-
-        plotAreaTopY = graphPadding
-        plotAreaBottomY = viewHeight.toFloat() - graphPadding
-        plotAreaHeight = plotAreaBottomY - plotAreaTopY
-
+        plotArea.left = graphPadding.toInt()
+        plotArea.right = viewWidth - graphPadding.toInt()
+        plotArea.top = graphPadding.toInt()
+        plotArea.bottom = viewHeight - graphPadding.toInt()
     }
 
 
-
-    private fun recomputeProperties() {
-        val numbars: Int = model?.size ?: 0
-        barWidth = if (numbars != 0) {
-            (totalWidth - (numbars + 1) * barPadding) / numbars
+    fun recomputeBarWidth() {
+        val modelSize = model?.size ?: 0
+        barWidth = if (modelSize != 0) {
+            (plotArea.width() - (model!!.size + 1) * barPadding) / modelSize
         } else {
             0f
         }
     }
 
     override fun onDraw(canvas: Canvas) {
-        recomputeProperties()  //TODO I'm not sure why we can't call this when the model changes.
-
         if (model != null) {
+            recomputeBarWidth()
             drawGrid(canvas)
-            createLabel()
-            drawLabelLine(canvas)
-            drawLabelBackground(canvas)
-            drawLabelText(canvas)
+            drawLabel(canvas)
             drawBars(canvas)
         } else {
-            // This is problematic bc we might want a blank display and a loading spinner...
             drawGrid(canvas)
         }
     }
 
+
     private fun drawGrid(canvas:Canvas) {
         drawGridLine(canvas, .5f * gridLineStrokeSize + graphPadding)
-        drawGridLine(canvas, plotAreaBottomY/2 + graphPadding/2)
-        drawGridLine(canvas, plotAreaBottomY - .5f * gridLineStrokeSize)
+        drawGridLine(canvas, plotArea.bottom/2 + graphPadding/2)
+        drawGridLine(canvas, plotArea.bottom - .5f * gridLineStrokeSize)
     }
 
-    private fun drawNoDataWarning(canvas: Canvas) {
-        canvas.drawText("No data", 0f, 70f, noDataWarningPaint)
-    }
-
-    private fun drawLabelLine(canvas:Canvas) {
-        if (labelLine != null) {  canvas.drawPath(labelLine!!, labelLinePaint) }
-    }
-
-    private fun drawLabelText(canvas: Canvas) {
-        if (labelText != null) { canvas.drawText(labelText!!, labelX, labelY, labelTextPaint) }
-    }
-
-    private fun drawLabelBackground(canvas: Canvas) {
-        if (labelBackground != null) { canvas.drawPath(labelBackground!!,labelBackgroundPaint) }
-    }
 
     private fun drawBars(canvas:Canvas) {
-        for (i in model!!.indices) { // Bar coordinates
+        val bar = RectF()
+
+        for (i in model!!.indices) {
             var topY = 0f
             if (model!!.map{it.first}.max() != 0f) {
-                topY = plotAreaBottomY - plotAreaHeight * model!!.map{it.first}.get(i) / model!!.map{it.first}.max()!!
+                topY = plotArea.bottom - plotArea.height() * model!!.map{it.first}.get(i) / model!!.map{it.first}.max()!!
             }
             bar.left = barLeftX(i)
             bar.right = barRightX(i)
             bar.top = topY
-            bar.bottom = plotAreaBottomY
+            bar.bottom = plotArea.bottom.toFloat()
             canvas.drawRect(bar, barPaint)
         }
     }
 
+
     private fun drawGridLine(canvas: Canvas, y:Float) {
         val leftX = graphPadding + barPadding
-        val rightX = totalWidth + graphPadding
+        val rightX = plotArea.width() + graphPadding
         val path = Path()
         path.moveTo(leftX, y)
         path.lineTo(rightX, y)
         canvas.drawPath(path, gridLinesPaint)
     }
+
 
     private fun whichBarClicked(x: Float): Int? {
         for (i in model!!.indices) { //yeah, I know.
@@ -246,17 +212,21 @@ class BarChartView: View {
         return null
     }
 
+
     private fun barLeftX(barIndexInModel: Int):Float {
         return barPadding * (barIndexInModel + 1) + barWidth * barIndexInModel + graphPadding
     }
+
 
     private fun barRightX(barIndexInModel:Int):Float {
         return barLeftX(barIndexInModel) + barWidth
     }
 
+
     private fun barCenterX(barIndexInModel: Int):Float {
         return barLeftX(barIndexInModel) + .5f * barWidth
     }
+
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         if (event != null)  {
@@ -271,50 +241,24 @@ class BarChartView: View {
     }
 
 
+    private fun drawLabel(canvas:Canvas) {
+        if (labelIndex != null) {
+            val x = barCenterX(labelIndex!!)
 
+            val labelBackground = Path()
+            labelBackground.moveTo(x - .5f * labelWidth, labelPosition)
+            labelBackground.lineTo(x + .5f * labelWidth, labelPosition)
 
-    fun createLabel() {
-        if (barIndex != null) {
-            val x = barCenterX(barIndex!!)
-            val y = labelPosition
-            labelText = model!!.getOrNull(barIndex!!)?.second
+            val labelStem = Path()
+            labelStem.moveTo(x, labelPosition)
+            labelStem.lineTo(x, plotArea.bottom.toFloat())
 
-            createLabelStem(y, x)
-            createLabelBackground(x, y)
+            val labelText = model!!.getOrNull(labelIndex!!)?.second ?: ""
 
-            if (labelText != null) {
-                createLabelText(labelText!!, x, y)
-            }
-        } else {
-            clearLabel()
+            canvas.drawPath(labelStem, labelStemPaint)
+            canvas.drawPath(labelBackground,labelBackgroundPaint)
+            canvas.drawText(labelText, x, labelPosition + labelTextPosition, labelTextPaint)
         }
-        invalidate()
     }
 
-
-    private fun clearLabel() {
-        labelText = null
-        barIndex = null
-    }
-
-    private fun createLabelBackground(x: Float, y: Float) {
-        val p = Path()
-        p.moveTo(x - .5f * labelWidth, y)
-        p.lineTo(x + .5f * labelWidth, y)
-        labelBackground = p
-    }
-
-    private fun createLabelStem(yTop: Float, x: Float) {
-        val yBottom = plotAreaBottomY
-        val p = Path()
-        p.moveTo(x, yTop)
-        p.lineTo(x, yBottom)
-        labelLine = p
-    }
-
-    private fun createLabelText(text:String, x: Float, y: Float) {
-        labelText = text
-        labelX = x
-        labelY = y + labelTextPosition
-    }
 }

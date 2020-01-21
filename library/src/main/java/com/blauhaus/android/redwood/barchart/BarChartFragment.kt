@@ -1,14 +1,10 @@
 package com.blauhaus.android.redwood.barchart
 
-import android.app.Activity
-import android.content.Context
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 
 import com.blauhaus.android.redwood.R
@@ -39,7 +35,7 @@ class BarChartFragment : Fragment(), BarChartFragmentListener {
         bar_chart_view.listener = this
 
         model._activeItem.observe(this, Observer {index ->
-            bar_chart_view.barIndex = index
+            bar_chart_view.labelIndex = index
         })
     }
 
