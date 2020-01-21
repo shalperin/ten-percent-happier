@@ -37,14 +37,13 @@
             android:padding = "40dp"
             android:background="@color/overlayBackgroundColor"
             android:layout_marginTop="24dp"
+            android:id="@+id/last4WeeksContainer"
             >
-            <fragment
-                android:name="com.blauhaus.android.redwood.lastfourweeks.LastFourWeeksFragment"
+            <fragment android:name="com.blauhaus.android.redwood.lastfourweeks.LastFourWeeksFragment"
+                android:id="@+id/l4w"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/last4weeks"
+                android:layout_height="wrap_content"/>
 
-                android:layout_gravity="center"/>
         </FrameLayout>
 
 

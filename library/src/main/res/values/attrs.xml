@@ -14,5 +14,13 @@
         <attr name="labelHeight" format= "float"/>
         <attr name="labelWidth" format = "float"/>
     </declare-styleable>
+
+    <declare-styleable name="DayView">
+        <attr name="metVector" format="reference"/>
+        <attr name="notMetVector" format="reference"/>
+        <attr name="notMetTodayVector" format="reference"/>
+        <attr name="futureVector" format="reference"/>
+        <attr name="metTodayVector" format="reference"/>
+    </declare-styleable>
    
 </resources>

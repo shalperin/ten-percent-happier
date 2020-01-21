@@ -1,7 +1,9 @@
 package com.blauhaus.android.redwood.lastfourweeks.views
 
 import android.content.Context
+import android.os.Debug
 import android.util.AttributeSet
+import android.util.Log
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
@@ -11,19 +13,19 @@ import com.blauhaus.android.redwood.R
 class DayView : ImageView {
 
     // Note to self: get more muscle memory of the Code->Generate menu above.
-    constructor(context: Context?) : super(context)
-    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
+    constructor(context: Context?) : super(context) {init(null)}
+    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)  {init(attrs)}
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(
         context,
         attrs,
         defStyleAttr
-    )
+    ) { init(attrs)}
 
-    private val metVector = R.drawable.ic_last4weeks_circle_met
-    private val futureVector = R.drawable.ic_last4weeks_circle_future
-    private val metTodayVector = R.drawable.ic_last4weeks_check_circle
-    private val notMetVector = R.drawable.ic_last4weeks_x_mark
-    private val notMetTodayVector = R.drawable.ic_last4weeks_stroked_circle
+    private var metVector = 0
+    private var futureVector = 0
+    private var metTodayVector =  0
+    private var notMetVector = 0
+    private var notMetTodayVector = 0
 
     private var d: ViewState =
         ViewState.Future()
@@ -39,6 +41,27 @@ class DayView : ImageView {
                 startAnimation(AnimationUtils.loadAnimation(context, android.R.anim.fade_in))
             }
         })
+    }
+
+    private fun init(attrs:AttributeSet?) {
+        attrs?.let {
+            context.theme.obtainStyledAttributes(
+                attrs,
+                R.styleable.DayView,
+                0, 0
+            ).apply {
+                try {
+                    metVector = getResourceId(R.styleable.DayView_metVector, R.drawable.ic_last4weeks_circle_met)
+                    notMetVector = getResourceId(R.styleable.DayView_notMetVector, R.drawable.ic_last4weeks_x_mark)
+                    notMetTodayVector = getResourceId(R.styleable.DayView_notMetTodayVector, R.drawable.ic_last4weeks_stroked_circle)
+                    futureVector = getResourceId(R.styleable.DayView_futureVector, R.drawable.ic_last4weeks_circle_future)
+                    metTodayVector = getResourceId(R.styleable.DayView_metTodayVector, R.drawable.ic_last4weeks_check_circle)
+                } finally {
+                    recycle()
+                }
+            }
+
+        }
     }
 
     fun show (d: ViewState) {

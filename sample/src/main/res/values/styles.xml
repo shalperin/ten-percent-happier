@@ -12,4 +12,8 @@
         <!-- override barchart attributes here -->
         <!-- protip: right click / 'go to' the the RedwoodBarChartViewDefault style above.-->
     </style>
+
+    <style name="RedwoodDayView" parent="RedwoodDayViewDefault">
+        <!-- override last 4 weeks day display here -->
+    </style>
 </resources>

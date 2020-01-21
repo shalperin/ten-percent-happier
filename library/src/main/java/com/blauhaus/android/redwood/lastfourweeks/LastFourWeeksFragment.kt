@@ -16,11 +16,11 @@ class LastFourWeeksFragment : Fragment() {
 
     lateinit var views: List<DayView>
 
-
     companion object {
-        fun newInstance() =
-            LastFourWeeksFragment()
+        fun newInstance() = LastFourWeeksFragment()
     }
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
