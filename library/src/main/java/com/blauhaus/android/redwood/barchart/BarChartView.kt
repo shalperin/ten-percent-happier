@@ -204,9 +204,11 @@ class BarChartView: View {
 
 
     private fun whichBarClicked(x: Float): Int? {
-        for (i in model!!.indices) { //yeah, I know.
-            if (x  in barLeftX(i)..barRightX(i)) {
-                return i
+        if (model != null) {
+            for (i in model!!.indices) { //yeah, I know.
+                if (x  in barLeftX(i)..barRightX(i)) {
+                    return i
+                }
             }
         }
         return null
