@@ -35,10 +35,10 @@ class BarChartView: View {
     private var plotArea = Rect()
 
     //Attrs to twiddle.
-    private var barColor = getColor(context, R.color.barColor)
-    private var gridLineColor = getColor(context, R.color.gridLineColor)
-    private var labelLineColor = getColor(context, R.color.labelColor)
-    private var textColor = getColor(context, R.color.labelTextColor)
+    private var barColor = getColor(context, R.color.defaultBarColor)
+    private var gridLineColor = getColor(context, R.color.defaultGridLineColor)
+    private var labelColor = getColor(context, R.color.defaultLabelColor)
+    private var textColor = getColor(context, R.color.defaultTextColor)
     private var barPadding = 8f
     private var gridLineStrokeSize = 5f
     private var graphPadding = 100f
@@ -84,10 +84,10 @@ class BarChartView: View {
                 0,0
             ).apply{
                 try {
-                    barColor = getColor(R.styleable.BarChartView_barColor, getColor(context, R.color.barColor))
-                    gridLineColor = getColor(R.styleable.BarChartView_gridLineColor, getColor(context, R.color.gridLineColor))
-                    labelLineColor = getColor(R.styleable.BarChartView_labelLineColor, getColor(context, R.color.labelColor))
-                    textColor = getColor(R.styleable.BarChartView_textColor, getColor(context, R.color.labelTextColor))
+                    barColor = getColor(R.styleable.BarChartView_barColor, getColor(context, R.color.defaultBarColor))
+                    gridLineColor = getColor(R.styleable.BarChartView_gridLineColor, getColor(context, R.color.defaultGridLineColor))
+                    labelColor = getColor(R.styleable.BarChartView_labelColor, getColor(context, R.color.defaultLabelColor))
+                    textColor = getColor(R.styleable.BarChartView_textColor, getColor(context, R.color.defaultTextColor))
                     gridLineStrokeSize = getFloat(R.styleable.BarChartView_gridLineStrokeSize, 5f)
                     barPadding = getFloat(R.styleable.BarChartView_barPadding, 8f)
                     graphPadding = getFloat(R.styleable.BarChartView_graphPadding, 100f)
@@ -117,12 +117,12 @@ class BarChartView: View {
         gridLinesPaint.pathEffect = DashPathEffect(floatArrayOf(35f, 5f), 0f)
 
         labelStemPaint = Paint(Paint.ANTI_ALIAS_FLAG)
-        labelStemPaint.color = labelLineColor
+        labelStemPaint.color = labelColor
         labelStemPaint.style = Paint.Style.STROKE
         labelStemPaint.strokeWidth = gridLineStrokeSize
 
         labelBackgroundPaint = Paint(Paint.ANTI_ALIAS_FLAG)
-        labelBackgroundPaint.color = labelLineColor
+        labelBackgroundPaint.color = labelColor
         labelBackgroundPaint.style = Paint.Style.STROKE
         labelBackgroundPaint.strokeCap = Paint.Cap.ROUND
         labelBackgroundPaint.strokeWidth = labelHeight

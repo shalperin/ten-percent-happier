@@ -8,10 +8,10 @@
     <color name="lastFourWeeksCheckColor">#ffffff</color>
 
     <!-- Bar Chart -->
-    <color name="barColor">#008577</color>
-    <color name="gridLineColor">#4B4B4B</color>
-    <color name="labelColor">#03A9F4</color>
-    <color name="labelTextColor">#ffffff</color>
+    <color name="defaultBarColor">#008577</color>-->
+    <color name="defaultGridLineColor">#4B4B4B</color>
+    <color name="defaultLabelColor">#03A9F4</color>
+    <color name="defaultTextColor">#ffffff</color>
 
 
 </resources>

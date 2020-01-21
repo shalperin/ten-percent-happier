@@ -11,16 +11,11 @@
     <!-- You can override the colors from other modules
     here -->
     <!-- Calendar -->
-    <color name="lastFourWeeksMetCircleColor">@color/colorPrimary</color>
-    <color name="lastFourWeeksTextColor">@color/backedOffWhite</color>
-    <color name="lastFourWeeksSkippedColor">@color/colorAccent</color>
-    <color name="lastFourWeeksDisabledColor">@color/mediumGray</color>
-    <color name="lastFourWeeksCheckColor">@color/backedOffWhite</color>
+<!--    <color name="lastFourWeeksMetCircleColor">@color/colorPrimary</color>-->
+<!--    <color name="lastFourWeeksTextColor">@color/backedOffWhite</color>-->
+<!--    <color name="lastFourWeeksSkippedColor">@color/colorAccent</color>-->
+<!--    <color name="lastFourWeeksDisabledColor">@color/mediumGray</color>-->
+<!--    <color name="lastFourWeeksCheckColor">@color/backedOffWhite</color>-->
 
-    <!-- Bar Chart -->
-    <color name="barColor">@color/colorPrimaryDark</color>
-    <color name="gridLineColor">@color/mediumGray</color>
-    <color name="labelColor">@color/colorPrimary</color>
-    <color name="labelTextColor">@color/backedOffWhite</color>
 
 </resources>

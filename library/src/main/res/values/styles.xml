@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="RedwoodBarChartViewDefault">
+        <item name="barColor">@color/defaultBarColor</item>
+        <item name="gridLineColor">@color/defaultGridLineColor</item>
+        <item name="labelColor">@color/defaultLabelColor</item>
+        <item name="textColor">@color/defaultTextColor</item>
+        <item name="gridLineStrokeSize">5</item>
+        <item name="barPadding">8</item>
+        <item name="graphPadding">100</item>
+        <item name="labelPosition">40</item>
+        <item name="labelTextPosition">12</item>
+        <item name="labelTextSize">30</item>
+        <item name="labelHeight">70</item>
+        <item name="labelWidth">225</item>
+    </style>
+
+    <style name="RedwoodBarChartView" parent="RedwoodBarChartViewDefault"/>
+
+</resources>

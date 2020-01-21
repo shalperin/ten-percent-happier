@@ -8,4 +8,8 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="RedwoodBarChartView" parent="RedwoodBarChartViewDefault">
+        <!-- override barchart attributes here -->
+        <!-- protip: right click / 'go to' the the RedwoodBarChartViewDefault style above.-->
+    </style>
 </resources>
