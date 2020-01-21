@@ -24,6 +24,7 @@ class BarChartView: View {
         defStyleAttr
     ) { init(attrs) }
 
+
     //These are calculated - Modifications will be overwritten.
     private lateinit var barPaint: Paint
     private lateinit var gridLinesPaint: Paint
@@ -71,6 +72,20 @@ class BarChartView: View {
             invalidate()
 
         }
+
+   var listener: BarChartFragmentListener? = null
+    get() {
+        if (field == null) {
+            throw Exception("Missing BarChartFragmentListener")
+        }
+        return field
+    }
+
+    var barIndex:Int? = null
+    set(value) {
+        field = value
+        invalidate()
+    }
 
 
     private fun init(attrs: AttributeSet?) {
@@ -147,6 +162,7 @@ class BarChartView: View {
         plotAreaTopY = graphPadding
         plotAreaBottomY = viewHeight.toFloat() - graphPadding
         plotAreaHeight = plotAreaBottomY - plotAreaTopY
+
     }
 
 
@@ -165,6 +181,7 @@ class BarChartView: View {
 
         if (model != null) {
             drawGrid(canvas)
+            createLabel()
             drawLabelLine(canvas)
             drawLabelBackground(canvas)
             drawLabelText(canvas)
@@ -243,29 +260,41 @@ class BarChartView: View {
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         if (event != null)  {
-            createLabel(event.x)
+        val barIndex = whichBarClicked(event.x)
+            if (barIndex != null) {
+                listener?.onActiveItemSet(barIndex)
+            } else {
+                listener?.onActiveItemSet(null)
+            }
         }
         return true
     }
 
-    private fun createLabel(touchX: Float) {
-        val barIndex = whichBarClicked(touchX)
+
+
+
+    fun createLabel() {
         if (barIndex != null) {
-            val x = barCenterX(barIndex)
+            val x = barCenterX(barIndex!!)
             val y = labelPosition
-            labelText = model!!.getOrNull(barIndex)?.second
+            labelText = model!!.getOrNull(barIndex!!)?.second
+
+            createLabelStem(y, x)
+            createLabelBackground(x, y)
 
             if (labelText != null) {
-                createLabelStem(y, x)
-                createLabelBackground(x, y)
                 createLabelText(labelText!!, x, y)
-                invalidate()
-            } else {
-                labelText = null
             }
         } else {
-            labelText = null
+            clearLabel()
         }
+        invalidate()
+    }
+
+
+    private fun clearLabel() {
+        labelText = null
+        barIndex = null
     }
 
     private fun createLabelBackground(x: Float, y: Float) {

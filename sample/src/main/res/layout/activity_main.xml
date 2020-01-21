@@ -10,32 +10,42 @@
         android:layout_height="wrap_content"
         >
 
-
-        <com.blauhaus.android.redwood.barchart.BarChartView
-            android:layout_width="wrap_content"
+        <FrameLayout
+            android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:id="@+id/bar_chart"
-            app:barColor="#33ff33"
-            />
+            android:background="@color/overlayBackgroundColor"
+            android:layout_marginTop="24dp"
+            >
 
+            <fragment
+                android:name="com.blauhaus.android.redwood.barchart.BarChartFragment"
+                android:layout_width="wrap_content"
+                android:layout_height="300dp"
+                android:id="@+id/bar_chart"
+                />
+        </FrameLayout>
 
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="go"
+            android:id="@+id/go"/>
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:padding = "40dp"
+            android:background="@color/overlayBackgroundColor"
+            android:layout_marginTop="24dp"
+            >
+            <fragment
+                android:name="com.blauhaus.android.redwood.lastfourweeks.LastFourWeeksFragment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/last4weeks"
 
-<!--        <FrameLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="300dp"-->
-<!--            android:padding = "40dp"-->
-<!--            android:background="@color/overlayBackgroundColor"-->
-<!--            android:layout_marginTop="24dp"-->
-<!--            >-->
-<!--            <fragment-->
-<!--                android:name="com.blauhaus.android.redwood.lastfourweeks.LastFourWeeksFragment"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:id="@+id/last4weeks"-->
-
-<!--                android:layout_gravity="center"/>-->
-<!--        </FrameLayout>-->
+                android:layout_gravity="center"/>
+        </FrameLayout>
 
 
     </LinearLayout>

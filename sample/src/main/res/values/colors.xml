@@ -2,13 +2,25 @@
 <resources>
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccent">#7C2747</color>
     <color name="backedOffWhite">#eeeeee</color>
     <color name="backedOffBlack">#222222</color>
     <color name="overlayBackgroundColor">#222222</color>
+    <color name="mediumGray">#444444</color>
 
     <!-- You can override the colors from other modules
     here -->
+    <!-- Calendar -->
+    <color name="lastFourWeeksMetCircleColor">@color/colorPrimary</color>
+    <color name="lastFourWeeksTextColor">@color/backedOffWhite</color>
+    <color name="lastFourWeeksSkippedColor">@color/colorAccent</color>
+    <color name="lastFourWeeksDisabledColor">@color/mediumGray</color>
+    <color name="lastFourWeeksCheckColor">@color/backedOffWhite</color>
 
+    <!-- Bar Chart -->
+    <color name="barColor">@color/colorPrimaryDark</color>
+    <color name="gridLineColor">@color/mediumGray</color>
+    <color name="labelColor">@color/colorPrimary</color>
+    <color name="labelTextColor">@color/backedOffWhite</color>
 
 </resources>

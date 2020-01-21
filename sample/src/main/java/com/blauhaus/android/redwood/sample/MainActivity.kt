@@ -2,52 +2,50 @@ package com.blauhaus.android.redwood.sample
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import com.blauhaus.android.redwood.barchart.BarChartViewModel
 import com.blauhaus.android.redwood.barchart.barChartDemoData
+import com.blauhaus.android.redwood.lastfourweeks.LastFourWeeksViewModel
+import com.blauhaus.android.redwood.lastfourweeks.demoLastFourWeeksData
+import com.blauhaus.android.redwood.lastfourweeks.views.DayView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
+    val lastFourWeeksViewModel by viewModel<LastFourWeeksViewModel>()
+    val barChartViewModel by viewModel<BarChartViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val model = ViewModelProviders.of(this)[SampleViewModel::class.java]
-
-        model.barChartData.observe(this, Observer {
-            bar_chart.model = it
-        })
+        go.setOnClickListener {
+            GlobalScope.launch {
+                for (i in 1..10) {
+                    barChartViewModel.data.postValue(barChartDemoData)
+//                delay(5600)
+//                barChartViewModel.data.postValue(barChartDemoData.subList(2, 10))
+//                delay(5600)
+//                barChartViewModel.data.postValue(barChartDemoData.subList(1, 5))
+//                delay(5600)
+//                barChartViewModel.data.postValue(barChartDemoData.subList(2, 13))
+//                delay(5600)
+                }
+            }
+        }
 
         GlobalScope.launch {
-            for (i in 1..10) {
-                model.barChartData.postValue(barChartDemoData)
-                delay(5600)
-                model.barChartData.postValue(barChartDemoData.subList(2, 10))
-                delay(5600)
-                model.barChartData.postValue(barChartDemoData.subList(1, 5))
-                delay(5600)
-                model.barChartData.postValue(barChartDemoData.subList(2, 13))
-                delay(5600)
-            }
+            lastFourWeeksViewModel.dayData.postValue(demoLastFourWeeksData)
+            delay(3600)
+
+            // replace the last element in the list with MetToday()
+            val next = demoLastFourWeeksData.mapIndexed{i, existing ->
+                if (i == demoLastFourWeeksData.size-1)
+                    DayView.ViewState.MetToday() else existing}
+
+            lastFourWeeksViewModel.dayData.postValue(next)
         }
     }
 }
-
-//
-//private suspend fun doLastFourWeeksDemo(startData: List<DayView.ViewState>, stream: MutableLiveData<List<DayView.ViewState>>) {
-//    stream.postValue(startData)
-//    delay(3600)
-//
-//    // replace the last element in the list with MetToday()
-//    val next = startData.mapIndexed{i, existing ->
-//        if (i == startData.size-1) DayView.ViewState.MetToday() else existing}
-//
-//    stream.postValue(next)
-//}
-
-
-
