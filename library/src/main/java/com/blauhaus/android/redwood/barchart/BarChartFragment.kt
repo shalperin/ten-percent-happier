@@ -11,30 +11,32 @@ import com.blauhaus.android.redwood.R
 import kotlinx.android.synthetic.main.bar_chart_fragment.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-private const val ID_ARG_PARAM = "id_param"
+private const val ARG_ID = "id_param"
+const val PROP_BAR_COLOR = "barColor"
+const val PROP_GRID_LINE_COLOR = "gridLineColor"
+const val PROP_LABEL_COLOR = "labelColor"
+const val PROP_TEXT_COLOR = "textColor"
 
-class BarChartFragment : Fragment(), BarChartFragmentListener {
+class BarChartFragment : Fragment(), BarChartViewListener {
     private val model: BarChartViewModel by viewModel()
-    private var id: String? = null
+    private lateinit var id: String
 
     companion object {
         fun newInstance(id: String) = BarChartFragment().apply {
             arguments = Bundle().apply {
-                putString(ID_ARG_PARAM, id)
+                putString(ARG_ID, id)
             }
         }
-
-        const val BAR_COLOR_PROP = "barColor"
-        const val GRID_LINE_COLOR_PROP = "gridLineColor"
-        const val LABEL_COLOR_PROP = "labelColor"
-        const val TEXT_COLOR_PROP = "textColor"
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            id = it.getString(ID_ARG_PARAM)
+            if (!it.containsKey(ARG_ID)) {
+                throw Exception("ID is required.")
+            } else {
+                id = it.getString(ARG_ID)!!
+            }
         }
     }
 
@@ -50,36 +52,36 @@ class BarChartFragment : Fragment(), BarChartFragmentListener {
 
         bar_chart_view.listener = this
 
-        model.data(id!!).observe(this, Observer {
+        model.data(id).observe(this, Observer {
             bar_chart_view.model = it
         })
 
-        model.activeItem(id!!).observe(this, Observer {index ->
+        model.activeItem(id).observe(this, Observer {index ->
             bar_chart_view.labelIndex = index
         })
 
-        model.intProp(id!!, BAR_COLOR_PROP).observe(this, Observer {
+        model.intProp(id, PROP_BAR_COLOR).observe(this, Observer {
             //TODO : why is 'it' type Int!?
             bar_chart_view.barColor = it
         })
-        model.intProp(id!!, GRID_LINE_COLOR_PROP).observe(this, Observer {
+        model.intProp(id, PROP_GRID_LINE_COLOR).observe(this, Observer {
             bar_chart_view.gridLineColor = it
         })
-        model.intProp(id!!, LABEL_COLOR_PROP).observe(this, Observer {
+        model.intProp(id, PROP_LABEL_COLOR).observe(this, Observer {
             bar_chart_view.labelColor = it
         })
-        model.intProp(id!!, TEXT_COLOR_PROP).observe(this, Observer {
+        model.intProp(id, PROP_TEXT_COLOR).observe(this, Observer {
             bar_chart_view.textColor = it
         })
 
     }
 
     override fun onActiveItemSet(index: Int?) {
-        model.activeItem(id!!).postValue(index)
+        model.activeItem(id).postValue(index)
     }
 
 }
 
-interface BarChartFragmentListener {
+interface BarChartViewListener {
     fun onActiveItemSet(index:Int?)
 }

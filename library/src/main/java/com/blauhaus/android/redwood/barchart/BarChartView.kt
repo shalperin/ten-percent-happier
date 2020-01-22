@@ -57,7 +57,7 @@ class BarChartView: View {
             invalidate()
         }
 
-   var listener: BarChartFragmentListener? = null
+   var listener: BarChartViewListener? = null
     get() {
         if (field == null) {
             throw Exception("Missing BarChartFragmentListener")
@@ -93,7 +93,6 @@ class BarChartView: View {
         }
 
     private fun init(attrs: AttributeSet?) {
-
         attrs?.let {
             context.theme.obtainStyledAttributes(
                 attrs,
@@ -148,8 +147,6 @@ class BarChartView: View {
         labelTextPaint.color = textColor
         labelTextPaint.textAlign = Paint.Align.CENTER
         labelTextPaint.textSize = labelTextSize
-
-
     }
 
     override fun onSizeChanged(
@@ -165,7 +162,7 @@ class BarChartView: View {
     }
 
 
-    fun recomputeBarWidth() {
+    private fun recomputeBarWidth() {
         val modelSize = model?.size ?: 0
         barWidth = if (modelSize != 0) {
             (plotArea.width() - (model!!.size + 1) * barPadding) / modelSize
