@@ -35,10 +35,7 @@ class BarChartView: View {
     private var plotArea = Rect()
 
     //Attrs to twiddle.
-    private var barColor = getColor(context, R.color.defaultBarColor)
-    private var gridLineColor = getColor(context, R.color.defaultGridLineColor)
-    private var labelColor = getColor(context, R.color.defaultLabelColor)
-    private var textColor = getColor(context, R.color.defaultTextColor)
+    // These also can be exposed, see barColor et al below.
     private var barPadding = 8f
     private var gridLineStrokeSize = 5f
     private var graphPadding = 100f
@@ -74,6 +71,26 @@ class BarChartView: View {
         invalidate()
      }
 
+    var barColor: Int = getColor(context, R.color.defaultBarColor)
+    set(value) {
+        field = value
+        initPaints()
+    }
+    var gridLineColor = getColor(context, R.color.defaultGridLineColor)
+        set(value) {
+            field = value
+            initPaints()
+        }
+    var labelColor = getColor(context, R.color.defaultLabelColor)
+        set(value) {
+            field = value
+            initPaints()
+        }
+    var textColor = getColor(context, R.color.defaultTextColor)
+        set(value) {
+            field = value
+            initPaints()
+        }
 
     private fun init(attrs: AttributeSet?) {
 
