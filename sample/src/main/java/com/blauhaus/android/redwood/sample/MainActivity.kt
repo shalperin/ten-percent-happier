@@ -17,18 +17,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
     }
+
+
 }
 
 //  val lastFourWeeksViewModel by viewModel<LastFourWeeksViewModel>()
 //
-//        GlobalScope.launch {
-//            lastFourWeeksViewModel.dayData.postValue(demoLastFourWeeksData)
-//            delay(3600)
 //
-//            // replace the last element in the list with MetToday()
-//            val next = demoLastFourWeeksData.mapIndexed{i, existing ->
-//                if (i == demoLastFourWeeksData.size-1)
-//                    DayView.ViewState.MetToday() else existing}
-//
-//            lastFourWeeksViewModel.dayData.postValue(next)
-//        }

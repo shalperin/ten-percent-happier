@@ -24,6 +24,10 @@ class IndexFragment : Fragment() {
         link_barChartDemo.setOnClickListener{
             findNavController().navigate(R.id.action_indexFragment_to_barGraphDemo1Fragment2)
         }
+
+        link_lastFourWeeksDemo.setOnClickListener{
+            findNavController().navigate(R.id.action_indexFragment_to_lastFourWeeksDemo1Fragment)
+        }
     }
 
     companion object {

@@ -9,13 +9,30 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title="Bar graph demo"
-        app:description="There's more here than meets the eye (this will be a common theme.)  What we've got is a really nicely modular bar chart."
+        app:description="A nice, modular MVVM bar chart."
         app:thumbnail="@drawable/ic_all_inclusive_black_24dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:background="#eeeeee"
+        android:background="#dddddd"
         android:id="@+id/link.barChartDemo"
+        android:layout_margin="8dp"
+        />
+
+
+
+    <com.blauhaus.android.redwood.sample.views.ThumbnailDescriptionView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="Last Four Weeks"
+        app:description="An abstract calendar"
+        app:thumbnail="@drawable/ic_all_inclusive_black_24dp"
+        app:layout_constraintTop_toBottomOf="@id/link.barChartDemo"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:background="#dddddd"
+        android:id="@+id/link.lastFourWeeksDemo"
+        android:layout_margin="8dp"
         />
 
 

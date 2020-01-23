@@ -10,9 +10,16 @@
         <action
             android:id="@+id/action_indexFragment_to_barGraphDemo1Fragment2"
             app:destination="@id/barGraphDemo1Fragment" />
+        <action
+            android:id="@+id/action_indexFragment_to_lastFourWeeksDemo1Fragment"
+            app:destination="@id/lastFourWeeksDemo1Fragment" />
     </fragment>
     <fragment
         android:id="@+id/barGraphDemo1Fragment"
         android:name="com.blauhaus.android.redwood.sample.fragments.BarGraphDemo1Fragment"
         android:label="BarGraphDemo1Fragment" />
+    <fragment
+        android:id="@+id/lastFourWeeksDemo1Fragment"
+        android:name="com.blauhaus.android.redwood.sample.fragments.LastFourWeeksDemo1Fragment"
+        android:label="LastFourWeeksDemo1Fragment" />
 </navigation>
