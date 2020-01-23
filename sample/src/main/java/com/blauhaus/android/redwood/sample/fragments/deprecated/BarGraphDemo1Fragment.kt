@@ -1,4 +1,4 @@
-package com.blauhaus.android.redwood.sample.fragments
+package com.blauhaus.android.redwood.sample.fragments.deprecated
 
 
 import android.os.Bundle
