@@ -8,6 +8,9 @@
     <color name="overlayBackgroundColor">#222222</color>
     <color name="mediumGray">#444444</color>
 
+    <color name="barChart2BarColor">#3D6430</color>
+    <color name="barChart3BarColor">#E7526B</color>
+
     <!-- You can override the colors from other modules
     here -->
     <!-- Calendar -->

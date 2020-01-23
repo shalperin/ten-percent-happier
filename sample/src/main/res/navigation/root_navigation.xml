@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/root_navigation"
+    app:startDestination="@id/indexFragment">
+
+    <fragment
+        android:id="@+id/indexFragment"
+        android:name="com.blauhaus.android.redwood.sample.fragments.IndexFragment"
+        android:label="IndexFragment" >
+        <action
+            android:id="@+id/action_indexFragment_to_barGraphDemo1Fragment2"
+            app:destination="@id/barGraphDemo1Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/barGraphDemo1Fragment"
+        android:name="com.blauhaus.android.redwood.sample.fragments.BarGraphDemo1Fragment"
+        android:label="BarGraphDemo1Fragment" />
+</navigation>

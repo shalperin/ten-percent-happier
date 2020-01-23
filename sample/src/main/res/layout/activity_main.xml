@@ -1,51 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<ScrollView android:layout_height="wrap_content"
-    android:layout_width="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#000000">
-    <LinearLayout android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:background="@color/overlayBackgroundColor"
-            android:layout_marginTop="24dp"
-            >
-
-            <fragment
-                android:name="com.blauhaus.android.redwood.barchart.BarChartFragment"
-                android:layout_width="wrap_content"
-                android:layout_height="300dp"
-                android:id="@+id/bar_chart"
-                />
-        </FrameLayout>
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="go"
-            android:id="@+id/go"/>
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:padding = "40dp"
-            android:background="@color/overlayBackgroundColor"
-            android:layout_marginTop="24dp"
-            android:id="@+id/last4WeeksContainer"
-            >
-            <fragment android:name="com.blauhaus.android.redwood.lastfourweeks.LastFourWeeksFragment"
-                android:id="@+id/l4w"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-        </FrameLayout>
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
 
 
-    </LinearLayout>
-</ScrollView>
+    <fragment
+        android:id="@+id/nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/root_navigation" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

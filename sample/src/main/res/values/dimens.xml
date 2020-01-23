@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="dimen" name="index_thumbnail_width">100dp</item>
+    <item type="dimen" name="index_thumbnail_height">100dp</item>
+    <item type="dimen" name="index_item_margin">16dp</item>
+
+</resources>
