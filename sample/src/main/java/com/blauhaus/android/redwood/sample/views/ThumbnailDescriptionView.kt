@@ -10,19 +10,47 @@ import kotlinx.android.synthetic.main.view_thumbnail_description.view.*
 
 class ThumbnailDescriptionView : ConstraintLayout {
 
-    private lateinit var title: String
-    private lateinit var description: String
-    private var thumbnail = 0
+    // When using the one-arg programmatic constructor,
+    // we will need to be able to set these.
+    public var title = "Not initialized"
+        set(value) {
+            field = value
+            initSubViews()
+        }
+    public var description = "Not initialized"
+        set(value) {
+            field = value
+            initSubViews()
+        }
 
-    constructor(context: Context) : super(context) { init(null)}
-    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {init(attrs)}
+    public var thumbnail = 0
+        set(value) {
+            field = value
+            initSubViews()
+        }
+
+
+    //all three constructors call init below
+    constructor(context: Context) : super(context) {
+        init(null)
+    }
+
+    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
+        init(attrs)
+    }
+
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
         context,
         attrs,
         defStyleAttr
-    ) { init(attrs)}
+    ) {
+        init(attrs)
+    }
 
-    private fun init(attrs:AttributeSet?) {
+    private fun init(attrs: AttributeSet?) {
+        // When we are using the constructors for XML, peel
+        // the styles out of the XML so we can use the values
+        // later.
         attrs?.let {
             context.theme.obtainStyledAttributes(
                 attrs,
@@ -43,10 +71,17 @@ class ThumbnailDescriptionView : ConstraintLayout {
             }
         }
 
-        val view = inflate(context,
-            R.layout.view_thumbnail_description, this)
-        view.titleText.text = title
-        view.description.text = description
-        view.thumbnail.setImageDrawable(ContextCompat.getDrawable(context, thumbnail))
+        // Inflate the view, attatching to 'this'.
+        inflate(context, R.layout.view_thumbnail_description, this)
+
+        // Load the subviews with our styling attributes.
+        initSubViews()
     }
+
+    private fun initSubViews() {
+        rootView?.titleText?.text = title
+        rootView?.description?.text = description
+        rootView?.thumbnail?.setImageDrawable(ContextCompat.getDrawable(context, thumbnail))
+    }
+
 }
