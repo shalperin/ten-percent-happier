@@ -23,9 +23,11 @@
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:layout_marginTop="16dp"
-            android:background="@color/onEfes"
+            android:background="@drawable/background_rounded_corners"
             android:paddingTop="24dp"
+            android:paddingBottom="24dp"
             >
+
         </androidx.viewpager.widget.ViewPager>
         <!-- TODO this is not an optimal approach, the status text doesn't slide. -->
         <LinearLayout
@@ -46,6 +48,7 @@
             <ImageView android:id="@+id/medal"  android:layout_width="30dp" android:layout_height="30dp" android:visibility="gone" android:layout_marginLeft="-5dp"/>
         </LinearLayout>
     </FrameLayout>
+
 
 
 </LinearLayout>

@@ -3,21 +3,26 @@ package com.blauhaus.android.redwood.sample.viewmodels
 import androidx.lifecycle.*
 import com.blauhaus.android.redwood.lastfourweeks.views.DayView
 import com.blauhaus.android.redwood.sample.*
-import org.koin.android.ext.android.inject
 
 class AchievmentViewModel(val repo: Repository): ViewModel() {
 
-
-
     val lastFourWeeksBackingModel: LiveData<List<DayView.ViewState>> =
         Transformations.map(repo.meditationData) { data ->
-            adaptRepoMeditationDataToLastFourWeeksDayData(data)
+            val adapted = data.map { datum ->
+                if (datum.first == 0f) {
+                    DayView.ViewState.Skipped()
+                } else {
+                    DayView.ViewState.Met()
+                }
+            }.toMutableList()
+            adapted.add(DayView.ViewState.DidntMeetYetToday())
+            while (adapted.size != 28) {
+                adapted.add(DayView.ViewState.Future())
+            }
+            adapted
         }
 
-    val barChartBackingModel: LiveData<List<Pair<Float, String>>> =
-        Transformations.map(repo.meditationData) { data ->
-            adaptRepoMeditationDataToBarChartData(data)
-        }
+    val barChartBackingModel = repo.meditationData
 
     val totalDaysMeditated: LiveData<Int> =
         Transformations.map(lastFourWeeksBackingModel) {
@@ -67,30 +72,6 @@ class AchievmentViewModel(val repo: Repository): ViewModel() {
 
 
 
-    //TODO move these up
-    private fun adaptRepoMeditationDataToLastFourWeeksDayData(data: List<Pair<Float, String>>): MutableList<DayView.ViewState> {
-        val adapted = data.map { datum ->
-            if (datum.first == 0f) {
-                DayView.ViewState.Skipped()
-            } else {
-                DayView.ViewState.Met()
-            }
-        }.toMutableList()
-        adapted.add(DayView.ViewState.DidntMeetYetToday())
-        while (adapted.size != 28) {
-            adapted.add(DayView.ViewState.Future())
-        }
-        return adapted
-    }
-
-
-    private fun adaptRepoMeditationDataToBarChartData(data: List<Pair<Float, String>>): List<Pair<Float, String>> {
-        var adapted = data.toMutableList()
-        while (adapted.size != 28) {
-            adapted.add(Pair(0f, "0 minutes"))
-        }
-        return adapted.toList()
-    }
 
 
     init {
