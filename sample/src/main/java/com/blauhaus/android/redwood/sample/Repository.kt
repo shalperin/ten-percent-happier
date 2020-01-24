@@ -2,14 +2,22 @@ package com.blauhaus.android.redwood.sample
 
 import androidx.lifecycle.MutableLiveData
 
-class Repository {
-    val meditationData = MutableLiveData<List<Pair<Float, String>>>()
+class Repository : IRepository {
+    val _meditationData = MutableLiveData<List<Pair<Float, String>>>()
+
+    override fun meditationData(): MutableLiveData<List<Pair<Float, String>>> {
+        return _meditationData
+    }
 
     init {
         loadData()
     }
 
     fun loadData() {
-        meditationData.postValue(meditationHistoryData)
+        _meditationData.postValue(meditationHistoryData)
     }
+}
+
+interface IRepository {
+    fun meditationData(): MutableLiveData<List<Pair<Float, String>>>
 }

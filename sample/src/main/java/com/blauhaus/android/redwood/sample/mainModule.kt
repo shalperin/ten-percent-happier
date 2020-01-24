@@ -5,6 +5,6 @@ import org.koin.dsl.module
 
 
 val mainModule = module {
-    single { Repository() }
+    single { Repository() as IRepository }
     single { AchievmentViewModel(get()) }
 }

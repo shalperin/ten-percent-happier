@@ -4,10 +4,10 @@ import androidx.lifecycle.*
 import com.blauhaus.android.redwood.lastfourweeks.views.DayView
 import com.blauhaus.android.redwood.sample.*
 
-class AchievmentViewModel(val repo: Repository): ViewModel() {
+class AchievmentViewModel(val repo: IRepository): ViewModel() {
 
     val lastFourWeeksBackingModel: LiveData<List<DayView.ViewState>> =
-        Transformations.map(repo.meditationData) { data ->
+        Transformations.map(repo.meditationData()) { data ->
             val adapted = data.map { datum ->
                 if (datum.first == 0f) {
                     DayView.ViewState.Skipped()
@@ -22,7 +22,7 @@ class AchievmentViewModel(val repo: Repository): ViewModel() {
             adapted
         }
 
-    val barChartBackingModel = repo.meditationData
+    val barChartBackingModel = repo.meditationData()
 
     val totalDaysMeditated: LiveData<Int> =
         Transformations.map(lastFourWeeksBackingModel) {
@@ -30,7 +30,7 @@ class AchievmentViewModel(val repo: Repository): ViewModel() {
         }
 
     val averageMinutesMeditated: LiveData<Int> =
-        Transformations.map(repo.meditationData) {
+        Transformations.map(repo.meditationData()) {
             it.map{it.first}.filter{it != 0f}.average().toInt()
         }
 
