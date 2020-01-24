@@ -16,7 +16,7 @@ class MainApplication : Application(){
         startKoin{
             androidLogger()
             androidContext(this@MainApplication)
-            modules(listOf(lastFourWeeksModule, barChartModule))
+            modules(listOf(lastFourWeeksModule, barChartModule, mainModule))
         }
     }
 

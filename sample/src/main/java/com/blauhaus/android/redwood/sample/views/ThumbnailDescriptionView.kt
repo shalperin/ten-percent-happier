@@ -1,6 +1,7 @@
 package com.blauhaus.android.redwood.sample.views
 
 import android.content.Context
+import android.graphics.Color
 import android.util.AttributeSet
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
@@ -28,6 +29,13 @@ class ThumbnailDescriptionView : ConstraintLayout {
             field = value
             initSubViews()
         }
+
+    public var textColor = 0
+        set(value) {
+            field = value
+            initSubViews()
+        }
+
 
 
     //all three constructors call init below
@@ -63,8 +71,9 @@ class ThumbnailDescriptionView : ConstraintLayout {
                         ?: "Description Missing"
                     thumbnail = getResourceId(
                         R.styleable.ThumbnailDescriptionView_thumbnail,
-                        R.drawable.ic_all_inclusive_black_24dp
+                        R.drawable.ic_all_inclusive_24dp
                     )
+                    textColor = getColor(R.styleable.ThumbnailDescriptionView_textColor, Color.RED)
                 } finally {
                     recycle()
                 }
@@ -80,8 +89,13 @@ class ThumbnailDescriptionView : ConstraintLayout {
 
     private fun initSubViews() {
         rootView?.titleText?.text = title
+        rootView?.titleText?.setTextColor(textColor)
+
         rootView?.description?.text = description
+        rootView?.description?.setTextColor(textColor)
+
         rootView?.thumbnail?.setImageDrawable(ContextCompat.getDrawable(context, thumbnail))
+
     }
 
 }

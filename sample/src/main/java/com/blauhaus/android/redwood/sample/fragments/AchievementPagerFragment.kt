@@ -1,0 +1,146 @@
+package com.blauhaus.android.redwood.sample.fragments
+
+
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
+import androidx.lifecycle.Observer
+import androidx.viewpager.widget.ViewPager
+import com.blauhaus.android.redwood.barchart.BarChartFragment
+import com.blauhaus.android.redwood.barchart.BarChartViewModel
+import com.blauhaus.android.redwood.lastfourweeks.LastFourWeeksFragment
+import com.blauhaus.android.redwood.lastfourweeks.LastFourWeeksViewModel
+import com.blauhaus.android.redwood.sample.R
+import com.blauhaus.android.redwood.sample.viewmodels.AchievmentViewModel
+import kotlinx.android.synthetic.main.fragment_achievement_pager.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
+
+
+/**
+ * A simple [Fragment] subclass.
+ */
+class AchievementPagerFragment : Fragment() {
+    val barChartViewModel by viewModel<BarChartViewModel>()
+    val last4ViewModel by viewModel<LastFourWeeksViewModel>()
+    val model by viewModel<AchievmentViewModel>()
+
+    private val BAR_CHART_ID = "1"
+    private val LAST4_WEEKS_POSITION_IN_VIEW_PAGER = 0
+    private val frag1 = LastFourWeeksFragment()
+    private val frag2 = BarChartFragment.newInstance(BAR_CHART_ID)
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_achievement_pager, container, false)
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        val vpAdapter = MyPagerAdapter(fragmentManager!!)
+        vpAdapter.set(frag1, frag2)
+        vpPager.adapter = vpAdapter
+        vpPager.addOnPageChangeListener(viewPagerListener)
+
+        model.lastFourWeeksBackingModel.observe( this, Observer {
+            last4ViewModel.dayData.postValue(it)
+        })
+
+        model.barChartBackingModel.observe ( this, Observer {
+            barChartViewModel.data(BAR_CHART_ID).postValue(it)
+        })
+
+        model.totalDaysMeditated.observe (this, Observer {
+            achievedDayCount.text = it.toString()
+        })
+
+        model.averageMinutesMeditated.observe (this, Observer {
+            achievedAverage.text = it.toString()
+        })
+
+
+        //TODO() there's some logic here that would be amenable to testing.
+        model.medalClass.observe (this, Observer {
+
+            val drawable = when(it.first) {
+                is AchievmentViewModel.MedalClass.Gold -> R.drawable.gold
+                is AchievmentViewModel.MedalClass.Bronze -> R.drawable.bronze
+                is AchievmentViewModel.MedalClass.Silver -> R.drawable.silver
+                else -> null
+            }
+            if (drawable != null) {
+                medal.background = ResourcesCompat.getDrawable(resources, drawable, null)
+            }
+
+            when (it.second) {
+                is AchievmentViewModel.MedalProgress.OnTrack -> {
+                    onTrackMedalText.visibility = View.VISIBLE
+                    gotMedalText.visibility = View.GONE
+                    medal.visibility = View.VISIBLE
+                }
+                is AchievmentViewModel.MedalProgress.Got -> {
+                    onTrackMedalText.visibility = View.GONE
+                    gotMedalText.visibility = View.VISIBLE
+                    medal.visibility = View.VISIBLE
+                }
+                is AchievmentViewModel.MedalProgress.No -> {
+                    onTrackMedalText.visibility = View.GONE
+                    gotMedalText.visibility = View.GONE
+                    medal.visibility = View.GONE
+                }
+            }
+        })
+
+    }
+
+    private val viewPagerListener = object: ViewPager.OnPageChangeListener {
+        override fun onPageSelected(position: Int) {
+            if (position == LAST4_WEEKS_POSITION_IN_VIEW_PAGER) {
+                lastFourWeeksDecoration.visibility = View.VISIBLE
+            } else {
+                lastFourWeeksDecoration.visibility = View.GONE
+            }
+        }
+
+        override fun onPageScrollStateChanged(state: Int) {}
+
+        override fun onPageScrolled(
+            position: Int,
+            positionOffset: Float,
+            positionOffsetPixels: Int
+        ) {}
+    }
+
+    class MyPagerAdapter(manager: FragmentManager) :
+        FragmentPagerAdapter(manager, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+        private val COUNT = 2
+        private lateinit var frag1:Fragment
+        private lateinit var frag2:Fragment
+
+        fun set(frag1: Fragment, frag2:Fragment) {
+            this.frag1 = frag1
+            this.frag2 = frag2
+        }
+
+        override fun getCount(): Int {
+            return COUNT
+        }
+
+        override fun getItem(position: Int): Fragment {
+            return when(position) {
+                0 -> frag1
+                else -> frag2
+            }
+        }
+    }
+
+}
+
