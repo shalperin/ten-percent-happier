@@ -1,4 +1,4 @@
-package com.blauhaus.android.jazz
+package com.blauhaus.android.redwood
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

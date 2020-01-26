@@ -1,4 +1,4 @@
-package com.blauhaus.android.jazz
+package com.blauhaus.android.redwood
 
 import org.junit.Test
 
