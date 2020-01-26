@@ -3,6 +3,7 @@ package com.blauhaus.android.redwood.sample.viewmodels
 import androidx.lifecycle.*
 import com.blauhaus.android.redwood.lastfourweeks.views.DayView
 import com.blauhaus.android.redwood.sample.*
+import com.blauhaus.android.redwood.sample.data.IRepository
 
 class AchievmentViewModel(val repo: IRepository): ViewModel() {
 

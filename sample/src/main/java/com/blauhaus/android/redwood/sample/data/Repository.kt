@@ -1,4 +1,4 @@
-package com.blauhaus.android.redwood.sample
+package com.blauhaus.android.redwood.sample.data
 
 import androidx.lifecycle.MutableLiveData
 

@@ -1,4 +1,4 @@
-package com.blauhaus.android.redwood.sample
+package com.blauhaus.android.redwood.sample.data
 
 val meditationHistoryData= listOf(
     Pair(5f, "5 min @ Jan 1"),

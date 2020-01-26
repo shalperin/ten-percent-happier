@@ -6,13 +6,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.blauhaus.android.redwood.lastfourweeks.views.DayView
 import com.blauhaus.android.redwood.lastfourweeks.views.DayView.ViewState
-import com.blauhaus.android.redwood.sample.IRepository
+import com.blauhaus.android.redwood.sample.data.IRepository
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.rules.TestRule
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.TimeoutException
