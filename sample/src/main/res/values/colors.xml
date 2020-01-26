@@ -1,39 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#7C2747</color>
-    <color name="backedOffWhite">#eeeeee</color>
-    <color name="lowContrastWhite">#aaaaaa</color>
-    <color name="backedOffBlack">#222222</color>
-    <color name="backgroundOnBackedOffBlack">#111111</color>
-    <color name="overlayBackgroundColor">#222222</color>
-    <color name="mediumGray">#444444</color>
+    <!--Color-->
 
-    <color name="efesLight">#EEEFF3</color>
-    <color name="ehadLight">#222328</color>
-    <color name="onEfes">#FFFFFF</color>
-    <color name="shteimLight">#AAAAAA</color>
-    <color name="shteimBeitLight">#BDBEC2</color>
-    <color name="alephLight">#4FCDC9</color>
-    <color name="aleph2">#3A9491</color>
-    <color name="beitLight">#EA2F38</color>
+    <!--Material uses an organized approach to applying color by providing a set of attributes -->
+    <!--which define the color of generalized UI elements such as backgrounds, surfaces, type -->
+    <!--and icons. Using these attributes throughout your app makes it easy to change a single -->
+    <!--color, or the entire theme, and have those changes cascade through the interface.-->
 
+    <!--Color is customized by overriding Material Components color attributes with custom -->
+    <!--color values. In this project, your theme’s color attributes are already overridden -->
+    <!--with default values defined in this file, color.xml.  Change any of the values in -->
+    <!--this file to see changes applied across all elements of your app.-->
+
+    <!--LIGHT COLOR THEME-->
+
+    <!--colorPrimary colors map to components and elements, such as app bars and buttons. -->
+    <!--colorSecondary colors are most often used as accents on components, such as FABs and -->
+    <!--selection controls.-->
+    <color name="color_primary">#222222</color>
+    <color name="color_primary_variant">#000000</color>
+    <color name="color_secondary">#03dac6</color>
+    <color name="color_secondary_variant">#018786</color>
+
+    <!--colorBackground appears behind scrollable content and is used for the default window-->
+    <!--background. colorSurface is mapped to the surface of components such as cards, sheets-->
+    <!--and menus. colorError is used to indicate an error state for components such as-->
+    <!--text fields.-->
+    <color name="color_background">#EBFDFF</color>
+    <color name="color_surface">#ffffff</color>
+    <color name="color_error">#C74100</color>
+
+    <!--"On" colors define how text, icons and strokes are colored in relation to the surface-->
+    <!--on which they appear.-->
+    <color name="color_on_primary">#ffffff</color>
+    <color name="color_on_secondary">#000000</color>
+    <color name="color_on_background">#000000</color>
+    <color name="color_on_surface">#000000</color>
+    <color name="color_on_error">#ffffff</color>
+
+
+    <!-- COMPONENTS -->
     <color name="barChart2BarColor">#3D6430</color>
     <color name="barChart3BarColor">#E7526B</color>
-
-
-    <!-- It's somewhat imperfect to style these directly, but it's expedient.-->
-    <color name="lastFourWeeksTextColor">@color/shteimLight</color>
-
-    <!-- You can override the colors from other modules
-    here -->
-    <!-- Calendar -->
-<!--    <color name="lastFourWeeksMetCircleColor">@color/colorPrimary</color>-->
-<!--    <color name="lastFourWeeksTextColor">@color/backedOffWhite</color>-->
-<!--    <color name="lastFourWeeksSkippedColor">@color/colorAccent</color>-->
-<!--    <color name="lastFourWeeksDisabledColor">@color/mediumGray</color>-->
-<!--    <color name="lastFourWeeksCheckColor">@color/backedOffWhite</color>-->
-
+    <color name="lastFourWeeksTextColor">#aaaaaa</color>
 
 </resources>

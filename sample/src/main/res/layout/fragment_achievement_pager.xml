@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+
     >
 
     <TextView
@@ -12,7 +13,6 @@
         android:layout_height="wrap_content"
         android:textSize="24dp"
         android:text="Meditate 14 out of 28 days"
-        android:textColor="@color/mediumGray"
         android:layout_marginBottom="16dp"
         />
 
@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
-        card_view:cardElevation="2dp"
+        card_view:cardElevation="4dp"
         card_view:cardCornerRadius="15dp"
         >
         <FrameLayout

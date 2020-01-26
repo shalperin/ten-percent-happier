@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="16dp"
 
     >
 
@@ -12,14 +14,36 @@
         android:layout_height="wrap_content"
         app:title="A Meditation Challenge"
         app:description="User interface inspired by Dan Harris' 10 Percent Happier app."
-        app:textColor="@color/lowContrastWhite"
-        android:background="@color/backgroundOnBackedOffBlack"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:id="@+id/link.meditationChallenge"
-        android:layout_margin="16dp"
+        app:textColor="@color/color_on_surface"
+        />
+
+    <com.blauhaus.android.redwood.sample.views.ThumbnailDescriptionView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="Bar Chart Demo"
+        app:description=""
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:id="@+id/link.barChartDemo"
+        app:textColor="@color/color_on_surface"
+        />
+
+    <com.blauhaus.android.redwood.sample.views.ThumbnailDescriptionView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="4 Weeks Demo"
+        app:description=""
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:id="@+id/link.4WeeksDemo"
+        app:textColor="@color/color_on_surface"
         />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

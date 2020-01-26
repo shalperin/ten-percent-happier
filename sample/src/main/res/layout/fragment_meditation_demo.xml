@@ -7,7 +7,6 @@
     android:paddingTop="32dp"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    android:background="@color/efesLight"
     >
 
     <fragment android:name="com.blauhaus.android.redwood.sample.fragments.AchievementPagerFragment"

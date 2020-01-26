@@ -21,7 +21,6 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="300dp"
-                android:background="@color/overlayBackgroundColor"
                 android:layout_marginTop="24dp"
                 android:id="@+id/bar_chart_container_1"
                 android:layout_margin="8dp"
@@ -33,7 +32,6 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="300dp"
-                android:background="@color/overlayBackgroundColor"
                 android:layout_marginTop="24dp"
                 android:id="@+id/bar_chart_container_2"
                 android:layout_margin="8dp"
@@ -54,7 +52,6 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:background="@color/overlayBackgroundColor"
                 android:layout_marginTop="24dp"
                 android:id="@+id/bar_chart_container_3"
                 android:layout_margin="8dp"

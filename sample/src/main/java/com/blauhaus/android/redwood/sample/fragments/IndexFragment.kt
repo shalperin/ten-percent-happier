@@ -27,6 +27,15 @@ class IndexFragment : Fragment() {
         link_meditationChallenge.setOnClickListener{
             findNavController().navigate(R.id.action_indexFragment_to_meditationDemoFragment)
         }
+
+        link_4WeeksDemo.setOnClickListener{
+            findNavController().navigate(R.id.action_indexFragment_to_lastFourWeeksDemo1Fragment)
+        }
+
+        link_barChartDemo.setOnClickListener{
+            findNavController().navigate(R.id.action_indexFragment_to_barGraphDemo1Fragment)
+        }
+
     }
 
     companion object {
