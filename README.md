@@ -23,5 +23,5 @@ Notes:
 To Build:
 =========
 Should be straightforward to just clone the project and open it in Android Studio.
-Screenshots (that might be more or less out of date immediately!)
+
 
