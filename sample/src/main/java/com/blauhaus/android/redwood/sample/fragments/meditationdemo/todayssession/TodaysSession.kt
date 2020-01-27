@@ -1,4 +1,4 @@
-package com.blauhaus.android.redwood.sample.fragments
+package com.blauhaus.android.redwood.sample.fragments.meditationdemo.todayssession
 
 
 import android.os.Bundle
@@ -8,17 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 import com.blauhaus.android.redwood.sample.R
 
+
 /**
  * A simple [Fragment] subclass.
  */
-class MeditationDemoFragment : Fragment() {
+class TodaysSession : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_meditation_demo, container, false)
+        return inflater.inflate(R.layout.fragment_todays_session, container, false)
     }
 
 

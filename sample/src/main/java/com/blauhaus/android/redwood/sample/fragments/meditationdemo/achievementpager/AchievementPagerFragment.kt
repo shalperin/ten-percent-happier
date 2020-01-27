@@ -1,4 +1,4 @@
-package com.blauhaus.android.redwood.sample.fragments
+package com.blauhaus.android.redwood.sample.fragments.meditationdemo.achievementpager
 
 
 import android.content.res.ColorStateList
@@ -19,7 +19,6 @@ import com.blauhaus.android.redwood.barchart.BarChartViewModel
 import com.blauhaus.android.redwood.lastfourweeks.LastFourWeeksFragment
 import com.blauhaus.android.redwood.lastfourweeks.LastFourWeeksViewModel
 import com.blauhaus.android.redwood.sample.R
-import com.blauhaus.android.redwood.sample.viewmodels.AchievmentViewModel
 import kotlinx.android.synthetic.main.fragment_achievement_pager.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -36,6 +35,7 @@ class AchievementPagerFragment : Fragment() {
     private val LAST4_WEEKS_POSITION_IN_VIEW_PAGER = 0
     private val frag1 = LastFourWeeksFragment()
     private val frag2 = BarChartFragment.newInstance(BAR_CHART_ID)
+    private val frag3 = StatsFragment()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,8 +48,11 @@ class AchievementPagerFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val vpAdapter = MyPagerAdapter(fragmentManager!!)
-        vpAdapter.set(frag1, frag2)
+        val vpAdapter =
+            MyPagerAdapter(
+                fragmentManager!!
+            )
+        vpAdapter.set(frag1, frag2, frag3)
         vpPager.adapter = vpAdapter
         vpPager.addOnPageChangeListener(viewPagerListener)
 
@@ -110,9 +113,9 @@ class AchievementPagerFragment : Fragment() {
                 lastFourWeeksDecoration.visibility = View.GONE
             }
 
-            val dots = listOf(dot0, dot1)
+            val dots = listOf(dot0, dot1, dot2)
             dots.forEachIndexed{ index, view ->
-                var color = ContextCompat.getColor(context!!, R.color.color_error_dark)
+                var color = ContextCompat.getColor(context!!, R.color.color_grey_1)
                 if (index == position) {
                     color = ContextCompat.getColor(context!!, R.color.color_error)
                 }
@@ -131,13 +134,15 @@ class AchievementPagerFragment : Fragment() {
 
     class MyPagerAdapter(manager: FragmentManager) :
         FragmentPagerAdapter(manager, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
-        private val COUNT = 2
+        private val COUNT = 3
         private lateinit var frag1:Fragment
         private lateinit var frag2:Fragment
+        private lateinit var frag3:Fragment
 
-        fun set(frag1: Fragment, frag2:Fragment) {
+        fun set(frag1: Fragment, frag2:Fragment, frag3: Fragment) {
             this.frag1 = frag1
             this.frag2 = frag2
+            this.frag3 = frag3
         }
 
         override fun getCount(): Int {
@@ -147,7 +152,8 @@ class AchievementPagerFragment : Fragment() {
         override fun getItem(position: Int): Fragment {
             return when(position) {
                 0 -> frag1
-                else -> frag2
+                1-> frag2
+                else -> frag3
             }
         }
     }

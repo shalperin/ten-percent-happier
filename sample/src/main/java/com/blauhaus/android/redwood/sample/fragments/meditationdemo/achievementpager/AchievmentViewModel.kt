@@ -1,9 +1,12 @@
-package com.blauhaus.android.redwood.sample.viewmodels
+package com.blauhaus.android.redwood.sample.fragments.meditationdemo.achievementpager
 
 import androidx.lifecycle.*
 import com.blauhaus.android.redwood.lastfourweeks.views.DayView
 import com.blauhaus.android.redwood.sample.*
 import com.blauhaus.android.redwood.sample.data.IRepository
+import com.blauhaus.android.redwood.sample.data.Repository.Companion.GLOBAL_DATA_AVERAGE
+import com.blauhaus.android.redwood.sample.data.Repository.Companion.GLOBAL_DATA_MINUTES
+import com.blauhaus.android.redwood.sample.data.Repository.Companion.GLOBAL_DATA_PARTICIPANTS
 
 class AchievmentViewModel(val repo: IRepository): ViewModel() {
 
@@ -46,7 +49,10 @@ class AchievmentViewModel(val repo: IRepository): ViewModel() {
         val avg:Int? = avgMinutesMeditated.value
 
         if (days == null || avg == null) {
-            medalClass.value = Pair(MedalClass.None(), MedalProgress.No())
+            medalClass.value = Pair(
+                MedalClass.None(),
+                MedalProgress.No()
+            )
             return
         }
 
@@ -70,6 +76,10 @@ class AchievmentViewModel(val repo: IRepository): ViewModel() {
 
         medalClass.value = Pair(_medalClass, medalProgress)
     }
+
+    val globalParticipants = Transformations.map(repo.globalStats()){ it[GLOBAL_DATA_PARTICIPANTS] }
+    val globalMinutes = Transformations.map(repo.globalStats()){ it[GLOBAL_DATA_MINUTES] }
+    val globalAverage = Transformations.map(repo.globalStats()){ it[GLOBAL_DATA_AVERAGE] }
 
 
 

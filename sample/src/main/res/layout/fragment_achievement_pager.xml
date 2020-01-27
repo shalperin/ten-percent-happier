@@ -66,8 +66,9 @@
         android:orientation="horizontal"
         android:layout_marginTop="5dp"
         >
-        <ImageView android:layout_width="8dp" android:layout_height="8dp" android:layout_margin="2dp" android:id="@+id/dot0" android:src="@drawable/viewpager_dot" android:tint="@color/color_error"/>
-        <ImageView android:layout_width="8dp" android:layout_height="8dp" android:layout_margin="2dp" android:id="@+id/dot1" android:src="@drawable/viewpager_dot" android:tint="@color/color_error_dark"/>
+        <ImageView android:layout_width="10dp" android:layout_height="10dp" android:layout_margin="4dp" android:id="@+id/dot0" android:src="@drawable/viewpager_dot" android:tint="@color/color_error"/>
+        <ImageView android:layout_width="10dp" android:layout_height="10dp" android:layout_margin="4dp" android:id="@+id/dot1" android:src="@drawable/viewpager_dot" android:tint="@color/color_grey_1"/>
+        <ImageView android:layout_width="10dp" android:layout_height="10dp" android:layout_margin="4dp" android:id="@+id/dot2" android:src="@drawable/viewpager_dot" android:tint="@color/color_grey_1"/>
     </LinearLayout>
 
 

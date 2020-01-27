@@ -9,7 +9,7 @@
     android:paddingRight="16dp"
     >
 
-    <fragment android:name="com.blauhaus.android.redwood.sample.fragments.AchievementPagerFragment"
+    <fragment android:name="com.blauhaus.android.redwood.sample.fragments.meditationdemo.achievementpager.AchievementPagerFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/acheivment_pager"

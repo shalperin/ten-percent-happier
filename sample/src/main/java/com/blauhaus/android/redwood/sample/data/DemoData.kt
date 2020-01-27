@@ -16,3 +16,5 @@ val meditationHistoryData= listOf(
     Pair(25f, "25 min @ Jan 13"),
     Pair(35f, "35 min @ Jan 14")
 )
+
+val globalStats = listOf(54580, 12707803, 19)

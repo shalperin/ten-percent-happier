@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import com.blauhaus.android.redwood.lastfourweeks.views.DayView
 import com.blauhaus.android.redwood.lastfourweeks.views.DayView.ViewState
 import com.blauhaus.android.redwood.sample.data.IRepository
+import com.blauhaus.android.redwood.sample.fragments.meditationdemo.achievementpager.AchievmentViewModel
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Before
@@ -19,7 +20,10 @@ import java.util.concurrent.TimeoutException
 
 class AchievmentViewModelTest {
     private val mockRepo = MockRepo()
-    private val model = AchievmentViewModel(mockRepo)
+    private val model =
+        AchievmentViewModel(
+            mockRepo
+        )
     private val testData = listOf(Pair(0f, ""), Pair(15f, ""), Pair(0f, ""))
 
 
