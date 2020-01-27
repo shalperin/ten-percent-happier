@@ -3,5 +3,8 @@
     <item type="dimen" name="index_thumbnail_width">100dp</item>
     <item type="dimen" name="index_thumbnail_height">100dp</item>
     <item type="dimen" name="index_item_margin">16dp</item>
+    <item type="dimen" name="card_corner_radius">8dp</item>
+    <item type="dimen" name="card_elevation">4dp</item>
+
 
 </resources>

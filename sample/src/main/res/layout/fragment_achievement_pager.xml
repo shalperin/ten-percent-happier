@@ -8,20 +8,14 @@
 
     >
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="24dp"
-        android:text="Meditate 14 out of 28 days"
-        android:layout_marginBottom="16dp"
-        />
+
 
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
-        card_view:cardElevation="4dp"
-        card_view:cardCornerRadius="15dp"
+        card_view:cardElevation="@dimen/card_elevation"
+        card_view:cardCornerRadius="@dimen/card_corner_radius"
         >
         <FrameLayout
             android:layout_width="match_parent"
