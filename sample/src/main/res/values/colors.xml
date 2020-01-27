@@ -29,6 +29,7 @@
     <color name="color_background">#EBFDFF</color>
     <color name="color_surface">#ffffff</color>
     <color name="color_error">#C74100</color>
+    <color name="color_error_dark">#922E00</color>
 
     <!--"On" colors define how text, icons and strokes are colored in relation to the surface-->
     <!--on which they appear.-->
@@ -38,10 +39,12 @@
     <color name="color_on_surface">#000000</color>
     <color name="color_on_error">#ffffff</color>
 
+    <color name="color_grey_1">#aaaaaa</color>
+
 
     <!-- COMPONENTS -->
     <color name="barChart2BarColor">#3D6430</color>
     <color name="barChart3BarColor">#E7526B</color>
-    <color name="lastFourWeeksTextColor">#aaaaaa</color>
+    <color name="lastFourWeeksTextColor">@color/color_grey_1</color>
 
 </resources>

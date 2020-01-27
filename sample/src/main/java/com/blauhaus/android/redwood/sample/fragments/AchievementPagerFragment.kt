@@ -1,11 +1,14 @@
 package com.blauhaus.android.redwood.sample.fragments
 
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.widget.ImageViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -66,8 +69,6 @@ class AchievementPagerFragment : Fragment() {
             achievedAverage.text = it.toString()
         })
 
-
-        //TODO() there's some logic here that would be amenable to testing.
         model.medalClass.observe (this, Observer {
 
             val drawable = when(it.first) {
@@ -107,6 +108,15 @@ class AchievementPagerFragment : Fragment() {
                 lastFourWeeksDecoration.visibility = View.VISIBLE
             } else {
                 lastFourWeeksDecoration.visibility = View.GONE
+            }
+
+            val dots = listOf(dot0, dot1)
+            dots.forEachIndexed{ index, view ->
+                var color = ContextCompat.getColor(context!!, R.color.color_error_dark)
+                if (index == position) {
+                    color = ContextCompat.getColor(context!!, R.color.color_error)
+                }
+                ImageViewCompat.setImageTintList( view, ColorStateList.valueOf(color))
             }
         }
 
