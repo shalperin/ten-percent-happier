@@ -22,5 +22,17 @@
         app:defaultNavHost="true"
         app:navGraph="@navigation/root_navigation" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/ic_noun_day_and_night_990003"
+        android:id="@+id/fab"
+        />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

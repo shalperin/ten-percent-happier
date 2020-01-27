@@ -13,6 +13,7 @@ import com.blauhaus.android.redwood.barchart.PROP_BAR_COLOR
 import com.blauhaus.android.redwood.barchart.BarChartFragment
 import com.blauhaus.android.redwood.barchart.BarChartViewModel
 import com.blauhaus.android.redwood.barchart.barChartDemoData
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -23,24 +24,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setUpNavigation()
-    }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        val inflater: MenuInflater = menuInflater
-        inflater.inflate(R.menu.menu_activity_main, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.toggle_day_night -> {
-                toggleDayNight()
-                false
-            }
-            else -> super.onOptionsItemSelected(item)
+        fab.setOnClickListener{
+            toggleDayNight()
         }
-
     }
+
 
     private fun toggleDayNight() {
         when(AppCompatDelegate.getDefaultNightMode()) {
