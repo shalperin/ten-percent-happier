@@ -1,5 +1,7 @@
 package com.blauhaus.android.redwood.sample.data
 
+import com.blauhaus.android.redwood.sample.R
+
 val meditationHistoryData= listOf(
     Pair(5f, "5 min @ Jan 1"),
     Pair(10f, "10 min @ Jan 2"),
@@ -14,7 +16,37 @@ val meditationHistoryData= listOf(
     Pair(15f, "15 min @ Jan 11"),
     Pair(15f, "15 min @ Jan 12"),
     Pair(25f, "25 min @ Jan 13"),
+    Pair(35f, "35 min @ Jan 14"),
+    Pair(35f, "35 min @ Jan 14"),
+    Pair(35f, "35 min @ Jan 14"),
+    Pair(35f, "35 min @ Jan 14"),
     Pair(35f, "35 min @ Jan 14")
+
+    )
+
+val myCircleData = listOf(
+    Pair("Dan", meditationHistoryData.subList(2, 8)),
+    Pair("Alexis", meditationHistoryData.subList(4,14))
 )
 
-val globalStats = listOf(54580, 12707803, 19)
+val globalStatsData = listOf(54580, 12707803, 19) //[participants, minutes, average minutes per session]
+
+
+val currentSessionData = Session(
+    R.drawable.josephgoldstein,
+    title  = "Meditate With Joseph",
+    pretitle = "UP NEXT",
+    description = "A beginners mindfulness medition focusing on breath following with Joseph Goldstein.  Joseph Goldstein is founder of the Insight Meditation Society in Barre Mass.",
+    type = SessionType.Meditation(1, 1)
+    )
+
+val challengeUpdateData = Session(
+    null,
+    pretitle = "CONGRATS",
+    title = "The challenge is over, but you just got started!",
+    description = "Great job in working through the meditation challenge.  Hopefully this is a jumping off point for your meditation practice, and that you will keep finding this app useful.  Thanks for participating!",
+    type = SessionType.Update()
+)
+
+val videoData = listOf("https://youtu.be/O44d1U7aYAo")
+val audioData = listOf(R.raw.goldstein_audio)
