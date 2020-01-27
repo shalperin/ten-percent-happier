@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/root_navigation"
-    app:startDestination="@id/meditationDemoFragment">
+    app:startDestination="@id/indexFragment">
 
     <fragment
         android:id="@+id/indexFragment"
-        android:name="com.blauhaus.android.redwood.sample.fragments.IndexFragment"
+        android:name="com.blauhaus.android.redwood.sample.components.index.IndexFragment"
         android:label="IndexFragment" >
         <action
             android:id="@+id/action_indexFragment_to_meditationDemoFragment"
@@ -19,14 +19,14 @@
     </fragment>
     <fragment
         android:id="@+id/meditationDemoFragment"
-        android:name="com.blauhaus.android.redwood.sample.fragments.meditationdemo.MeditationDemoFragment"
+        android:name="com.blauhaus.android.redwood.sample.components.meditationdemo.MeditationDemoFragment"
         android:label="MeditationDemoFragment" />
     <fragment
         android:id="@+id/barGraphDemo1Fragment"
-        android:name="com.blauhaus.android.redwood.sample.fragments.deprecated.BarGraphDemo1Fragment"
+        android:name="com.blauhaus.android.redwood.sample.components.deprecated.BarGraphDemo1Fragment"
         android:label="BarGraphDemo1Fragment" />
     <fragment
         android:id="@+id/lastFourWeeksDemo1Fragment"
-        android:name="com.blauhaus.android.redwood.sample.fragments.deprecated.LastFourWeeksDemo1Fragment"
+        android:name="com.blauhaus.android.redwood.sample.components.deprecated.LastFourWeeksDemo1Fragment"
         android:label="LastFourWeeksDemo1Fragment" />
 </navigation>

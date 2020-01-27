@@ -1,4 +1,4 @@
-package com.blauhaus.android.redwood.sample.views
+package com.blauhaus.android.redwood.sample.components.index
 
 import android.content.Context
 import android.graphics.Color

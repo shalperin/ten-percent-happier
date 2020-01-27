@@ -46,7 +46,7 @@
                 app:layout_constraintLeft_toLeftOf="@id/header"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.appbar.MaterialToolbar>
-    
+
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -70,7 +70,7 @@
                 android:text="Meditate 14 out of 28 days"
                 />
 
-            <fragment android:name="com.blauhaus.android.redwood.sample.fragments.meditationdemo.achievementpager.AchievementPagerFragment"
+            <fragment android:name="com.blauhaus.android.redwood.sample.components.meditationdemo.achievementpager.AchievementPagerFragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/acheivment_pager"
@@ -84,12 +84,70 @@
                 android:text="Today's Session"
                 android:layout_marginTop="24dp"
                 />
-            <fragment android:name="com.blauhaus.android.redwood.sample.fragments.meditationdemo.mediacard.MediaCard"
+            <fragment android:name="com.blauhaus.android.redwood.sample.components.meditationdemo.mediacard.MediaCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/todays_session"
                 android:layout_marginTop="8dp"
                 />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="24dp"
+                android:text="My Circle"
+                android:layout_marginTop="24dp"
+                />
+
+            <fragment android:name="com.blauhaus.android.redwood.sample.components.meditationdemo.MyCircle"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:id="@+id/my_circle"
+                android:layout_marginTop="8dp"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="24dp"
+                android:text="Challenge Updates"
+                android:layout_marginTop="24dp"
+                />
+
+            <fragment android:name="com.blauhaus.android.redwood.sample.components.meditationdemo.mediacard.MediaCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/challenge_updates"
+                android:layout_marginTop="8dp"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="24dp"
+                android:text="Settings"
+                android:layout_marginTop="24dp"
+                />
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="View Challenge Faq"
+                android:background="@color/color_primary"
+                android:textColor="@color/color_on_primary" />
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Email Support"
+                android:background="@color/color_primary"
+                android:textColor="@color/color_on_primary" />
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Quit Challenge"
+                android:background="@color/color_primary"
+                android:textColor="@color/color_on_primary" />
+
+
 
         </LinearLayout>
     </ScrollView>

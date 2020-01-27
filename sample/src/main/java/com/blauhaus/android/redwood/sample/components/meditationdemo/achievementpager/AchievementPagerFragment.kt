@@ -1,4 +1,4 @@
-package com.blauhaus.android.redwood.sample.fragments.meditationdemo.achievementpager
+package com.blauhaus.android.redwood.sample.components.meditationdemo.achievementpager
 
 
 import android.content.res.ColorStateList
@@ -29,7 +29,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class AchievementPagerFragment : Fragment() {
     val barChartViewModel by viewModel<BarChartViewModel>()
     val last4ViewModel by viewModel<LastFourWeeksViewModel>()
-    val model by viewModel<AchievmentViewModel>()
+    val model by viewModel<AchievementViewModel>()
 
     private val BAR_CHART_ID = "1"
     private val LAST4_WEEKS_POSITION_IN_VIEW_PAGER = 0
@@ -75,9 +75,9 @@ class AchievementPagerFragment : Fragment() {
         model.medalClass.observe (this, Observer {
 
             val drawable = when(it.first) {
-                is AchievmentViewModel.MedalClass.Gold -> R.drawable.gold
-                is AchievmentViewModel.MedalClass.Bronze -> R.drawable.bronze
-                is AchievmentViewModel.MedalClass.Silver -> R.drawable.silver
+                is AchievementViewModel.MedalClass.Gold -> R.drawable.gold
+                is AchievementViewModel.MedalClass.Bronze -> R.drawable.bronze
+                is AchievementViewModel.MedalClass.Silver -> R.drawable.silver
                 else -> null
             }
             if (drawable != null) {
@@ -85,17 +85,17 @@ class AchievementPagerFragment : Fragment() {
             }
 
             when (it.second) {
-                is AchievmentViewModel.MedalProgress.OnTrack -> {
+                is AchievementViewModel.MedalProgress.OnTrack -> {
                     onTrackMedalText.visibility = View.VISIBLE
                     gotMedalText.visibility = View.GONE
                     medal.visibility = View.VISIBLE
                 }
-                is AchievmentViewModel.MedalProgress.Got -> {
+                is AchievementViewModel.MedalProgress.Got -> {
                     onTrackMedalText.visibility = View.GONE
                     gotMedalText.visibility = View.VISIBLE
                     medal.visibility = View.VISIBLE
                 }
-                is AchievmentViewModel.MedalProgress.No -> {
+                is AchievementViewModel.MedalProgress.No -> {
                     onTrackMedalText.visibility = View.GONE
                     gotMedalText.visibility = View.GONE
                     medal.visibility = View.GONE

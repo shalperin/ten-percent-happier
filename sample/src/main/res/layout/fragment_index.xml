@@ -1,49 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="16dp"
+    android:padding="8dp"
 
     >
 
 
-    <com.blauhaus.android.redwood.sample.views.ThumbnailDescriptionView
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:textColor="#860000"
+        android:text="sam halperin"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/title"
+        android:layout_marginTop="18dp"
+        />
+
+    <TextView
+app:layout_constraintLeft_toLeftOf="parent"        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="48dp"
+        android:text="ANDROID FORGERIES #1"
+        android:id="@+id/title"
+        ></TextView>
+
+    <com.blauhaus.android.redwood.sample.components.index.ThumbnailDescriptionView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title="A Meditation Challenge"
-        app:description="User interface inspired by Dan Harris' 10 Percent Happier app."
-        app:layout_constraintTop_toTopOf="parent"
+        app:description="Inspired by Dan Harris' 10 Percent Happier."
+        app:layout_constraintTop_toBottomOf="@id/title"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:id="@+id/link.meditationChallenge"
         app:textColor="@color/color_on_surface"
+        app:thumbnail="@drawable/medal"
+        android:layout_marginTop="16dp"
         />
 
-    <com.blauhaus.android.redwood.sample.views.ThumbnailDescriptionView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:title="Bar Chart Demo"
-        app:description=""
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:id="@+id/link.barChartDemo"
-        app:textColor="@color/color_on_surface"
-        />
-
-    <com.blauhaus.android.redwood.sample.views.ThumbnailDescriptionView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:title="4 Weeks Demo"
-        app:description=""
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:id="@+id/link.4WeeksDemo"
-        app:textColor="@color/color_on_surface"
-        />
-
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

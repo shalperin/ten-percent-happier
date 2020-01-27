@@ -41,8 +41,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun toggleLanguage():Nothing = TODO()
-
     private fun setUpNavigation() {
         // Create a listener for doing things like setting the AppBar title text.
         findNavController(R.id.nav_host_fragment)
@@ -62,7 +60,3 @@ class MainActivity : AppCompatActivity() {
     }
 
 }
-
-//  val lastFourWeeksViewModel by viewModel<LastFourWeeksViewModel>()
-//
-//

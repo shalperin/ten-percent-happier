@@ -1,4 +1,4 @@
-package com.blauhaus.android.redwood.sample.fragments.meditationdemo.achievementpager
+package com.blauhaus.android.redwood.sample.components.meditationdemo.achievementpager
 
 import androidx.lifecycle.*
 import com.blauhaus.android.redwood.lastfourweeks.views.DayView
@@ -8,7 +8,7 @@ import com.blauhaus.android.redwood.sample.data.Repository.Companion.GLOBAL_DATA
 import com.blauhaus.android.redwood.sample.data.Repository.Companion.GLOBAL_DATA_MINUTES
 import com.blauhaus.android.redwood.sample.data.Repository.Companion.GLOBAL_DATA_PARTICIPANTS
 
-class AchievmentViewModel(val repo: IRepository): ViewModel() {
+class AchievementViewModel(repo: IRepository): ViewModel() {
 
     val lastFourWeeksBackingModel: LiveData<List<DayView.ViewState>> =
         Transformations.map(repo.meditationData()) { data ->
@@ -82,15 +82,10 @@ class AchievmentViewModel(val repo: IRepository): ViewModel() {
     val globalAverage = Transformations.map(repo.globalStats()){ it[GLOBAL_DATA_AVERAGE] }
 
 
-
-
-
     init {
         medalClass.addSource(totalDaysMeditated) { combineMetalClassData(totalDaysMeditated, averageMinutesMeditated) }
         medalClass.addSource(averageMinutesMeditated) { combineMetalClassData(totalDaysMeditated, averageMinutesMeditated) }
     }
-
-
 
     sealed class MedalClass() {
         class Gold(): MedalClass()

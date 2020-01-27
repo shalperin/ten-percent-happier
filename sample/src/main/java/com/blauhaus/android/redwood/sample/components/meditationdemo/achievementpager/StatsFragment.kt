@@ -1,4 +1,4 @@
-package com.blauhaus.android.redwood.sample.fragments.meditationdemo.achievementpager
+package com.blauhaus.android.redwood.sample.components.meditationdemo.achievementpager
 
 
 import android.os.Bundle
@@ -18,7 +18,7 @@ import java.util.*
  * A simple [Fragment] subclass.
  */
 class StatsFragment : Fragment() {
-    val model by viewModel<AchievmentViewModel>()
+    val model by viewModel<AchievementViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

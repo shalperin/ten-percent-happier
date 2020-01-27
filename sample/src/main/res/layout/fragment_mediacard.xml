@@ -38,6 +38,7 @@
                    android:text="UP NEXT"
                    android:textSize="16dp"
                    android:textColor="@color/color_error"
+                   android:id="@+id/_pretitle"
                    />
 
                <TextView
@@ -45,13 +46,13 @@
                    android:layout_height="wrap_content"
                    android:text="Title"
                    android:textSize="24dp"
-                   android:id="@+id/title"
+                   android:id="@+id/_title"
                    />
 
                <TextView
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
-                   android:id="@+id/description"
+                   android:id="@+id/_description"
                    android:text="description"
                    android:textSize="18dp"
                    android:textColor="@color/color_grey_1"/>
@@ -66,7 +67,7 @@
                    android:text="Play"
                    app:icon="@drawable/ic_play_arrow_white_24dp"
                    app:iconGravity="textStart"
-                   android:id="@+id/playButton"
+                   android:id="@+id/_playButton"
                    />
 
            </LinearLayout>
