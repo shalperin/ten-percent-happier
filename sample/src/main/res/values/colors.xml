@@ -22,6 +22,7 @@
     <color name="color_secondary">#03dac6</color>
     <color name="color_secondary_variant">#018786</color>
 
+
     <!--colorBackground appears behind scrollable content and is used for the default window-->
     <!--background. colorSurface is mapped to the surface of components such as cards, sheets-->
     <!--and menus. colorError is used to indicate an error state for components such as-->
@@ -47,5 +48,5 @@
     <color name="barChart3BarColor">#E7526B</color>
     <color name="lastFourWeeksTextColor">@color/color_grey_1</color>
     <color name="color_red">#C70000</color>
-
+    <color name="avatar">#5993BE</color>
 </resources>

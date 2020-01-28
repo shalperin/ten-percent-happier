@@ -8,6 +8,7 @@ class Repository : IRepository {
     private val _myCircle = MutableLiveData<List<Pair<String, List<Pair<Float, String>>>>>()
     private val _currentSession =MutableLiveData<Content>()
     private val _updates = MutableLiveData<Content>()
+    val _username =  MutableLiveData<String>()
 
     override fun meditationData(): MutableLiveData<List<Pair<Float, String>>> {
         return _meditationData
@@ -21,6 +22,7 @@ class Repository : IRepository {
     override fun currentSession(): MutableLiveData<Content>{ return _currentSession}
     override fun updates(): MutableLiveData<Content>{ return _updates}
 
+    override fun userName() :MutableLiveData<String> {return _username}
 
     init { loadData() }
 
@@ -30,13 +32,15 @@ class Repository : IRepository {
         _myCircle.postValue(myCircleData)
         _currentSession.postValue(currentSessionData)
         _updates.postValue(challengeUpdateData)
+        _username.postValue(demoUserName)
     }
+
 
     //TODO refactor this into a data class.
     companion object {
-        val GLOBAL_DATA_PARTICIPANTS = 0
-        val GLOBAL_DATA_MINUTES = 1
-        val GLOBAL_DATA_AVERAGE = 2
+        val GLOBAL_DATA_PARTICIPANTS_IDX = 0
+        val GLOBAL_DATA_MINUTES_IDX = 1
+        val GLOBAL_DATA_AVERAGE_IDX = 2
     }
 }
 
@@ -46,4 +50,5 @@ interface IRepository {
     fun myCircle(): MutableLiveData<List<Pair<String, List<Pair<Float, String>>>>>
     fun currentSession(): MutableLiveData<Content>
     fun updates(): MutableLiveData<Content>
+    fun userName() :MutableLiveData<String>
 }

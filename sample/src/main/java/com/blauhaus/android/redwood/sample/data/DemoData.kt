@@ -60,3 +60,5 @@ val challengeUpdateData = Content.Update(
 
 val videoData = listOf("https://youtu.be/O44d1U7aYAo")
 val audioData = listOf(R.raw.goldstein_audio)
+
+val demoUserName = "Sam"

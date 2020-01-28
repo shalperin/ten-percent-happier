@@ -97,9 +97,9 @@
                 android:layout_marginTop="24dp"
                 />
 
-            <fragment android:name="com.blauhaus.android.redwood.sample.components.meditationchallenge.mycircle.MyCircle"
+            <fragment android:name="com.blauhaus.android.redwood.sample.components.meditationchallenge.mycircle.MyCircleFragment"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="wrap_content"
                 android:id="@+id/my_circle"
                 android:layout_marginTop="8dp"
                 />
