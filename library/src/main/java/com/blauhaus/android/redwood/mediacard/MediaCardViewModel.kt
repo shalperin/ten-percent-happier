@@ -1,4 +1,4 @@
-package com.blauhaus.android.redwood.sample.components.meditationchallenge.mediacard
+package com.blauhaus.android.redwood.mediacard
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

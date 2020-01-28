@@ -20,8 +20,18 @@ val meditationHistoryData= listOf(
     Pair(35f, "35 min @ Jan 14"),
     Pair(35f, "35 min @ Jan 14"),
     Pair(35f, "35 min @ Jan 14"),
+    Pair(35f, "35 min @ Jan 14"),
+    Pair(0f, "0 min @ Jan 14"),
+    Pair(35f, "35 min @ Jan 14"),
+    Pair(20f, "35 min @ Jan 14"),
+    Pair(35f, "35 min @ Jan 14"),
+    Pair(0f, "0 min @ Jan 14"),
+    Pair(35f, "35 min @ Jan 14"),
+    Pair(0f, "0 min @ Jan 14"),
+    Pair(35f, "35 min @ Jan 14"),
+    Pair(20f, "35 min @ Jan 14"),
+    Pair(35f, "35 min @ Jan 14"),
     Pair(35f, "35 min @ Jan 14")
-
     )
 
 val myCircleData = listOf(

@@ -1,4 +1,4 @@
-package com.blauhaus.android.redwood.sample.components.meditationchallenge.mediacard
+package com.blauhaus.android.redwood.mediacard
 
 
 import android.os.Bundle
@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.Observer
-import com.blauhaus.android.redwood.sample.R
+import com.blauhaus.android.redwood.R
 import kotlinx.android.synthetic.main.fragment_mediacard.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

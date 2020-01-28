@@ -1,4 +1,4 @@
-package com.blauhaus.android.redwood.sample.components.meditationchallenge.achievementpager
+package com.blauhaus.android.redwood.sample.components.meditationchallenge.statspager
 
 import androidx.lifecycle.*
 import com.blauhaus.android.redwood.lastfourweeks.views.DayView
@@ -8,7 +8,7 @@ import com.blauhaus.android.redwood.sample.data.Repository.Companion.GLOBAL_DATA
 import com.blauhaus.android.redwood.sample.data.Repository.Companion.GLOBAL_DATA_MINUTES
 import com.blauhaus.android.redwood.sample.data.Repository.Companion.GLOBAL_DATA_PARTICIPANTS
 
-class AchievementViewModel(repo: IRepository): ViewModel() {
+class StatsViewModel(repo: IRepository): ViewModel() {
 
     val lastFourWeeksBackingModel: LiveData<List<DayView.ViewState>> =
         Transformations.map(repo.meditationData()) { data ->
@@ -20,7 +20,7 @@ class AchievementViewModel(repo: IRepository): ViewModel() {
                 }
             }.toMutableList()
             adapted.add(DayView.ViewState.DidntMeetYetToday())
-            while (adapted.size != 28) {
+            while (adapted.size <= 28) {
                 adapted.add(DayView.ViewState.Future())
             }
             adapted
@@ -30,7 +30,7 @@ class AchievementViewModel(repo: IRepository): ViewModel() {
 
     val totalDaysMeditated: LiveData<Int> =
         Transformations.map(lastFourWeeksBackingModel) {
-            it.filterIsInstance<DayView.ViewState.Met>().size
+            it.filterIsInstance<DayView.ViewState.Met>().size -1
         }
 
     val averageMinutesMeditated: LiveData<Int> =

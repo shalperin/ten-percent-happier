@@ -1,4 +1,4 @@
-package com.blauhaus.android.redwood.sample.components.meditationchallenge
+package com.blauhaus.android.redwood.sample.components.meditationchallenge.mycircle
 
 
 import android.os.Bundle

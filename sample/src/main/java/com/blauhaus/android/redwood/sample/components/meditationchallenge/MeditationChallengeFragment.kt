@@ -8,8 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import com.blauhaus.android.redwood.sample.R
-import com.blauhaus.android.redwood.sample.components.meditationchallenge.mediacard.MediaCardFragment
-import com.blauhaus.android.redwood.sample.components.meditationchallenge.mediacard.MediaCardViewModel
+import com.blauhaus.android.redwood.mediacard.MediaCardFragment
+import com.blauhaus.android.redwood.mediacard.MediaCardViewModel
 import com.blauhaus.android.redwood.sample.data.Content
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

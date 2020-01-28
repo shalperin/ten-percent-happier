@@ -70,7 +70,7 @@
                 android:text="Meditate 14 out of 28 days"
                 />
 
-            <fragment android:name="com.blauhaus.android.redwood.sample.components.meditationchallenge.achievementpager.AchievementPagerFragment"
+            <fragment android:name="com.blauhaus.android.redwood.sample.components.meditationchallenge.statspager.StatsFragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/acheivment_pager"
@@ -97,7 +97,7 @@
                 android:layout_marginTop="24dp"
                 />
 
-            <fragment android:name="com.blauhaus.android.redwood.sample.components.meditationchallenge.MyCircle"
+            <fragment android:name="com.blauhaus.android.redwood.sample.components.meditationchallenge.mycircle.MyCircle"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:id="@+id/my_circle"

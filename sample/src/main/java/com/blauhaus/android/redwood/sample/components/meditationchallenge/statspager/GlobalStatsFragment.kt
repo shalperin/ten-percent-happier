@@ -1,4 +1,4 @@
-package com.blauhaus.android.redwood.sample.components.meditationchallenge.achievementpager
+package com.blauhaus.android.redwood.sample.components.meditationchallenge.statspager
 
 
 import android.os.Bundle
@@ -17,8 +17,8 @@ import java.util.*
 /**
  * A simple [Fragment] subclass.
  */
-class StatsFragment : Fragment() {
-    val model by viewModel<AchievementViewModel>()
+class GlobalStatsFragment : Fragment() {
+    val model by viewModel<StatsViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
