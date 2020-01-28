@@ -24,7 +24,9 @@
            android:layout_width="match_parent"
            android:layout_height="200dp"
            android:src="@drawable/josephgoldstein"
-           android:scaleType="centerCrop"/>
+           android:scaleType="centerCrop"
+           android:id="@+id/_image"
+           />
 
            <LinearLayout
                android:layout_width="match_parent"
@@ -46,6 +48,7 @@
                    android:layout_height="wrap_content"
                    android:text="Title"
                    android:textSize="24dp"
+                   android:lineSpacingExtra="8dp"
                    android:id="@+id/_title"
                    />
 
@@ -55,6 +58,8 @@
                    android:id="@+id/_description"
                    android:text="description"
                    android:textSize="18dp"
+                   android:layout_marginTop="16dp"
+                   android:lineSpacingExtra="8dp"
                    android:textColor="@color/color_grey_1"/>
 
                <com.google.android.material.button.MaterialButton
@@ -62,12 +67,14 @@
                    android:layout_height="wrap_content"
                    android:layout_marginLeft="24dp"
                    android:layout_marginRight="24dp"
+                   android:layout_marginTop="24dp"
                     app:backgroundTint="@color/color_red"
                    android:textColor="#ffffff"
                    android:text="Play"
                    app:icon="@drawable/ic_play_arrow_white_24dp"
                    app:iconGravity="textStart"
                    android:id="@+id/_playButton"
+                   app:iconTint="#ffffff"
                    />
 
            </LinearLayout>

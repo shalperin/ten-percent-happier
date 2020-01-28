@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/meditationDemoFragment"
-        android:name="com.blauhaus.android.redwood.sample.components.meditationdemo.MeditationDemoFragment"
+        android:name="com.blauhaus.android.redwood.sample.components.meditationchallenge.MeditationChallengeFragment"
         android:label="MeditationDemoFragment" />
     <fragment
         android:id="@+id/barGraphDemo1Fragment"

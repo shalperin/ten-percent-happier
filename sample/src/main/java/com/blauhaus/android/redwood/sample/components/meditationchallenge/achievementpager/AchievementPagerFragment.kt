@@ -1,4 +1,4 @@
-package com.blauhaus.android.redwood.sample.components.meditationdemo.achievementpager
+package com.blauhaus.android.redwood.sample.components.meditationchallenge.achievementpager
 
 
 import android.content.res.ColorStateList

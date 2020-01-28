@@ -1,4 +1,4 @@
-package com.blauhaus.android.redwood.sample.components.meditationdemo
+package com.blauhaus.android.redwood.sample.components.meditationchallenge
 
 
 import android.os.Bundle

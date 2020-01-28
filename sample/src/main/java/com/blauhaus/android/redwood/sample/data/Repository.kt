@@ -3,11 +3,11 @@ package com.blauhaus.android.redwood.sample.data
 import androidx.lifecycle.MutableLiveData
 
 class Repository : IRepository {
-    val _meditationData = MutableLiveData<List<Pair<Float, String>>>()
-    val _globalStats = MutableLiveData<List<Int>>()
-    val _myCircle = MutableLiveData<List<Pair<String, List<Pair<Float, String>>>>>()
-    val _currentSession =MutableLiveData<Session>()
-    val _updates = MutableLiveData<Session>()
+    private val _meditationData = MutableLiveData<List<Pair<Float, String>>>()
+    private val _globalStats = MutableLiveData<List<Int>>()
+    private val _myCircle = MutableLiveData<List<Pair<String, List<Pair<Float, String>>>>>()
+    private val _currentSession =MutableLiveData<Content>()
+    private val _updates = MutableLiveData<Content>()
 
     override fun meditationData(): MutableLiveData<List<Pair<Float, String>>> {
         return _meditationData
@@ -18,13 +18,13 @@ class Repository : IRepository {
     override fun myCircle(): MutableLiveData<List<Pair<String, List<Pair<Float, String>>>>> {
         return _myCircle
     }
-    override fun currentSession(): MutableLiveData<Session>{ return _currentSession}
-    override fun updates(): MutableLiveData<Session>{ return _updates}
+    override fun currentSession(): MutableLiveData<Content>{ return _currentSession}
+    override fun updates(): MutableLiveData<Content>{ return _updates}
 
 
     init { loadData() }
 
-    fun loadData() {
+    private fun loadData() {
         _meditationData.postValue(meditationHistoryData)
         _globalStats.postValue(globalStatsData)
         _myCircle.postValue(myCircleData)
@@ -44,6 +44,6 @@ interface IRepository {
     fun meditationData(): MutableLiveData<List<Pair<Float, String>>>
     fun globalStats(): MutableLiveData<List<Int>>
     fun myCircle(): MutableLiveData<List<Pair<String, List<Pair<Float, String>>>>>
-    fun currentSession(): MutableLiveData<Session>
-    fun updates(): MutableLiveData<Session>
+    fun currentSession(): MutableLiveData<Content>
+    fun updates(): MutableLiveData<Content>
 }

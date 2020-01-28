@@ -32,20 +32,20 @@ val myCircleData = listOf(
 val globalStatsData = listOf(54580, 12707803, 19) //[participants, minutes, average minutes per session]
 
 
-val currentSessionData = Session(
-    R.drawable.josephgoldstein,
+val currentSessionData = Content.Meditation(
+    image = R.drawable.josephgoldstein,
     title  = "Meditate With Joseph",
     pretitle = "UP NEXT",
     description = "A beginners mindfulness medition focusing on breath following with Joseph Goldstein.  Joseph Goldstein is founder of the Insight Meditation Society in Barre Mass.",
-    type = SessionType.Meditation(1, 1)
+    audioId = 1,
+    videoId = 1
     )
 
-val challengeUpdateData = Session(
-    null,
-    pretitle = "CONGRATS",
+val challengeUpdateData = Content.Update(
+    image = R.drawable.dog_party_hat,
     title = "The challenge is over, but you just got started!",
-    description = "Great job in working through the meditation challenge.  Hopefully this is a jumping off point for your meditation practice, and that you will keep finding this app useful.  Thanks for participating!",
-    type = SessionType.Update()
+    pretitle = "CONGRATS",
+    description = "Great job in working through the meditation challenge.  Hopefully this is a jumping off point for your meditation practice, and that you will keep finding this app useful.  Thanks for participating!"
 )
 
 val videoData = listOf("https://youtu.be/O44d1U7aYAo")
