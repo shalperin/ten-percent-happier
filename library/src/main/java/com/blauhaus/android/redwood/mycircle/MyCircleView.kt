@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.blauhaus.android.redwood.R
-import kotlinx.android.synthetic.main.view_my_circle_row.view.*
+import kotlinx.android.synthetic.main.view_my_circle.view.*
 
 class MyCircleView : ConstraintLayout {
     constructor(context: Context?) : super(context) {init()}
@@ -55,6 +55,6 @@ class MyCircleView : ConstraintLayout {
 
     fun init() {
         // Inflate the view, attatching to 'this'.
-        inflate(context, R.layout.view_my_circle_row, this)
+        inflate(context, R.layout.view_my_circle, this)
     }
 }

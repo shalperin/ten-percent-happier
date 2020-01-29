@@ -44,7 +44,8 @@
             android:layout_margin="3dp"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:background="@drawable/ic_last4weeks_check_circle"/>
+           style="@style/MyCircleView_CheckCircle"
+            />
     </FrameLayout>
 
 
