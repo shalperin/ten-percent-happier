@@ -44,9 +44,5 @@
 
 
     <!-- COMPONENTS -->
-    <color name="barChart2BarColor">#3D6430</color>
-    <color name="barChart3BarColor">#E7526B</color>
     <color name="lastFourWeeksTextColor">@color/color_grey_1</color>
-    <color name="color_red">#C70000</color>
-    <color name="avatar">#5993BE</color>
 </resources>
