@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import com.blauhaus.android.redwood.R
 import com.blauhaus.android.redwood.lastfourweeks.views.DayView
-import kotlinx.android.synthetic.main.last_four_weeks_fragment.*
+import kotlinx.android.synthetic.main.fragment_last_four_weeks.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LastFourWeeksFragment : Fragment() {
@@ -26,7 +26,7 @@ class LastFourWeeksFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var view = inflater.inflate(R.layout.last_four_weeks_fragment, container, false)
+        var view = inflater.inflate(R.layout.fragment_last_four_weeks, container, false)
         return view
     }
 

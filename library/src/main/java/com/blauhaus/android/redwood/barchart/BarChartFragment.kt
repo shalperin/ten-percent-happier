@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 
 import com.blauhaus.android.redwood.R
-import kotlinx.android.synthetic.main.bar_chart_fragment.*
+import kotlinx.android.synthetic.main.fragment_bar_chart.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 private const val ARG_ID = "id_param"
@@ -44,7 +44,7 @@ class BarChartFragment : Fragment(), BarChartViewListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.bar_chart_fragment, container, false)
+        return inflater.inflate(R.layout.fragment_bar_chart, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
