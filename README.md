@@ -1,11 +1,9 @@
 
 # Apple-study: Ten Percent Happier
-=================================================
+### By Sam Halperin
 
-By Sam Halperin
 
-This "apple-study" (think competitive analysis, but more scholarly) is of the Ten Percent Happier
-meditation app by Dan Harris and crew.  It consists of ** Android layout / View / ViewModel study-code, ** i.e. you won't find any screenshots or other raster mockups here.
+This "apple-study" (View and layout study-code, think competitive analysis but more scholarly) is of the Ten Percent Happier meditation app by Dan Harris and crew. 
 
 To Build:
 =========
