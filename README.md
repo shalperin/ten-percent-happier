@@ -1,27 +1,14 @@
 
-Screenshots that may be more or less out of date:
+# Apple-study: Ten Percent Happier
 =================================================
 
-![](art/screenshots_and_compositions/last4weeks-colors-small.png)
+By Sam Halperin
 
-
-![](art/screenshots_and_compositions/meditation.gif)
-
-
-
-Notes:
-======
-+ Two modules: sample and a library for reusable components
-+ Implements AndroidX Navigation
-+ Uses MVVM as an architecture
-+ Tests: I need more, but there is a good prototype for testing ViewModels in there.
-+ Implements night/day switchable theme.
-
-
+![](art/screenshots_and_compositions/gallery.png)
 
 
 To Build:
 =========
-Should be straightforward to just clone the project and open it in Android Studio.
+Should be straightforward to just clone the project and open it in Android Studio.  There are two modules,the app is in 'sample' and some UI code that I have aspirations to reuse is in 'library'.
 
 
