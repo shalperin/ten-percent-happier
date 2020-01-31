@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import com.blauhaus.android.redwood.R
-import com.blauhaus.android.redwood.lastfourweeks.views.DayView
 import kotlinx.android.synthetic.main.fragment_last_four_weeks.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

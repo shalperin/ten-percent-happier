@@ -1,4 +1,4 @@
-package com.blauhaus.android.redwood.sample.components.meditationchallenge.mycircle
+package com.blauhaus.android.redwood.sample.components.mycircle
 
 import androidx.lifecycle.*
 import com.blauhaus.android.redwood.sample.IConfig
@@ -36,10 +36,10 @@ class MyCircleViewModel(private val repo: IRepository, private val config: IConf
                 it.first > 0
             }.size
             val avg:Int = it.second.map{it.first}.average().toInt()
-            val didCompleteChallenge = days > config.TOTAL_DAYS_ACHIEVEMENT_THRESHOLD()
+            val didCompleteChallenge = days > config.achievementThresholdInDays()
 
             //geeze paranoid of truncation or what?
-            val progress = (days.toFloat() / config.TOTAL_DAYS_ACHIEVEMENT_THRESHOLD().toFloat() * 100.00).toInt()
+            val progress = (days.toFloat() / config.achievementThresholdInDays().toFloat() * 100.00).toInt()
 
 
             Transport(

@@ -1,7 +1,5 @@
 package com.blauhaus.android.redwood.lastfourweeks
 
-import com.blauhaus.android.redwood.lastfourweeks.views.DayView
-
 
 val demoLastFourWeeksData = listOf(
     DayView.ViewState.Skipped(),

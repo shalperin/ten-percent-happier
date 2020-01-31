@@ -1,9 +1,7 @@
-package com.blauhaus.android.redwood.lastfourweeks.views
+package com.blauhaus.android.redwood.lastfourweeks
 
 import android.content.Context
-import android.os.Debug
 import android.util.AttributeSet
-import android.util.Log
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView

@@ -1,7 +1,7 @@
-package com.blauhaus.android.redwood.sample.components.meditationchallenge.statspager
+package com.blauhaus.android.redwood.sample.components.statspager
 
 import androidx.lifecycle.*
-import com.blauhaus.android.redwood.lastfourweeks.views.DayView
+import com.blauhaus.android.redwood.lastfourweeks.DayView
 import com.blauhaus.android.redwood.sample.*
 import com.blauhaus.android.redwood.sample.data.IRepository
 import com.blauhaus.android.redwood.sample.data.Repository.Companion.GLOBAL_DATA_AVERAGE_IDX
@@ -56,17 +56,17 @@ class StatsViewModel(val repo: IRepository, val config:IConfig): ViewModel() {
             return
         }
 
-        val _medalClass = if (avg >= config.GOLD_MEDAL_THRESHOLD_IN_MINUTES()) {
+        val _medalClass = if (avg >= config.goldMedalThresholdInMinutes()) {
             MedalClass.Gold()
-        } else if (avg >= config.SILVER_MEDAL_THRESHOLD_IN_MINUTES()) {
+        } else if (avg >= config.silverMedalThresholdInMinutes()) {
             MedalClass.Silver()
-        } else if (avg >= config.BRONZE_MEDAL_THRESHOLD_IN_MINUTES()) {
+        } else if (avg >= config.bronzeMedalThresholdInMinutes()) {
             MedalClass.Bronze()
         } else {
             MedalClass.None()
         }
 
-        val medalProgress = if (days >= config.TOTAL_DAYS_ACHIEVEMENT_THRESHOLD()) {
+        val medalProgress = if (days >= config.achievementThresholdInDays()) {
             MedalProgress.Got()
         } else if (_medalClass is MedalClass.None) {
             MedalProgress.No()

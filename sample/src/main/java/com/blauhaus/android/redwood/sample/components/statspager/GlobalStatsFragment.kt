@@ -1,4 +1,4 @@
-package com.blauhaus.android.redwood.sample.components.meditationchallenge.statspager
+package com.blauhaus.android.redwood.sample.components.statspager
 
 
 import android.os.Bundle
@@ -14,9 +14,6 @@ import java.text.NumberFormat
 import java.util.*
 
 
-/**
- * A simple [Fragment] subclass.
- */
 class GlobalStatsFragment : Fragment() {
     val model by viewModel<StatsViewModel>()
 

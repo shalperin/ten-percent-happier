@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 import com.blauhaus.android.redwood.sample.R
 import com.blauhaus.android.redwood.mediacard.MediaCardFragment
 import com.blauhaus.android.redwood.mediacard.MediaCardViewModel
-import com.blauhaus.android.redwood.sample.data.Content
+import com.blauhaus.android.redwood.sample.data.models.Content
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -57,7 +57,7 @@ class MeditationChallengeFragment : Fragment() {
     // if mediaCard is the in the reusable library,
     // then this adapter belongs with our Content class.
     // The specific implementation owns the adapter.
-    private fun mediaCardTransportFromContent(session:Content): MediaCardViewModel.Transport {
+    private fun mediaCardTransportFromContent(session: Content): MediaCardViewModel.Transport {
         when (session) {
             is Content.Meditation -> {
                 return MediaCardViewModel.Transport.Playable(

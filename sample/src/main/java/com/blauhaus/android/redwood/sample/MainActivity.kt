@@ -23,7 +23,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setUpNavigation()
 
         fab.setOnClickListener{
             toggleDayNight()
@@ -37,26 +36,6 @@ class MainActivity : AppCompatActivity() {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             else ->
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-
         }
     }
-
-    private fun setUpNavigation() {
-        // Create a listener for doing things like setting the AppBar title text.
-        findNavController(R.id.nav_host_fragment)
-            .addOnDestinationChangedListener{ controller, destination, arguments ->
-                when (destination.id) {
-                    R.id.indexFragment -> {
-                        title = "Redwood"
-                    }
-                    R.id.meditationDemoFragment -> {
-                        title = "Meditation Challenge"
-                    }
-                    else -> {
-                        title = "Redwood"
-                    }
-                }
-            }
-    }
-
 }

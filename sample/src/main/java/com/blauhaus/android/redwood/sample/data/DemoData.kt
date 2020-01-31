@@ -1,6 +1,7 @@
 package com.blauhaus.android.redwood.sample.data
 
 import com.blauhaus.android.redwood.sample.R
+import com.blauhaus.android.redwood.sample.data.models.Content
 
 val meditationHistoryData= listOf(
     Pair(5f, "5 min @ Jan 1"),

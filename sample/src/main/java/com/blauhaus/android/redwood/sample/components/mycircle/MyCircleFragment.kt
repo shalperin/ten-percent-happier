@@ -1,4 +1,4 @@
-package com.blauhaus.android.redwood.sample.components.meditationchallenge.mycircle
+package com.blauhaus.android.redwood.sample.components.mycircle
 
 
 import android.os.Bundle
@@ -14,10 +14,6 @@ import com.blauhaus.android.redwood.sample.R
 import kotlinx.android.synthetic.main.fragment_my_circle.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-
-/**
- * A simple [Fragment] subclass.
- */
 class MyCircleFragment : Fragment() {
     val model by viewModel<MyCircleViewModel>()
 

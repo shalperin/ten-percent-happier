@@ -1,4 +1,4 @@
-package com.blauhaus.android.redwood.sample.components.meditationchallenge.statspager
+package com.blauhaus.android.redwood.sample.components.statspager
 
 
 import android.content.res.ColorStateList
@@ -23,9 +23,6 @@ import kotlinx.android.synthetic.main.fragment_stats_pager.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-/**
- * A simple [Fragment] subclass.
- */
 class StatsFragment : Fragment() {
     val barChartViewModel by viewModel<BarChartViewModel>()
     val last4ViewModel by viewModel<LastFourWeeksViewModel>()

@@ -1,6 +1,7 @@
 package com.blauhaus.android.redwood.sample.data
 
 import androidx.lifecycle.MutableLiveData
+import com.blauhaus.android.redwood.sample.data.models.Content
 
 class Repository : IRepository {
     private val _meditationData = MutableLiveData<List<Pair<Float, String>>>()

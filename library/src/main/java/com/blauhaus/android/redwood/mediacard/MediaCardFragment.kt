@@ -12,10 +12,7 @@ import com.blauhaus.android.redwood.R
 import kotlinx.android.synthetic.main.fragment_mediacard.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-
-/**
- * A simple [Fragment] subclass.
- */
+//?Refactor:  This could be a simple View.
 class MediaCardFragment : Fragment() {
     val model by viewModel<MediaCardViewModel>()
     var fragId = 0
