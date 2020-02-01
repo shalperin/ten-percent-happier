@@ -7,7 +7,7 @@ import androidx.lifecycle.Observer
 import com.blauhaus.android.redwood.lastfourweeks.DayView
 import com.blauhaus.android.redwood.lastfourweeks.DayView.ViewState
 import com.blauhaus.android.redwood.sample.data.IRepository
-import com.blauhaus.android.redwood.sample.components.statspager.StatsViewModel
+import com.blauhaus.android.redwood.sample.components.statsPager.StatsViewModel
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Before

@@ -43,23 +43,21 @@ val myCircleData = listOf(
 val globalStatsData = listOf(54580, 12707803, 19) //[participants, minutes, average minutes per session]
 
 
-val currentSessionData = Content.Meditation(
+val currentSessionData = Content (
     image = R.drawable.josephgoldstein,
     title  = "Meditate With Joseph",
     pretitle = "UP NEXT",
     description = "A beginners mindfulness medition focusing on breath following with Joseph Goldstein.  Joseph Goldstein is founder of the Insight Meditation Society in Barre Mass.",
-    audioId = 1,
-    videoId = 1
+    videoId = "O44d1U7aYAo",
+    audioId = R.raw.goldstein_audio
     )
 
-val challengeUpdateData = Content.Update(
+val challengeUpdateData = Content (
     image = R.drawable.dog_party_hat,
     title = "The challenge is over, but you just got started!",
     pretitle = "CONGRATS",
     description = "Great job in working through the meditation challenge.  Hopefully this is a jumping off point for your meditation practice, and that you will keep finding this app useful.  Thanks for participating!"
-)
 
-val videoData = listOf("https://youtu.be/O44d1U7aYAo")
-val audioData = listOf(R.raw.goldstein_audio)
+)
 
 val demoUserName = "Sam"

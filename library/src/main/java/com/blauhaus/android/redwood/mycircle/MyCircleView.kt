@@ -54,7 +54,6 @@ class MyCircleView : ConstraintLayout {
     }
 
     fun init() {
-        // Inflate the view, attatching to 'this'.
         inflate(context, R.layout.view_my_circle, this)
     }
 }

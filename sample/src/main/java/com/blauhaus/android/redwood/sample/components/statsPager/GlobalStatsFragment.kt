@@ -1,4 +1,4 @@
-package com.blauhaus.android.redwood.sample.components.statspager
+package com.blauhaus.android.redwood.sample.components.statsPager
 
 
 import android.os.Bundle

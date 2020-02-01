@@ -1,4 +1,4 @@
-package com.blauhaus.android.redwood.sample.components.mycircle
+package com.blauhaus.android.redwood.sample.components.myCircle
 
 import androidx.lifecycle.*
 import com.blauhaus.android.redwood.sample.IConfig
