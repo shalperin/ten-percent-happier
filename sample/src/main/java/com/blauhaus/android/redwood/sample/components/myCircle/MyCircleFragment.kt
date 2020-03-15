@@ -1,4 +1,4 @@
-package com.blauhaus.android.redwood.sample.components.myCircle
+package com.blauhaus.android.redwood.sample.components.mycircle
 
 
 import android.os.Bundle

@@ -1,4 +1,4 @@
-package com.blauhaus.android.redwood.sample.components.statsPager
+package com.blauhaus.android.redwood.sample.components.statspager
 
 import androidx.lifecycle.*
 import com.blauhaus.android.redwood.lastfourweeks.DayView

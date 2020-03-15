@@ -1,4 +1,4 @@
-package com.blauhaus.android.redwood.sample.components.meditationChallenge
+package com.blauhaus.android.redwood.sample.components.meditationchallenge
 
 
 import android.os.Bundle
@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import com.blauhaus.android.redwood.sample.R
-import com.blauhaus.android.redwood.sample.data.models.Content
 import kotlinx.android.synthetic.main.fragment_meditation_challenge.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
