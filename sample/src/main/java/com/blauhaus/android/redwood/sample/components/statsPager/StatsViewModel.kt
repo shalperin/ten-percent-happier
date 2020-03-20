@@ -11,6 +11,8 @@ import com.blauhaus.android.redwood.sample.data.Repository.Companion.GLOBAL_DATA
 class StatsViewModel(val repo: IRepository, val config:IConfig): ViewModel() {
 
     val lastFourWeeksBackingModel: LiveData<List<DayView.ViewState>> =
+        //TODO: Refactor I kind of want to see an explicit typing for data below, it would give a hint as to what it is.
+        // or don't call it data, because that's not that much different than 'it'.
         Transformations.map(repo.meditationData()) { data ->
             val adapted = data.map { datum ->
                 if (datum.first == 0f) {

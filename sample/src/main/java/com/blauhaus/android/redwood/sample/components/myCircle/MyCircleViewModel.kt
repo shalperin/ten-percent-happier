@@ -7,6 +7,7 @@ import com.blauhaus.android.redwood.sample.data.IRepository
 class MyCircleViewModel(private val repo: IRepository, private val config: IConfig) : ViewModel() {
 
 
+    //TODO Refactor: This data structure is horrible.
     private val _myCircleBackingData = MediatorLiveData<List<Pair<String, List<Pair<Float, String>>>>>()
     private fun combineMediationData(
         me: LiveData<List<Pair<Float, String>>>,
@@ -52,6 +53,7 @@ class MyCircleViewModel(private val repo: IRepository, private val config: IConf
         }
     }
 
+    //TODO refactor: Is this a model?  Get rid of the generic 'transport' name.
     data class Transport(val fname:String, val days:Int, val avg:Int,
                          val didCompleteChallenge:Boolean, val progress:Int)
 

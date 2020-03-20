@@ -4,13 +4,20 @@ import androidx.lifecycle.MutableLiveData
 import com.blauhaus.android.redwood.sample.data.models.Content
 
 class Repository : IRepository {
+
+    // TODO refactor.
+    // This should be an object with named fields.  What is the Float? What is the String?
     private val _meditationData = MutableLiveData<List<Pair<Float, String>>>()
+    //TODO Same Comment
     private val _globalStats = MutableLiveData<List<Int>>()
+    // TODO Same comment.
     private val _myCircle = MutableLiveData<List<Pair<String, List<Pair<Float, String>>>>>()
     private val _currentSession =MutableLiveData<Content>()
     private val _updates = MutableLiveData<Content>()
+    // See this is OK, generic, because it's obvious.
     val _username =  MutableLiveData<String>()
 
+    // TODO see above
     override fun meditationData(): MutableLiveData<List<Pair<Float, String>>> {
         return _meditationData
     }

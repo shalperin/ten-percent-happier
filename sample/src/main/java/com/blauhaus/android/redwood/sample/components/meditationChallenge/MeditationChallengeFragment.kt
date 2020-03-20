@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.fragment_meditation_challenge.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
+//TODO Refactor: Do I want to rename this App fragment?
 class MeditationChallengeFragment : Fragment() {
 
     private val viewModel by viewModel<MeditationChallengeViewModel>()

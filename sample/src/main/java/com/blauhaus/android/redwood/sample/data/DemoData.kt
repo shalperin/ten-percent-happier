@@ -4,6 +4,8 @@ import com.blauhaus.android.redwood.sample.R
 import com.blauhaus.android.redwood.sample.data.models.Content
 
 val meditationHistoryData= listOf(
+   // TODO refactor These should be objects with logical names for 'first' and 'second' and probably more flexible
+    // string interpolation for the string.
     Pair(5f, "5 min @ Jan 1"),
     Pair(10f, "10 min @ Jan 2"),
     Pair(2f, "2 min @ Jan 3"),
@@ -36,13 +38,16 @@ val meditationHistoryData= listOf(
     )
 
 val myCircleData = listOf(
+    // Just grabbing random demo data here.
     Pair("Dan", meditationHistoryData.subList(2, 8)),
     Pair("Alexis", meditationHistoryData.subList(4,14))
 )
 
+// random
 val globalStatsData = listOf(54580, 12707803, 19) //[participants, minutes, average minutes per session]
 
 
+// nice use of named fields.
 val currentSessionData = Content (
     image = R.drawable.josephgoldstein,
     title  = "Meditate With Joseph",

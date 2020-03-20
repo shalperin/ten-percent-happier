@@ -32,7 +32,7 @@
 
             </androidx.viewpager.widget.ViewPager>
 
-            <!-- TODO this is not an optimal approach, the status text doesn't slide. -->
+            <!-- TODO this is not an optimal approach, the status text doesn't slide with the pager. -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
