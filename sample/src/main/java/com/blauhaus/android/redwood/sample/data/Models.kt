@@ -1,4 +1,4 @@
-package com.blauhaus.android.redwood.sample.data.models
+package com.blauhaus.android.redwood.sample.data
 
 data class Content (
     val image: Int,
