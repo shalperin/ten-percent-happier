@@ -11,11 +11,9 @@ import com.blauhaus.android.redwood.sample.data.Repository.Companion.GLOBAL_DATA
 class StatsViewModel(val repo: IRepository, val config:IConfig): ViewModel() {
 
     val lastFourWeeksBackingModel: LiveData<List<DayView.ViewState>> =
-        //TODO: Refactor I kind of want to see an explicit typing for data below, it would give a hint as to what it is.
-        // or don't call it data, because that's not that much different than 'it'.
         Transformations.map(repo.meditationData()) { data ->
-            val adapted = data.map { datum ->
-                if (datum.first == 0f) {
+            val adapted = data.map {
+                if (it.minutesMeditated == 0f) {
                     DayView.ViewState.Skipped()
                 } else {
                     DayView.ViewState.Met()
@@ -28,7 +26,12 @@ class StatsViewModel(val repo: IRepository, val config:IConfig): ViewModel() {
             adapted
         }
 
-    val barChartBackingModel = repo.meditationData()
+    val barChartBackingModel = Transformations.map(repo.meditationData()) {
+        it.map {
+            // Pair(bar height: Float, bar label: String)
+            Pair(it.minutesMeditated, it.description)
+        }
+    }
 
     val totalDaysMeditated: LiveData<Int> =
         Transformations.map(lastFourWeeksBackingModel) {
@@ -37,9 +40,8 @@ class StatsViewModel(val repo: IRepository, val config:IConfig): ViewModel() {
 
     val averageMinutesMeditated: LiveData<Int> =
         Transformations.map(repo.meditationData()) {
-            it.map{it.first}.filter{it != 0f}.average().toInt()
+            it.map{it.minutesMeditated}.filter{it != 0f}.average().toInt()
         }
-
 
     val medalClass = MediatorLiveData<Pair<MedalClass, MedalProgress>>()
     private fun combineMetalClassData(
@@ -56,27 +58,27 @@ class StatsViewModel(val repo: IRepository, val config:IConfig): ViewModel() {
                 MedalProgress.No()
             )
             return
-        }
-
-        val _medalClass = if (avg >= config.goldMedalThresholdInMinutes()) {
-            MedalClass.Gold()
-        } else if (avg >= config.silverMedalThresholdInMinutes()) {
-            MedalClass.Silver()
-        } else if (avg >= config.bronzeMedalThresholdInMinutes()) {
-            MedalClass.Bronze()
         } else {
-            MedalClass.None()
-        }
+            val _medalClass = if (avg >= config.goldMedalThresholdInMinutes()) {
+                MedalClass.Gold()
+            } else if (avg >= config.silverMedalThresholdInMinutes()) {
+                MedalClass.Silver()
+            } else if (avg >= config.bronzeMedalThresholdInMinutes()) {
+                MedalClass.Bronze()
+            } else {
+                MedalClass.None()
+            }
 
-        val medalProgress = if (days >= config.achievementThresholdInDays()) {
-            MedalProgress.Got()
-        } else if (_medalClass is MedalClass.None) {
-            MedalProgress.No()
-        } else {
-            MedalProgress.OnTrack()
-        }
+            val medalProgress = if (days >= config.achievementThresholdInDays()) {
+                MedalProgress.Got()
+            } else if (_medalClass is MedalClass.None) {
+                MedalProgress.No()
+            } else {
+                MedalProgress.OnTrack()
+            }
 
-        medalClass.value = Pair(_medalClass, medalProgress)
+            medalClass.value = Pair(_medalClass, medalProgress)
+        }
     }
 
     //TODO get rid of these indecies and replace with data class.

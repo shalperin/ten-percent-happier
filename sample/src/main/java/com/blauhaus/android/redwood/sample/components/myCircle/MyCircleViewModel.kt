@@ -3,73 +3,85 @@ package com.blauhaus.android.redwood.sample.components.mycircle
 import androidx.lifecycle.*
 import com.blauhaus.android.redwood.sample.IConfig
 import com.blauhaus.android.redwood.sample.data.IRepository
+import com.blauhaus.android.redwood.sample.data.ADaysWorthOfMeditationData
+import com.blauhaus.android.redwood.sample.data.MeditationDataByPersonName
+import com.blauhaus.android.redwood.sample.data.PersonInCircle
 
 class MyCircleViewModel(private val repo: IRepository, private val config: IConfig) : ViewModel() {
 
-
-    //TODO Refactor: This data structure is horrible.
-    private val _myCircleBackingData = MediatorLiveData<List<Pair<String, List<Pair<Float, String>>>>>()
+    private val _myCircleBackingData = MediatorLiveData<List<MeditationDataByPersonName>>()
     private fun combineMediationData(
-        me: LiveData<List<Pair<Float, String>>>,
-        friends: LiveData<List<Pair<String, List<Pair<Float, String>>>>>,
-        myUsername: LiveData<String>)
-    {
+        _me: LiveData<MeditationDataByPersonName>,
+        _friends: LiveData<List<MeditationDataByPersonName>>) {
 
-        val myData = me.value
-        val listOfFriendsData = friends.value
-        val myName  = myUsername.value
-
-        if (myData == null || listOfFriendsData == null || myName == null) { return}
-
-        _myCircleBackingData.value = listOf(Pair(myName, myData)).union(listOfFriendsData).toList()
-
+        val me = _me.value
+        val friends = _friends.value
+        
+        if (me == null || friends == null) {
+            return
+        } else {
+            _myCircleBackingData.value = listOf(me).union(friends).toList()
+        }
     }
+    
+    val _me = MediatorLiveData<MeditationDataByPersonName>()
+    private fun combineMyData(
+        _myData: LiveData<List<ADaysWorthOfMeditationData>>,
+        _myUsername: LiveData<String>
+        ) {
 
+        val myData = _myData.value
+        val myUsername = _myUsername.value
 
-
-    // I'm conflicted about the 'it' masking below... I'm not sure that logically naming things
-    // is going to make this any more readable.
-    //TODO needs test.
-    private val _myCircle:LiveData<List<Transport>> = Transformations.map(_myCircleBackingData){
-        it.map{
-            val name:String = it.first
-            val days:Int = it.second.filter{
-                it.first > 0
-            }.size
-            val avg:Int = it.second.map{it.first}.average().toInt()
-            val didCompleteChallenge = days > config.achievementThresholdInDays()
-
-            //geeze paranoid of truncation or what?
-            val progress = (days.toFloat() / config.achievementThresholdInDays().toFloat() * 100.00).toInt()
-
-
-            Transport(
-                name,
-                days,
-                avg,
-                didCompleteChallenge,
-                progress
-            )
+        if (myData == null || myUsername == null) {
+            return
+        } else {
+            _me.value =
+                MeditationDataByPersonName(
+                    myUsername,
+                    myData
+                )
         }
     }
 
-    //TODO refactor: Is this a model?  Get rid of the generic 'transport' name.
-    data class Transport(val fname:String, val days:Int, val avg:Int,
-                         val didCompleteChallenge:Boolean, val progress:Int)
+    //TODO needs test.
+    fun myCircle():LiveData<List<PersonInCircle>> {
+        return Transformations.map(_myCircleBackingData){
+            it.map{
+                val name:String = it.name
+                val days:Int = it.meditationData.filter{
+                    it.minutesMeditated > 0
+                }.size
+                val avg:Int = it.meditationData.map{it.minutesMeditated}.average().toInt()
+                val didCompleteChallenge = days > config.achievementThresholdInDays()
 
-    fun myCircle():LiveData<List<Transport>> { return _myCircle }
+                //geeze paranoid of truncation or what?
+                val progress = (days.toFloat() / config.achievementThresholdInDays().toFloat() * 100.00).toInt()
 
+                PersonInCircle(
+                    name,
+                    days,
+                    avg,
+                    didCompleteChallenge,
+                    progress
+                )
+            }
+        }
+    }
 
     init{
-        _myCircleBackingData.addSource(repo.meditationData()){
-            combineMediationData(repo.meditationData(), repo.myCircle(), repo.userName())
+        _me.addSource(repo.userName()) {
+            combineMyData(repo.meditationData(), repo.userName())
         }
+        _me.addSource(repo.meditationData()) {
+            combineMyData(repo.meditationData(), repo.userName())
+        }
+
         _myCircleBackingData.addSource(repo.myCircle()) {
-            combineMediationData(repo.meditationData(), repo.myCircle(), repo.userName())
+            combineMediationData(_me, repo.myCircle())
         }
-        _myCircleBackingData.addSource(repo.userName()) {
-            combineMediationData(repo.meditationData(), repo.myCircle(), repo.userName())
+        _myCircleBackingData.addSource(_me) {
+            combineMediationData(_me, repo.myCircle())
         }
     }
-
 }
