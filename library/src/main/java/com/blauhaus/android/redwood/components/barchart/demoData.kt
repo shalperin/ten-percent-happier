@@ -1,4 +1,4 @@
-package com.blauhaus.android.redwood.barchart
+package com.blauhaus.android.redwood.components.barchart
 
 
 // month long list of valuse ranging from 0 to 15

@@ -1,7 +1,7 @@
 package com.blauhaus.android.redwood.meditationchallenge.components.statspager
 
 import androidx.lifecycle.*
-import com.blauhaus.android.redwood.lastfourweeks.DayView
+import com.blauhaus.android.redwood.components.abstractcalendar.DayView
 import com.blauhaus.android.redwood.meditationchallenge.*
 import com.blauhaus.android.redwood.meditationchallenge.data.IRepository
 import com.blauhaus.android.redwood.meditationchallenge.data.Repository.Companion.GLOBAL_DATA_AVERAGE_IDX

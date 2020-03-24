@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".barchart.BarChartFragment">
+    tools:context=".components.barchart.BarChartFragment">
 
-    <com.blauhaus.android.redwood.barchart.BarChartView
+    <com.blauhaus.android.redwood.components.barchart.BarChartView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/bar_chart_view"

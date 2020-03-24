@@ -1,8 +1,8 @@
 package com.blauhaus.android.redwood.meditationchallenge
 
 import android.app.Application
-import com.blauhaus.android.redwood.barchart.barChartModule
-import com.blauhaus.android.redwood.lastfourweeks.lastFourWeeksModule
+import com.blauhaus.android.redwood.components.barchart.barChartModule
+import com.blauhaus.android.redwood.components.abstractcalendar.lastFourWeeksModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin

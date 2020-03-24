@@ -1,11 +1,9 @@
-package com.blauhaus.android.redwood.mediacard
+package com.blauhaus.android.redwood.components.mediacard
 
 import android.content.Context
-import android.opengl.Visibility
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
-import androidx.cardview.widget.CardView
 import com.blauhaus.android.redwood.R
 import kotlinx.android.synthetic.main.view_media_card.view.*
 

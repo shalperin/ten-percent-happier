@@ -14,10 +14,10 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.lifecycle.Observer
 import androidx.viewpager.widget.ViewPager
-import com.blauhaus.android.redwood.barchart.BarChartFragment
-import com.blauhaus.android.redwood.barchart.BarChartViewModel
-import com.blauhaus.android.redwood.lastfourweeks.LastFourWeeksFragment
-import com.blauhaus.android.redwood.lastfourweeks.LastFourWeeksViewModel
+import com.blauhaus.android.redwood.components.barchart.BarChartFragment
+import com.blauhaus.android.redwood.components.barchart.BarChartViewModel
+import com.blauhaus.android.redwood.components.abstractcalendar.LastFourWeeksFragment
+import com.blauhaus.android.redwood.components.abstractcalendar.LastFourWeeksViewModel
 import com.blauhaus.android.redwood.meditationchallenge.R
 import kotlinx.android.synthetic.main.fragment_stats_pager.*
 import org.koin.androidx.viewmodel.ext.android.viewModel

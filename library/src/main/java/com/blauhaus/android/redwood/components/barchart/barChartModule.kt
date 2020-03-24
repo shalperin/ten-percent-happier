@@ -1,6 +1,5 @@
-package com.blauhaus.android.redwood.barchart
+package com.blauhaus.android.redwood.components.barchart
 
-import com.blauhaus.android.redwood.lastfourweeks.LastFourWeeksFragment
 import org.koin.dsl.module
 
 

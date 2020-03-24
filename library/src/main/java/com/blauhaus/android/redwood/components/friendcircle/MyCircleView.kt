@@ -1,4 +1,4 @@
-package com.blauhaus.android.redwood.mycircle
+package com.blauhaus.android.redwood.components.friendcircle
 
 import android.content.Context
 import android.util.AttributeSet

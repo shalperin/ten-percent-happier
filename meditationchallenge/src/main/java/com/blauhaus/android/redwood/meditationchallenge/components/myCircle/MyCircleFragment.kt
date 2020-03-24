@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.blauhaus.android.redwood.mycircle.MyCircleView
+import com.blauhaus.android.redwood.components.friendcircle.MyCircleView
 import com.blauhaus.android.redwood.meditationchallenge.R
 import kotlinx.android.synthetic.main.fragment_my_circle.*
 import org.koin.androidx.viewmodel.ext.android.viewModel

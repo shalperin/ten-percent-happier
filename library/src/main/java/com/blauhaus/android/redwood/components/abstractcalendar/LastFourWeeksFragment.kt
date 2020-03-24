@@ -1,4 +1,4 @@
-package com.blauhaus.android.redwood.lastfourweeks
+package com.blauhaus.android.redwood.components.abstractcalendar
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

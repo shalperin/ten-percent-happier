@@ -4,8 +4,8 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.blauhaus.android.redwood.lastfourweeks.DayView
-import com.blauhaus.android.redwood.lastfourweeks.DayView.ViewState
+import com.blauhaus.android.redwood.components.abstractcalendar.DayView
+import com.blauhaus.android.redwood.components.abstractcalendar.DayView.ViewState
 import com.blauhaus.android.redwood.meditationchallenge.data.IRepository
 import com.blauhaus.android.redwood.meditationchallenge.components.statspager.StatsViewModel
 import org.junit.Assert.assertEquals

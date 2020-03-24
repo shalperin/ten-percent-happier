@@ -1,4 +1,4 @@
-package com.blauhaus.android.redwood.lastfourweeks
+package com.blauhaus.android.redwood.components.abstractcalendar
 
 import android.content.Context
 import android.util.AttributeSet

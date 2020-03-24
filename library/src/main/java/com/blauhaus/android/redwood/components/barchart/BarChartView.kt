@@ -1,4 +1,4 @@
-package com.blauhaus.android.redwood.barchart
+package com.blauhaus.android.redwood.components.barchart
 
 import android.content.Context
 import android.graphics.*
