@@ -8,7 +8,7 @@ class Repository : IRepository {
     // This should be an object with named fields.  What is the Float? What is the String?
     private val _meditationData = MutableLiveData<List<ADaysWorthOfMeditationData>>()
     //TODO Same Comment
-    private val _globalStats = MutableLiveData<List<Int>>()
+    private val _globalStats = MutableLiveData<GlobalStats>()
     // TODO Same comment.
     private val _myCircle = MutableLiveData<List<MeditationDataByPersonName>>()
     private val _currentSession =MutableLiveData<Content>()
@@ -21,7 +21,7 @@ class Repository : IRepository {
         return _meditationData
     }
 
-    override fun globalStats() : MutableLiveData<List<Int>> { return _globalStats }
+    override fun globalStats() : MutableLiveData<GlobalStats> { return _globalStats }
 
     override fun myCircle(): MutableLiveData<List<MeditationDataByPersonName>>{
         return _myCircle
@@ -41,19 +41,11 @@ class Repository : IRepository {
         _updates.postValue(challengeUpdateData)
         _username.postValue(demoUserName)
     }
-
-
-    //TODO refactor this into a data class.
-    companion object {
-        val GLOBAL_DATA_PARTICIPANTS_IDX = 0
-        val GLOBAL_DATA_MINUTES_IDX = 1
-        val GLOBAL_DATA_AVERAGE_IDX = 2
-    }
 }
 
 interface IRepository {
     fun meditationData(): MutableLiveData<List<ADaysWorthOfMeditationData>>
-    fun globalStats(): MutableLiveData<List<Int>>
+    fun globalStats(): MutableLiveData<GlobalStats>
     fun myCircle(): MutableLiveData<List<MeditationDataByPersonName>>
     fun currentSession(): MutableLiveData<Content>
     fun updates(): MutableLiveData<Content>

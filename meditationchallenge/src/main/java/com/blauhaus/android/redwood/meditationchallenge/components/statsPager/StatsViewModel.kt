@@ -4,9 +4,6 @@ import androidx.lifecycle.*
 import com.blauhaus.android.redwood.components.abstractcalendar.DayView
 import com.blauhaus.android.redwood.meditationchallenge.*
 import com.blauhaus.android.redwood.meditationchallenge.data.IRepository
-import com.blauhaus.android.redwood.meditationchallenge.data.Repository.Companion.GLOBAL_DATA_AVERAGE_IDX
-import com.blauhaus.android.redwood.meditationchallenge.data.Repository.Companion.GLOBAL_DATA_MINUTES_IDX
-import com.blauhaus.android.redwood.meditationchallenge.data.Repository.Companion.GLOBAL_DATA_PARTICIPANTS_IDX
 
 class StatsViewModel(val repo: IRepository, val config:IConfig): ViewModel() {
 
@@ -82,9 +79,9 @@ class StatsViewModel(val repo: IRepository, val config:IConfig): ViewModel() {
     }
 
     //TODO get rid of these indecies and replace with data class.
-    val globalParticipants = Transformations.map(repo.globalStats()){ it[GLOBAL_DATA_PARTICIPANTS_IDX] }
-    val globalMinutes = Transformations.map(repo.globalStats()){ it[GLOBAL_DATA_MINUTES_IDX] }
-    val globalAverage = Transformations.map(repo.globalStats()){ it[GLOBAL_DATA_AVERAGE_IDX] }
+    val globalParticipants = Transformations.map(repo.globalStats()){ it.participants}
+    val globalMinutes = Transformations.map(repo.globalStats()){ it.totalMinutes}
+    val globalAverage = Transformations.map(repo.globalStats()){ it.avgMinutesPerSesssion}
 
 
     init {

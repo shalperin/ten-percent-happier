@@ -25,3 +25,5 @@ data class MeditationDataByPersonName (
 
 data class PersonInCircle(val fname:String, val days:Int, val avg:Int,
                           val didCompleteChallenge:Boolean, val progress:Int)
+
+data class GlobalStats(val participants: Int, val totalMinutes:Int, val avgMinutesPerSesssion:Int)

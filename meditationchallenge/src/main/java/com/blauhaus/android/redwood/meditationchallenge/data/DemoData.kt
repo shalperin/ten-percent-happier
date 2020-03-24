@@ -134,8 +134,7 @@ val myCircleData = listOf(
 )
 
 // random
-val globalStatsData = listOf(54580, 12707803, 19) //[participants, minutes, average minutes per session]
-
+val globalStatsData = GlobalStats(54580, 12707803, 19)
 
 // nice use of named fields.
 val currentSessionData = Content(
