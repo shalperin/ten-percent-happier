@@ -1,9 +1,9 @@
-package com.blauhaus.android.redwood.meditationchallenge.components.meditationchallenge
+package com.blauhaus.android.redwood.app.meditationchallenge.components.meditationchallenge
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.blauhaus.android.redwood.meditationchallenge.data.IRepository
-import com.blauhaus.android.redwood.meditationchallenge.data.Content
+import com.blauhaus.android.redwood.app.meditationchallenge.data.IRepository
+import com.blauhaus.android.redwood.app.meditationchallenge.data.Content
 
 class MeditationChallengeViewModel(repo: IRepository): ViewModel() {
     val currentMeditationSession: MutableLiveData<Content> = repo.currentSession()

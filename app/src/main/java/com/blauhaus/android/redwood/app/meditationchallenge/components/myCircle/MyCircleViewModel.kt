@@ -1,11 +1,11 @@
-package com.blauhaus.android.redwood.meditationchallenge.components.mycircle
+package com.blauhaus.android.redwood.app.meditationchallenge.components.mycircle
 
 import androidx.lifecycle.*
-import com.blauhaus.android.redwood.meditationchallenge.IConfig
-import com.blauhaus.android.redwood.meditationchallenge.data.IRepository
-import com.blauhaus.android.redwood.meditationchallenge.data.ADaysWorthOfMeditationData
-import com.blauhaus.android.redwood.meditationchallenge.data.MeditationDataByPersonName
-import com.blauhaus.android.redwood.meditationchallenge.data.PersonInCircle
+import com.blauhaus.android.redwood.app.meditationchallenge.IConfig
+import com.blauhaus.android.redwood.app.meditationchallenge.data.IRepository
+import com.blauhaus.android.redwood.app.meditationchallenge.data.ADaysWorthOfMeditationData
+import com.blauhaus.android.redwood.app.meditationchallenge.data.MeditationDataByPersonName
+import com.blauhaus.android.redwood.app.meditationchallenge.data.PersonInCircle
 
 class MyCircleViewModel(private val repo: IRepository, private val config: IConfig) : ViewModel() {
 

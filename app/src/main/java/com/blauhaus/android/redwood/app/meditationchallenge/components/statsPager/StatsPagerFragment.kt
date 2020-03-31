@@ -1,4 +1,4 @@
-package com.blauhaus.android.redwood.meditationchallenge.components.statspager
+package com.blauhaus.android.redwood.app.meditationchallenge.components.statspager
 
 
 import android.content.res.ColorStateList
@@ -18,7 +18,7 @@ import com.blauhaus.android.redwood.components.barchart.BarChartFragment
 import com.blauhaus.android.redwood.components.barchart.BarChartViewModel
 import com.blauhaus.android.redwood.components.abstractcalendar.LastFourWeeksFragment
 import com.blauhaus.android.redwood.components.abstractcalendar.LastFourWeeksViewModel
-import com.blauhaus.android.redwood.meditationchallenge.R
+import com.blauhaus.android.redwood.app.R
 import kotlinx.android.synthetic.main.fragment_stats_pager.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

@@ -1,7 +1,8 @@
-package com.blauhaus.android.redwood.meditationchallenge
+package com.blauhaus.android.redwood.app.meditationchallenge
 
 
-class Config: IConfig {
+class MeditationConfig:
+    IConfig {
     override fun achievementThresholdInDays() = 14
     override fun goldMedalThresholdInMinutes() = 25
     override fun silverMedalThresholdInMinutes() = 15

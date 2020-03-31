@@ -1,4 +1,4 @@
-package com.blauhaus.android.redwood.meditationchallenge.components.meditationchallenge
+package com.blauhaus.android.redwood.app.meditationchallenge.components.meditationchallenge
 
 
 import android.os.Bundle
@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import com.blauhaus.android.redwood.meditationchallenge.R
+import com.blauhaus.android.redwood.app.R
 import kotlinx.android.synthetic.main.fragment_meditation_challenge.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

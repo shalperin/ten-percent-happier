@@ -1,9 +1,9 @@
-package com.blauhaus.android.redwood
+package com.blauhaus.android.redwood.app
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import com.blauhaus.android.redwood.meditationchallenge.R
+import androidx.navigation.findNavController
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -11,8 +11,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        fab.setOnClickListener{
+        daynightfab.setOnClickListener{
             toggleDayNight()
+        }
+
+        meditationfab.setOnClickListener{
+            findNavController(R.id.nav_host_fragment).navigate(R.id.action_global_meditationDemoFragment)
+        }
+
+        todofab.setOnClickListener{
+            findNavController(R.id.nav_host_fragment).navigate(R.id.action_global_todoMvvmFragment)
         }
     }
 

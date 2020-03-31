@@ -1,6 +1,6 @@
-package com.blauhaus.android.redwood.meditationchallenge.data
+package com.blauhaus.android.redwood.app.meditationchallenge.data
 
-import com.blauhaus.android.redwood.meditationchallenge.R
+import com.blauhaus.android.redwood.app.R
 
 val meditationHistoryData= listOf(
     ADaysWorthOfMeditationData(

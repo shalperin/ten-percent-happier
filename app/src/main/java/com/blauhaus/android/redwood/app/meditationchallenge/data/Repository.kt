@@ -1,4 +1,4 @@
-package com.blauhaus.android.redwood.meditationchallenge.data
+package com.blauhaus.android.redwood.app.meditationchallenge.data
 
 import androidx.lifecycle.MutableLiveData
 

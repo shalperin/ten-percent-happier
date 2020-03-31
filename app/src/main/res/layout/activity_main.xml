@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.blauhaus.android.redwood.MainActivity"
+    tools:context=".MainActivity"
     >
 
 
@@ -22,6 +22,29 @@
         app:defaultNavHost="true"
         app:navGraph="@navigation/root_navigation" />
 
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@id/daynightfab"
+        android:id="@+id/meditationfab"
+        />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintLeft_toRightOf="@id/meditationfab"
+        app:layout_constraintTop_toTopOf="@id/daynightfab"
+        android:id="@+id/todofab"
+        />
+
+
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,8 +53,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:src="@drawable/ic_noun_day_and_night_990003"
-        android:id="@+id/fab"
+        android:id="@+id/daynightfab"
         />
+
+
 
 
 

@@ -1,4 +1,4 @@
-package com.blauhaus.android.redwood.meditationchallenge.components.mycircle
+package com.blauhaus.android.redwood.app.meditationchallenge.components.mycircle
 
 
 import android.os.Bundle
@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.blauhaus.android.redwood.components.friendcircle.MyCircleView
-import com.blauhaus.android.redwood.meditationchallenge.R
+import com.blauhaus.android.redwood.app.R
 import kotlinx.android.synthetic.main.fragment_my_circle.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

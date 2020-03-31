@@ -1,4 +1,4 @@
-package com.blauhaus.android.redwood.meditationchallenge.data
+package com.blauhaus.android.redwood.app.meditationchallenge.data
 
 data class Content (
     val image: Int,

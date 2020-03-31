@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/root_navigation"
-    app:startDestination="@id/meditationDemoFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_navigation"
+    app:startDestination="@id/homeFragment">
 
     <fragment
-        android:id="@+id/indexFragment"
-        android:name="com.blauhaus.android.redwood.meditationchallenge.components.index.IndexFragment"
-        android:label="IndexFragment" >
-        <action
-            android:id="@+id/action_indexFragment_to_meditationDemoFragment"
-            app:destination="@id/meditationDemoFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/meditationDemoFragment"
-        android:name="com.blauhaus.android.redwood.meditationchallenge.components.meditationchallenge.MeditationChallengeFragment"
+        android:name="com.blauhaus.android.redwood.app.meditationchallenge.components.meditationchallenge.MeditationChallengeFragment"
         android:label="MeditationDemoFragment" />
+    <fragment
+        android:id="@+id/todoMvvmFragment"
+        android:name="com.blauhaus.android.redwood.app.todomvvm.TodoMvvmFragment"
+        android:label="fragment_todo_mvvm"
+        tools:layout="@layout/fragment_todo_mvvm" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.blauhaus.android.redwood.app.home.HomeFragment"
+        android:label="HomeFragment" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.blauhaus.android.redwood.app.login.LoginFragment"
+        android:label="LoginFragment" /><action android:id="@+id/action_global_meditationDemoFragment" app:destination="@id/meditationDemoFragment"/><action android:id="@+id/action_global_todoMvvmFragment" app:destination="@id/todoMvvmFragment"/><action android:id="@+id/action_global_loginFragment" app:destination="@id/loginFragment"/>
 </navigation>

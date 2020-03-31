@@ -1,4 +1,4 @@
-package com.blauhaus.android.redwood.meditationchallenge.viewmodels
+package com.blauhaus.android.redwood.app.viewmodels
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.LiveData
@@ -6,8 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.blauhaus.android.redwood.components.abstractcalendar.DayView
 import com.blauhaus.android.redwood.components.abstractcalendar.DayView.ViewState
-import com.blauhaus.android.redwood.meditationchallenge.data.IRepository
-import com.blauhaus.android.redwood.meditationchallenge.components.statspager.StatsViewModel
+import com.blauhaus.android.redwood.app.meditationchallenge.data.IRepository
+import com.blauhaus.android.redwood.app.meditationchallenge.components.statspager.StatsViewModel
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Before

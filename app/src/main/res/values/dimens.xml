@@ -6,5 +6,7 @@
     <item type="dimen" name="card_corner_radius">8dp</item>
     <item type="dimen" name="card_elevation">4dp</item>
     <item type="dimen" name="card_margin">4dp</item>
+    <item type="dimen" name="text_padding">8dp</item>
+    <item type="dimen" name="text_margin">8dp</item>
 
 </resources>

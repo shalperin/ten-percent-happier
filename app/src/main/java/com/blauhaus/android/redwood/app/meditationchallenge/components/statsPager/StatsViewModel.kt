@@ -1,11 +1,11 @@
-package com.blauhaus.android.redwood.meditationchallenge.components.statspager
+package com.blauhaus.android.redwood.app.meditationchallenge.components.statspager
 
 import androidx.lifecycle.*
 import com.blauhaus.android.redwood.components.abstractcalendar.DayView
-import com.blauhaus.android.redwood.meditationchallenge.*
-import com.blauhaus.android.redwood.meditationchallenge.data.IRepository
+import com.blauhaus.android.redwood.app.meditationchallenge.IConfig
+import com.blauhaus.android.redwood.app.meditationchallenge.data.IRepository
 
-class StatsViewModel(val repo: IRepository, val config:IConfig): ViewModel() {
+class StatsViewModel(val repo: IRepository, val config: IConfig): ViewModel() {
 
     val lastFourWeeksBackingModel: LiveData<List<DayView.ViewState>> =
         Transformations.map(repo.meditationData()) { data ->
