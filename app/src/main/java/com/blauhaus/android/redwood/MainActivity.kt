@@ -1,8 +1,9 @@
-package com.blauhaus.android.redwood.meditationchallenge
+package com.blauhaus.android.redwood
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import com.blauhaus.android.redwood.meditationchallenge.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {

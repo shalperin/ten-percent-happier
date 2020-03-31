@@ -1,2 +1,2 @@
-include ':meditationchallenge', ':library'
+include ':app', ':library'
 rootProject.name='Redwood'

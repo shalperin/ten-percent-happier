@@ -4,7 +4,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name="com.blauhaus.android.redwood.meditationchallenge.MainApplication"
+        android:name="com.blauhaus.android.redwood.MainApplication"
         android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.DayNight">
-        <activity android:name="com.blauhaus.android.redwood.meditationchallenge.MainActivity">
+        <activity android:name="com.blauhaus.android.redwood.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
