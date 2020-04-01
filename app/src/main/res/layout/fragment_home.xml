@@ -7,20 +7,51 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/home"
-
-
     >
 
-        <TextView
-                android:id="@+id/auth_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/text_margin"
-                android:background="@color/colorAccent"
-                android:padding="@dimen/text_padding"
-                android:textColor="#fff"
-                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="@string/login_button_text"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <Button
+        android:id="@+id/launch_meditation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="90dp"
+        android:text="Inspired by ''10% Happier''"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:rotation="45"
+        />
+
+
+    <Button
+        android:id="@+id/launch_todo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="20dp"
+        android:text="Inspired by ''Todo MVC''"
+        app:layout_constraintTop_toBottomOf="@id/launch_meditation"
+        app:layout_constraintLeft_toLeftOf="@id/launch_meditation"
+        android:rotation="-24"
+
+        />
+
+    <TextView
+        android:id="@+id/auth_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="98dp"
+        android:layout_marginLeft="150dp"
+        android:background="@color/colorAccent"
+        android:padding="@dimen/text_padding"
+        android:textColor="#fff"
+        app:layout_constraintLeft_toLeftOf="@id/launch_meditation"
+
+        app:layout_constraintTop_toBottomOf="@id/launch_todo"
+        tools:text="@string/login_button_text"
+        android:rotation="20"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

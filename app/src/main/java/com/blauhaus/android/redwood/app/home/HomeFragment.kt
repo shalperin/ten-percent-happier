@@ -26,13 +26,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment.findNavController
 import com.blauhaus.android.redwood.app.R
 import com.blauhaus.android.redwood.app.login.LoginViewModel
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_home.*
+
 
 class HomeFragment : Fragment() {
 
@@ -58,6 +62,19 @@ class HomeFragment : Fragment() {
         auth_button.setOnClickListener {
             launchSignInFlow()
         }
+
+        launch_meditation.setOnClickListener{
+            findNavController(this).navigate(R.id.action_global_meditationDemoFragment)
+        }
+
+        launch_todo.setOnClickListener{
+            findNavController(this).navigate(R.id.action_global_todoMvvmFragment)
+        }
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
