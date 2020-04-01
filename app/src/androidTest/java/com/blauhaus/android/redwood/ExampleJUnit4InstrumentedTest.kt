@@ -12,7 +12,10 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import com.blauhaus.android.redwood.app.MainActivity
 import com.blauhaus.android.redwood.app.R
-
+import com.schibsted.spain.barista.assertion.BaristaVisibilityAssertions.assertDisplayed
+import com.schibsted.spain.barista.assertion.BaristaVisibilityAssertions.assertNotDisplayed
+import com.schibsted.spain.barista.interaction.BaristaClickInteractions.clickOn
+import com.schibsted.spain.barista.interaction.BaristaEditTextInteractions.writeTo
 
 
 import org.junit.Test
@@ -37,10 +40,6 @@ class ExampleInstrumentedTest {
     var activityRule: ActivityTestRule<MainActivity>
             = ActivityTestRule(MainActivity::class.java)
 
-
-
-
-
     @Test
     fun useAppContext() {
         // Context of the app under test.
@@ -49,34 +48,35 @@ class ExampleInstrumentedTest {
     }
 
     @Test
-    fun attemptBeingDeniedRouteRequiringLogin() {
-        onView(withId(R.id.home))
-            .check(matches(isDisplayed()))
+    fun goHome() {
+        try {
+            clickOn(R.id.go_home)
+        } catch(e: Exception) {}
+        finally {
+            assertDisplayed(R.id.home)
+        }
+    }
+
+    @Test
+    fun testAccessDeniedRedirect() {
+        goHome()
 
         try {
-            onView(withText(R.string.logout_button_text))  //onView(matcher).perform(ViewAction)
-                    .perform(click())
+            clickOn(R.string.logout_button_text)
         } catch (e: Exception) {
             Log.d(tag, "I wasn't logged in.")
         } finally {
-            onView(withId(R.id.todofab))
-                .perform(click())
-
-            onView(withId(R.id.please_login))           //onView(matcher).check(ViewAssertion)
-                .check(matches(isDisplayed()))
+            clickOn(R.id.launch_todo)
+            assertDisplayed(R.id.please_login)
         }
     }
 
     @Test
     fun attemptRouteNotRequiringLogin() {
-        onView(withId(R.id.meditationfab))
-            .perform(click())
-
-        onView(withId(R.id.meditation_challenge))
-            .check(matches(isDisplayed()))
+        goHome()
+        clickOn(R.id.launch_meditation)
+        assertDisplayed(R.id.meditation_challenge)
     }
-
-    //abcde1234
 
 
  }

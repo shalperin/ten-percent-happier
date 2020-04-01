@@ -33,7 +33,7 @@
         android:text="Inspired by ''Todo MVC''"
         app:layout_constraintTop_toBottomOf="@id/launch_meditation"
         app:layout_constraintLeft_toLeftOf="@id/launch_meditation"
-        android:rotation="-24"
+        android:rotation="0"
 
         />
 
