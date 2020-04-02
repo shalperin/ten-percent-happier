@@ -31,8 +31,10 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:background="@color/todo_input"
-        android:textSize="32dp"
+        android:textSize="@dimen/todo_text_size"
         android:id="@+id/todo_input"
+        android:hint="What needs to be done?"
+        android:padding="@dimen/todo_padding"
         />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -43,6 +45,7 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
+        android:layout_marginTop="2dp"
         android:id="@+id/todo_rv"
         android:background="@color/todo_input"
         />

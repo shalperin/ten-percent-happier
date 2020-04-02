@@ -8,5 +8,7 @@
     <item type="dimen" name="card_margin">4dp</item>
     <item type="dimen" name="text_padding">8dp</item>
     <item type="dimen" name="text_margin">8dp</item>
+    <item type="dimen" name="todo_text_size">32dp</item>
+    <item type="dimen" name="todo_padding">8dp</item>
 
 </resources>
