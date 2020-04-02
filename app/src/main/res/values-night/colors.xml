@@ -20,7 +20,13 @@
     <color name="color_on_error">#000000</color>
 
 
+    <!-- TODO MVC -->
+    <color name="todo_background">#666666</color>
+    <color name="todo_header">#CD6565</color>
+    <color name="todo_input">#999</color>
+    <color name="deemphasized_text">#aaa</color>
 
-
+    <!-- Chrome and index page -->
+    <color name="toolbar_background">#333</color>
 
 </resources>

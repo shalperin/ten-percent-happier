@@ -45,4 +45,19 @@
 
     <!-- COMPONENTS -->
     <color name="lastFourWeeksTextColor">@color/color_grey_1</color>
+
+
+    <!-- TODO MVC -->
+    <color name="todo_background">#dddddd</color>
+    <color name="todo_header">#CD6565</color>
+    <color name="todo_input">#ffffff</color>
+    <color name="deemphasized_text">#aaa</color>
+
+    <!-- Chrome and index page -->
+    <color name="toolbar_background">#fff</color>
+    <color name="toolbar_text">#888</color>
+
+
 </resources>
+
+
