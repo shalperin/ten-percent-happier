@@ -19,11 +19,15 @@ class TodoViewModel(val repo: ITodoRepository): ViewModel( ) {
     }
 
     fun getAllTodosByTimestampAsc(): LiveData<ListOrException<TodoOrException>> {
-        return repo.getAllTodosByTimestampAsc()
+        return repo.getAllTodosByTimestamp()
     }
 
     fun toggleTodoComplete(id: String, complete:Boolean) {
         repo.toggleTodoComplete(id, complete)
+    }
+
+    fun addTodo(text: String) {
+        repo.addTodo(text)
     }
 
 

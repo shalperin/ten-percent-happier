@@ -3,10 +3,13 @@ package com.blauhaus.android.redwood.app.todomvvm
 import android.os.Bundle
 import android.text.Layout
 import android.util.Log
+import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
@@ -79,6 +82,16 @@ class TodoMvvmFragment : Fragment() {
                 }.filterNotNull()
 
                 rvAdapter.submitList(todos)
+            }
+        })
+
+        todo_input.setOnEditorActionListener( object: TextView.OnEditorActionListener {
+            override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    todoViewModel.addTodo(todo_input.text.toString())
+                    todo_input.setText("")
+                }
+                return false
             }
         })
     }
