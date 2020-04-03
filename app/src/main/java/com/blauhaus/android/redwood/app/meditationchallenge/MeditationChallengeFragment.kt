@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import com.blauhaus.android.redwood.app.R
-import kotlinx.android.synthetic.main.fragment_meditation_challenge.*
+import kotlinx.android.synthetic.main.meditation_fragment_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -22,7 +22,7 @@ class MeditationChallengeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_meditation_challenge, container, false)
+        return inflater.inflate(R.layout.meditation_fragment_main, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

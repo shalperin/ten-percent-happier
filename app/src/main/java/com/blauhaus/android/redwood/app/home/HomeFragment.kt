@@ -26,16 +26,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import com.blauhaus.android.redwood.app.R
 import com.blauhaus.android.redwood.app.login.LoginViewModel
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
-import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.app_fragment_home.*
 
 
 class HomeFragment : Fragment() {
@@ -52,7 +49,7 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
 
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        return inflater.inflate(R.layout.app_fragment_home, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

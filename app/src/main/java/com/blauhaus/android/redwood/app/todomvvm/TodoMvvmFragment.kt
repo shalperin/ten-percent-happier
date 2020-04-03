@@ -1,7 +1,6 @@
 package com.blauhaus.android.redwood.app.todomvvm
 
 import android.os.Bundle
-import android.text.Layout
 import android.util.Log
 import android.view.KeyEvent
 import androidx.fragment.app.Fragment
@@ -14,16 +13,14 @@ import android.widget.Toast
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
 import com.blauhaus.android.redwood.app.R
 import com.blauhaus.android.redwood.app.login.LoginViewModel
-import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.fragment_todo_mvvm.*
-import kotlinx.android.synthetic.main.rv_item_todos.view.*
+import kotlinx.android.synthetic.main.todomvvm_fragment_main.*
+import kotlinx.android.synthetic.main.todomvvm_rv_item_todos_list.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -41,7 +38,7 @@ class TodoMvvmFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_todo_mvvm, container, false)
+        return inflater.inflate(R.layout.todomvvm_fragment_main, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -130,7 +127,7 @@ class TodoListAdapter(val viewModel:TodoViewModel, val lifecycleOwner: Lifecycle
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.rv_item_todos, parent, false)
+        val view = inflater.inflate(R.layout.todomvvm_rv_item_todos_list, parent, false)
         return VH(view)
     }
 }

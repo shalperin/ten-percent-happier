@@ -19,7 +19,7 @@ import com.blauhaus.android.redwood.components.barchart.BarChartViewModel
 import com.blauhaus.android.redwood.components.abstractcalendar.LastFourWeeksFragment
 import com.blauhaus.android.redwood.components.abstractcalendar.LastFourWeeksViewModel
 import com.blauhaus.android.redwood.app.R
-import kotlinx.android.synthetic.main.fragment_stats_pager.*
+import kotlinx.android.synthetic.main.meditation_fragment_stats_pager.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -39,7 +39,7 @@ class StatsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_stats_pager, container, false)
+        return inflater.inflate(R.layout.meditation_fragment_stats_pager, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

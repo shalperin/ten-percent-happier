@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.blauhaus.android.redwood.components.friendcircle.MyCircleView
 import com.blauhaus.android.redwood.app.R
-import kotlinx.android.synthetic.main.fragment_my_circle.*
+import kotlinx.android.synthetic.main.meditation_fragment_my_circle.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MyCircleFragment : Fragment() {
@@ -22,7 +22,7 @@ class MyCircleFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my_circle, container, false)
+        return inflater.inflate(R.layout.meditation_fragment_my_circle, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
