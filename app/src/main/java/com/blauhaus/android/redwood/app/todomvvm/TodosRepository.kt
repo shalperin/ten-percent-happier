@@ -2,10 +2,12 @@ package com.blauhaus.android.redwood.app.todomvvm
 
 import androidx.lifecycle.*
 import com.blauhaus.android.redwood.app.common.DataOrException
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import java.util.*
 
 
 //typealias ListTodosOrException = DataOrException<List<Todo>, Exception>
@@ -18,7 +20,14 @@ class TodoFirestoreRepository(val firestore: FirebaseFirestore, val auth: Fireba
     val PATH_USERS = "users"
     val PATH_TODOS = "todos"
     val FIELD_TIMESTAMP = "timestamp"
+    val FIELD_COMPLETE = "complete"
 
+    val allTodosQuery = firestore.collection(PATH_ROOT)
+        .document(PATH_APPDATA)
+        .collection(PATH_USERS)
+        .document(auth.uid.toString())
+        .collection(PATH_TODOS)
+        .orderBy(FIELD_TIMESTAMP, Query.Direction.DESCENDING)
 
     override fun getTodo(todoId: String): TodoLiveData {
         //TODO create a constant for the path below.
@@ -44,20 +53,49 @@ class TodoFirestoreRepository(val firestore: FirebaseFirestore, val auth: Fireba
         }
     }
 
-    override fun getAllTodosByTimestampAsc() : LiveData<ListOrException<TodoOrException>> {
-        val query = firestore.collection(PATH_ROOT)
+    override fun getAllTodosByTimestamp() : LiveData<ListOrException<TodoOrException>> {
+        return executeTodosQuery(allTodosQuery)
+    }
+
+    override fun toggleTodoComplete(id: String, complete:Boolean) {
+        firestore.collection(PATH_ROOT)
             .document(PATH_APPDATA)
             .collection(PATH_USERS)
             .document(auth.uid.toString())
             .collection(PATH_TODOS)
-            .orderBy(FIELD_TIMESTAMP)
-
-        return executeTodosQuery(query)
+            .document(id).update(FIELD_COMPLETE, complete)
     }
 
+    //todo can this throw errors?
+    //what if I'm no longer logged in or something and I try to write?
+    override fun addTodo(text:String) {
+        val todo = hashMapOf(
+            "text" to text,
+            "complete" to false,
+            "timestamp" to Timestamp(Date())
+        )
+
+        firestore.collection(PATH_ROOT)
+            .document(PATH_APPDATA)
+            .collection(PATH_USERS)
+            .document(auth.uid.toString())
+            .collection(PATH_TODOS)
+            .add(todo)
+    }
+
+    override fun markAllTodosCompletion(complete:Boolean) {
+        allTodosQuery.get().addOnSuccessListener { documents ->
+            for (document in documents) {
+                toggleTodoComplete(document.id, complete)
+            }
+        }
+    }
 }
 
 interface ITodoRepository {
     fun getTodo(todoId:String): TodoLiveData
-    fun getAllTodosByTimestampAsc() : LiveData<ListOrException<TodoOrException>>
+    fun getAllTodosByTimestamp() : LiveData<ListOrException<TodoOrException>>
+    fun toggleTodoComplete(id: String, complete:Boolean)
+    fun addTodo(text: String)
+    fun markAllTodosCompletion(complete:Boolean)
 }

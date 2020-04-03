@@ -1,25 +1,26 @@
 package com.blauhaus.android.redwood.app.todomvvm
 
 import android.os.Bundle
-import android.text.Layout
 import android.util.Log
+import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
 import com.blauhaus.android.redwood.app.R
 import com.blauhaus.android.redwood.app.login.LoginViewModel
-import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.fragment_todo_mvvm.*
-import kotlinx.android.synthetic.main.rv_item_todos.view.*
+import kotlinx.android.synthetic.main.todomvvm_fragment_main.*
+import kotlinx.android.synthetic.main.todomvvm_rv_item_todos_list.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -37,11 +38,17 @@ class TodoMvvmFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_todo_mvvm, container, false)
+        return inflater.inflate(R.layout.todomvvm_fragment_main, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        var rvAdapter = TodoListAdapter(todoViewModel, this )
+        todo_rv.let {
+            it.adapter = rvAdapter
+            it.layoutManager = LinearLayoutManager(requireActivity())
+        }
 
         loginViewModel.authenticationState.observe(this, Observer {
             if (it == LoginViewModel.AuthenticationState.UNAUTHENTICATED) {
@@ -49,44 +56,114 @@ class TodoMvvmFragment : Fragment() {
             }
         })
 
-        todoViewModel.getTodoLiveData("Y6uPXpaVVuAu03bAFGgT")
-            .observe(this, Observer {
-                Log.d(TAG, "porsche")
-                if (it.data != null) {
-                    Log.d(TAG, it.data.toString())
-                } else {
-                    Log.d(TAG, "EXCEPTION ", it.exception)
-                }
-            })
-
-        val rvAdapter = TodoListAdapter()
-        todo_rv.adapter = rvAdapter
-        todo_rv.layoutManager= LinearLayoutManager(requireActivity())
-        todoViewModel.getAllTodosByTimestampAsc().observe(this, Observer{
-            if (it.data != null) {
-                rvAdapter.submitList(it.data.map { todoOrException ->
-                    // map to just the t.odo.
-                    if(todoOrException.data != null) {
-                        Log.d(TAG, todoOrException.data.text)
-                        todoOrException.data
-                    } else {
-                        Log.e(TAG, "error with individual Todo", todoOrException.exception)
-                        null
-                    }.takeUnless{it == null}
-                })
+        todoViewModel.getFilteredTodos().observe(this, Observer{
+            if (it.data == null) {
+                handleException("Error with todos by timestamp query", it.exception)
             } else {
-                Log.e(TAG, "Error with todo list", it.exception)
+                val todos: List<Todo> = it.data.map { todoOrException ->
+                    if( todoOrException.data == null) {
+                        handleException("error with individual Todo", todoOrException.exception)
+                        null
+                    } else {
+                        todoOrException.data
+                    }
+                }.filterNotNull()
+
+                rvAdapter.submitList(todos)
             }
         })
 
+        todo_input.setOnEditorActionListener( object: TextView.OnEditorActionListener {
+            override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    todoViewModel.addTodo(todo_input.text.toString())
+                    todo_input.setText("")
+                }
+                return false
+            }
+        })
+
+        toggle_all_completed_btn.setOnClickListener{
+            var value = todoViewModel.allTodosAreComplete.value
+            if (value == null || value == false) {
+                todoViewModel.markAllTodosCompletion(true)
+            } else {
+                todoViewModel.markAllTodosCompletion(false)
+            }
+        }
+
+        all_btn.setOnClickListener {
+            todoViewModel.setFilterMode(TodoViewModel.TodoFilterMode.ALL)
+        }
+
+        active_btn.setOnClickListener {
+            todoViewModel.setFilterMode(TodoViewModel.TodoFilterMode.ACTIVE)
+        }
+
+        completed_btn.setOnClickListener {
+            todoViewModel.setFilterMode(TodoViewModel.TodoFilterMode.COMPLETED)
+        }
+
+        todoViewModel.filterMode.observe (this, Observer {
+            when (it) {
+                TodoViewModel.TodoFilterMode.ACTIVE -> {
+                    all_btn.setBackgroundResource(0)
+                    completed_btn.setBackgroundResource(0)
+                    active_btn.setBackgroundResource(R.drawable.active_todo_filter_bg)
+                }
+                TodoViewModel.TodoFilterMode.COMPLETED -> {
+                    all_btn.setBackgroundResource(0)
+                    completed_btn.setBackgroundResource(R.drawable.active_todo_filter_bg)
+                    active_btn.setBackgroundResource(0)
+
+                }
+                TodoViewModel.TodoFilterMode.ALL -> {
+                    all_btn.setBackgroundResource(R.drawable.active_todo_filter_bg)
+                    completed_btn.setBackgroundResource(0)
+                    active_btn.setBackgroundResource(0)
+
+                }
+            }
+        })
+
+        todoViewModel.allTodosAreComplete.observe(this, Observer {
+            if (it) {
+                toggle_all_completed_btn.setImageDrawable(resources.getDrawable(R.drawable.ic_keyboard_arrow_down_active))
+            } else {
+                toggle_all_completed_btn.setImageDrawable(resources.getDrawable(R.drawable.ic_keyboard_arrow_down))
+            }
+        })
+
+        todoViewModel.incompleteCount.observe(this, Observer {
+            if (it.data == null) {
+                handleException("error in todo count", it.exception)
+            } else {
+                todo_count.text = getString(R.string.items_left, it.data)
+            }
+        })
+    }
+
+    //Todo: crashylitcs
+    fun handleException(msg:String, e: Exception?) {
+        Log.e(TAG, msg, e)
+        Toast.makeText(requireActivity(), R.string.wrong, Toast.LENGTH_LONG ).show()
     }
 }
 
 
-class TodoListAdapter() : ListAdapter<Todo, TodoListAdapter.VH>(GenericDiffCallback()) {
-    class VH(val view:View): RecyclerView.ViewHolder(view) {
+
+class TodoListAdapter(val viewModel:TodoViewModel, val lifecycleOwner: LifecycleOwner) : ListAdapter<Todo, TodoListAdapter.VH>(GenericDiffCallback()) {
+    val TAG = "TODO_LIST_ADAPTER"
+
+    inner class VH(val view:View): RecyclerView.ViewHolder(view) {
         fun bind(todo:Todo) {
             view.todo_text.text = todo.text
+            showCheckmark(view, todo.complete)
+            //TODO is this a source of jank?  Should we be binding the listener to the viewholder or sumptin?
+            view.unchecked_icon.setOnClickListener {
+                showCheckmark(view, !todo.complete)
+                viewModel.toggleTodoComplete(todo.id, !todo.complete)
+            }
         }
     }
 
@@ -97,7 +174,15 @@ class TodoListAdapter() : ListAdapter<Todo, TodoListAdapter.VH>(GenericDiffCallb
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.rv_item_todos, parent, false)
+        val view = inflater.inflate(R.layout.todomvvm_rv_item_todos_list, parent, false)
         return VH(view)
+    }
+
+    fun showCheckmark(view: View, showComplete:Boolean) {
+        if (showComplete) {
+            view.checked_icon.visibility = View.VISIBLE
+        } else {
+            view.checked_icon.visibility = View.GONE
+        }
     }
 }

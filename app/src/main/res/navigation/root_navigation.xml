@@ -13,7 +13,7 @@
         android:id="@+id/todoMvvmFragment"
         android:name="com.blauhaus.android.redwood.app.todomvvm.TodoMvvmFragment"
         android:label="fragment_todo_mvvm"
-        tools:layout="@layout/fragment_todo_mvvm" />
+        tools:layout="@layout/todomvvm_fragment_main" />
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.blauhaus.android.redwood.app.home.HomeFragment"

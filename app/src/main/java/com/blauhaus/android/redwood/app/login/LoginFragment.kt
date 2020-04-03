@@ -32,9 +32,8 @@ import androidx.navigation.NavController
 import com.blauhaus.android.redwood.app.R
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.fragment_login.view.*
+import kotlinx.android.synthetic.main.app_fragment_login.view.*
 
 class LoginFragment : Fragment() {
 
@@ -51,7 +50,7 @@ class LoginFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        val view =  inflater.inflate(R.layout.fragment_login, container, false)
+        val view =  inflater.inflate(R.layout.app_fragment_login, container, false)
 
         view.auth_button.setOnClickListener { launchSignInFlow() }
 
