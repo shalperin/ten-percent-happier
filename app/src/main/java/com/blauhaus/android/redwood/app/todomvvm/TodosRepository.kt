@@ -18,6 +18,7 @@ class TodoFirestoreRepository(val firestore: FirebaseFirestore, val auth: Fireba
     val PATH_USERS = "users"
     val PATH_TODOS = "todos"
     val FIELD_TIMESTAMP = "timestamp"
+    val FIELD_COMPLETE = "complete"
 
 
     override fun getTodo(todoId: String): TodoLiveData {
@@ -50,9 +51,18 @@ class TodoFirestoreRepository(val firestore: FirebaseFirestore, val auth: Fireba
             .collection(PATH_USERS)
             .document(auth.uid.toString())
             .collection(PATH_TODOS)
-            .orderBy(FIELD_TIMESTAMP)
+//            .orderBy(FIELD_TIMESTAMP)
 
         return executeTodosQuery(query)
+    }
+
+    override fun toggleTodoComplete(id: String, complete:Boolean) {
+        firestore.collection(PATH_ROOT)
+            .document(PATH_APPDATA)
+            .collection(PATH_USERS)
+            .document(auth.uid.toString())
+            .collection(PATH_TODOS)
+            .document(id).update(FIELD_COMPLETE, complete)
     }
 
 }
@@ -60,4 +70,5 @@ class TodoFirestoreRepository(val firestore: FirebaseFirestore, val auth: Fireba
 interface ITodoRepository {
     fun getTodo(todoId:String): TodoLiveData
     fun getAllTodosByTimestampAsc() : LiveData<ListOrException<TodoOrException>>
+    fun toggleTodoComplete(id: String, complete:Boolean)
 }

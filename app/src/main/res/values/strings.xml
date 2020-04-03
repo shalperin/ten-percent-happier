@@ -10,4 +10,5 @@
 
     <string name="meditation_demo_description">Meditation challenge, inspired by "10% Happier"</string>
     <string name="todo_demo_description">Todo List, inspired by "Todo MVC"</string>
+    <string name="wrong">Something went wrong.</string>
 </resources>

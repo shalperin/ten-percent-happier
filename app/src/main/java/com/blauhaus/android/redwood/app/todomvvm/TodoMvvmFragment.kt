@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -43,6 +44,12 @@ class TodoMvvmFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        var rvAdapter = TodoListAdapter(todoViewModel, this )
+        todo_rv.let {
+            it.adapter = rvAdapter
+            it.layoutManager = LinearLayoutManager(requireActivity())
+        }
+
         loginViewModel.authenticationState.observe(this, Observer {
             if (it == LoginViewModel.AuthenticationState.UNAUTHENTICATED) {
                 findNavController().navigate(R.id.action_global_loginFragment)
@@ -56,37 +63,50 @@ class TodoMvvmFragment : Fragment() {
                     Log.d(TAG, it.data.toString())
                 } else {
                     Log.d(TAG, "EXCEPTION ", it.exception)
-                }
-            })
+                } })
 
-        val rvAdapter = TodoListAdapter()
-        todo_rv.adapter = rvAdapter
-        todo_rv.layoutManager= LinearLayoutManager(requireActivity())
         todoViewModel.getAllTodosByTimestampAsc().observe(this, Observer{
-            if (it.data != null) {
-                rvAdapter.submitList(it.data.map { todoOrException ->
-                    // map to just the t.odo.
-                    if(todoOrException.data != null) {
-                        Log.d(TAG, todoOrException.data.text)
-                        todoOrException.data
-                    } else {
-                        Log.e(TAG, "error with individual Todo", todoOrException.exception)
-                        null
-                    }.takeUnless{it == null}
-                })
+            if (it.data == null) {
+                handleException("Error with todos by timestamp query", it.exception)
             } else {
-                Log.e(TAG, "Error with todo list", it.exception)
+                val todos: List<Todo> = it.data.map { todoOrException ->
+                    if( todoOrException.data == null) {
+                        handleException("error with individual Todo", todoOrException.exception)
+                        null
+                    } else {
+                        todoOrException.data
+                    }
+                }.filterNotNull()
+
+                rvAdapter.submitList(todos)
             }
         })
+    }
 
+    //Todo: crashylitcs
+    fun handleException(msg:String, e: Exception?) {
+        Log.e(TAG, msg, e)
+        Toast.makeText(requireActivity(), R.string.wrong, Toast.LENGTH_LONG ).show()
     }
 }
 
 
-class TodoListAdapter() : ListAdapter<Todo, TodoListAdapter.VH>(GenericDiffCallback()) {
-    class VH(val view:View): RecyclerView.ViewHolder(view) {
+
+class TodoListAdapter(val viewModel:TodoViewModel, val lifecycleOwner: LifecycleOwner) : ListAdapter<Todo, TodoListAdapter.VH>(GenericDiffCallback()) {
+    val TAG = "TODO_LIST_ADAPTER"
+
+    inner class VH(val view:View): RecyclerView.ViewHolder(view) {
         fun bind(todo:Todo) {
             view.todo_text.text = todo.text
+            if (todo.complete) {
+                view.checked_icon.visibility = View.VISIBLE
+            } else {
+                view.checked_icon.visibility = View.GONE
+            }
+            //TODO is this a source of jank?  Should we be binding the listener to the viewholder or sumptin?
+            view.unchecked_icon.setOnClickListener {
+                viewModel.toggleTodoComplete(todo.id, !todo.complete)
+            }
         }
     }
 

@@ -22,5 +22,11 @@ class TodoViewModel(val repo: ITodoRepository): ViewModel( ) {
         return repo.getAllTodosByTimestampAsc()
     }
 
+    fun toggleTodoComplete(id: String, complete:Boolean) {
+        repo.toggleTodoComplete(id, complete)
+    }
+
+
+
 
 }
