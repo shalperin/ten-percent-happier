@@ -56,16 +56,7 @@ class TodoMvvmFragment : Fragment() {
             }
         })
 
-        todoViewModel.getTodoLiveData("Y6uPXpaVVuAu03bAFGgT")
-            .observe(this, Observer {
-                Log.d(TAG, "porsche")
-                if (it.data != null) {
-                    Log.d(TAG, it.data.toString())
-                } else {
-                    Log.d(TAG, "EXCEPTION ", it.exception)
-                } })
-
-        todoViewModel.getAllTodosByTimestampAsc().observe(this, Observer{
+        todoViewModel.getFilteredTodos().observe(this, Observer{
             if (it.data == null) {
                 handleException("Error with todos by timestamp query", it.exception)
             } else {
@@ -91,6 +82,44 @@ class TodoMvvmFragment : Fragment() {
                 return false
             }
         })
+
+        toggle_all_completed_btn.setOnClickListener{
+            TODO()
+        }
+
+        all_btn.setOnClickListener {
+            todoViewModel.setFilterMode(TodoViewModel.TodoFilterMode.ALL)
+        }
+
+        active_btn.setOnClickListener {
+            todoViewModel.setFilterMode(TodoViewModel.TodoFilterMode.ACTIVE)
+        }
+
+        completed_btn.setOnClickListener {
+            todoViewModel.setFilterMode(TodoViewModel.TodoFilterMode.COMPLETED)
+        }
+
+        todoViewModel.filterMode.observe (this, Observer {
+            when (it) {
+                TodoViewModel.TodoFilterMode.ACTIVE -> {
+                    all_btn.setBackgroundResource(0)
+                    completed_btn.setBackgroundResource(0)
+                    active_btn.setBackgroundResource(R.drawable.active_todo_filter_bg)
+                }
+                TodoViewModel.TodoFilterMode.COMPLETED -> {
+                    all_btn.setBackgroundResource(0)
+                    completed_btn.setBackgroundResource(R.drawable.active_todo_filter_bg)
+                    active_btn.setBackgroundResource(0)
+
+                }
+                TodoViewModel.TodoFilterMode.ALL -> {
+                    all_btn.setBackgroundResource(R.drawable.active_todo_filter_bg)
+                    completed_btn.setBackgroundResource(0)
+                    active_btn.setBackgroundResource(0)
+
+                }
+            }
+        })
     }
 
     //Todo: crashylitcs
@@ -108,13 +137,10 @@ class TodoListAdapter(val viewModel:TodoViewModel, val lifecycleOwner: Lifecycle
     inner class VH(val view:View): RecyclerView.ViewHolder(view) {
         fun bind(todo:Todo) {
             view.todo_text.text = todo.text
-            if (todo.complete) {
-                view.checked_icon.visibility = View.VISIBLE
-            } else {
-                view.checked_icon.visibility = View.GONE
-            }
+            showCheckmark(view, todo.complete)
             //TODO is this a source of jank?  Should we be binding the listener to the viewholder or sumptin?
             view.unchecked_icon.setOnClickListener {
+                showCheckmark(view, !todo.complete)
                 viewModel.toggleTodoComplete(todo.id, !todo.complete)
             }
         }
@@ -129,5 +155,13 @@ class TodoListAdapter(val viewModel:TodoViewModel, val lifecycleOwner: Lifecycle
         val inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.todomvvm_rv_item_todos_list, parent, false)
         return VH(view)
+    }
+
+    fun showCheckmark(view: View, showComplete:Boolean) {
+        if (showComplete) {
+            view.checked_icon.visibility = View.VISIBLE
+        } else {
+            view.checked_icon.visibility = View.GONE
+        }
     }
 }
