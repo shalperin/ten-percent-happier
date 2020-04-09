@@ -21,16 +21,20 @@ class TodoFirestoreRepository(val firestore: FirebaseFirestore, val auth: Fireba
     val PATH_TODOS = "todos"
     val FIELD_TIMESTAMP = "timestamp"
     val FIELD_COMPLETE = "complete"
+    val FIELD_TEXT = "text"
 
-    val allTodosQuery = firestore.collection(PATH_ROOT)
-        .document(PATH_APPDATA)
-        .collection(PATH_USERS)
-        .document(auth.uid.toString())
-        .collection(PATH_TODOS)
-        .orderBy(FIELD_TIMESTAMP, Query.Direction.DESCENDING)
+    fun allTodosQuery(): Query {
+        var uid = auth.uid.toString()
+        return firestore.collection(PATH_ROOT)
+            .document(PATH_APPDATA)
+            .collection(PATH_USERS)
+            .document(uid)
+            .collection(PATH_TODOS)
+            .orderBy(FIELD_TIMESTAMP, Query.Direction.DESCENDING)
+
+    }
 
     override fun getTodo(todoId: String): TodoLiveData {
-        //TODO create a constant for the path below.
         val ref: DocumentReference = firestore.collection(PATH_ROOT)
             .document(PATH_APPDATA)
             .collection(PATH_USERS)
@@ -43,10 +47,13 @@ class TodoFirestoreRepository(val firestore: FirebaseFirestore, val auth: Fireba
     fun executeTodosQuery(query: Query) : LiveData<ListOrException<TodoOrException>> {
         return Transformations.map( TodoQueryLiveData(query) ) {
             if (it.data == null) {
-                ListOrException(null, it.exception)
+                var exception = it.exception
+                ListOrException(null, exception)
             } else {
+                var list = it.data.map{ snapshot -> deserializeTodo(snapshot)}
+
                 ListOrException(
-                    it.data.map{ snapshot -> deserializeTodo(snapshot)},
+                    list,
                     null
                 )
             }
@@ -54,7 +61,7 @@ class TodoFirestoreRepository(val firestore: FirebaseFirestore, val auth: Fireba
     }
 
     override fun getAllTodosByTimestamp() : LiveData<ListOrException<TodoOrException>> {
-        return executeTodosQuery(allTodosQuery)
+        return executeTodosQuery(allTodosQuery())
     }
 
     override fun toggleTodoComplete(id: String, complete:Boolean) {
@@ -84,11 +91,30 @@ class TodoFirestoreRepository(val firestore: FirebaseFirestore, val auth: Fireba
     }
 
     override fun markAllTodosCompletion(complete:Boolean) {
-        allTodosQuery.get().addOnSuccessListener { documents ->
+        allTodosQuery().get().addOnSuccessListener { documents ->
             for (document in documents) {
                 toggleTodoComplete(document.id, complete)
             }
         }
+    }
+
+    override fun deleteTodo(id: String) {
+        firestore.collection(PATH_ROOT)
+            .document(PATH_APPDATA)
+            .collection(PATH_USERS)
+            .document(auth.uid.toString())
+            .collection(PATH_TODOS)
+            .document(id).delete()
+    }
+
+    override fun updateTodo(id:String, newText: String) {
+        firestore.collection(PATH_ROOT)
+            .document(PATH_APPDATA)
+            .collection(PATH_USERS)
+            .document(auth.uid.toString())
+            .collection(PATH_TODOS)
+            .document(id)
+            .update(FIELD_TEXT, newText)
     }
 }
 
@@ -98,4 +124,6 @@ interface ITodoRepository {
     fun toggleTodoComplete(id: String, complete:Boolean)
     fun addTodo(text: String)
     fun markAllTodosCompletion(complete:Boolean)
+    fun deleteTodo(id: String)
+    fun updateTodo(id: String, newText:String)
 }

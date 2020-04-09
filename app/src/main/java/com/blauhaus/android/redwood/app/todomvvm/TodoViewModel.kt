@@ -1,25 +1,20 @@
 package com.blauhaus.android.redwood.app.todomvvm
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.blauhaus.android.redwood.app.common.DataOrException
-import kotlinx.coroutines.flow.combine
+import com.blauhaus.android.redwood.app.login.LoginViewModel
 
 class TodoViewModel(val repo: ITodoRepository): ViewModel() {
-    enum class TodoFilterMode { ALL, COMPLETED, ACTIVE }
-
     var TAG = "TODO_ViewModel"
-    var todoLiveDataCache = mutableMapOf<String, TodoLiveData>()
+    enum class TodoFilterMode { ALL, COMPLETED, ACTIVE }
+    val _filteredTodos = MediatorLiveData<List<TodoOrException>>()
+    var _incompleteCount:LiveData<Int>? = null
+    var _allTodosComplete: LiveData<Boolean>? = null
+    var _authState = MutableLiveData<LoginViewModel.AuthenticationState>()
     val filterMode = MutableLiveData<TodoFilterMode>()
 
-    fun getTodoLiveData(todoId: String): TodoLiveData {
-        if (!todoLiveDataCache.containsKey(todoId)) {
-            Log.d(TAG, "todo Live Data cache miss")
-            todoLiveDataCache[todoId] = repo.getTodo(todoId)
-        } else {
-            Log.d(TAG, "todo live data cache hit")
-        }
-        return todoLiveDataCache[todoId]!!
+    fun setAuthState(state: LoginViewModel.AuthenticationState) {
+        _authState.value = state
     }
 
     fun toggleTodoComplete(id: String, complete: Boolean) {
@@ -34,99 +29,108 @@ class TodoViewModel(val repo: ITodoRepository): ViewModel() {
         filterMode.postValue(mode)
     }
 
-    var _allTodos: LiveData<ListOrException<TodoOrException>>? = null
-    fun allTodos(): LiveData<ListOrException<TodoOrException>> {
-        if (_allTodos == null) {
-            _allTodos = repo.getAllTodosByTimestamp()
-        }
-        return _allTodos!!
-    }
-
-
-    fun getFilteredTodos(): LiveData<ListOrException<TodoOrException>> { return _filteredTodos }
-    val _filteredTodos = MediatorLiveData<ListOrException<TodoOrException>>()
-    private fun combineFilterResult(
-        todos: LiveData<ListOrException<TodoOrException>>,
-        mode: LiveData<TodoFilterMode>
-    ) {
-
-        val todos = todos.value
-        val mode = mode.value
-
-        if (todos != null && mode != null) {
-            if (todos.data == null) {
-                _filteredTodos.value = todos // repost the exception
-            } else {
-                when (mode) {
-                    TodoFilterMode.ACTIVE -> {
-                        val filteredData = todos.data.filter { it.data?.complete != true }
-                        _filteredTodos.value = ListOrException(filteredData, null)
-                    }
-                    TodoFilterMode.ALL -> {
-                        _filteredTodos.value = todos
-                    }
-                    TodoFilterMode.COMPLETED -> {
-                        val filteredData = todos.data.filter { it.data?.complete == true }
-                        _filteredTodos.value = ListOrException(filteredData, null)
-                    }
-                }
-            }
-        }
-    }
-
     fun markAllTodosCompletion(complete: Boolean) {
         repo.markAllTodosCompletion(complete)
     }
 
+    fun deleteTodo(id: String) {
+        repo.deleteTodo(id)
+    }
+
+    fun updateTodo(id:String, newText: String) {
+        repo.updateTodo(id, newText)
+    }
+
+    var _queryResult = Transformations.switchMap(_authState){
+        if (_authState.value == LoginViewModel.AuthenticationState.AUTHENTICATED) {
+            // do not fire this unless authenticated
+            // otherwise you will get a dead query
+            // because it has uid in its path, and it would be null.
+            repo.getAllTodosByTimestamp()
+        } else {
+            MutableLiveData<ListOrException<TodoOrException>>()
+        }
+    }
+
+    var _allTodos = Transformations.map(_queryResult){
+        if (it.data == null) {
+            //Todo emit on error LD to handle exception
+            listOf<DataOrException<Todo, Exception>>()
+        } else {
+            it.data
+        }
+    }
+
+    //Emit a filtered list of todos based on the filter mode.
+    fun combineForFilteredTodosMediator(todos: LiveData<List<TodoOrException>>,
+                                        filterMode: LiveData<TodoViewModel.TodoFilterMode>) {
+
+        val todos:List<TodoOrException>? = todos.value
+        val filterMode: TodoViewModel.TodoFilterMode? = filterMode.value
+
+        if(todos != null && filterMode!=null) {
+            when (filterMode) {
+                TodoViewModel.TodoFilterMode.ACTIVE -> {
+                    val filteredData = todos.filter { it.data?.complete != true }
+                    _filteredTodos.value = filteredData
+                }
+                TodoViewModel.TodoFilterMode.ALL -> {
+                    _filteredTodos.value = todos
+                }
+                TodoViewModel.TodoFilterMode.COMPLETED -> {
+                    val filteredData = todos.filter { it.data?.complete == true }
+                    _filteredTodos.value = filteredData
+                }
+            }
+        }
+    }
+
+    fun allTodosAreComplete(): LiveData<Boolean> {
+        if (_allTodosComplete == null) {
+            _allTodosComplete = Transformations.switchMap(_allTodos){
+                val retval = MutableLiveData<Boolean>()
+                retval.value = it.all { todoOrException ->
+                    if (todoOrException.data != null) {
+                        todoOrException.data.complete
+                    } else {
+                        false
+                    }
+                }
+                retval
+            }
+        }
+        return _allTodosComplete!!
+    }
+
+    fun incompleteCount():LiveData<Int> {
+        if (_incompleteCount == null) {
+            _incompleteCount = Transformations.switchMap(_allTodos) {
+                val retval = MutableLiveData<Int>()
+                var incompleteCount = it.count { todoOrException ->
+                    if (todoOrException.data != null) {
+                        !todoOrException.data.complete
+                    } else {
+                        false
+                    }
+                }
+                retval.value = incompleteCount
+                retval
+            }
+        }
+        return _incompleteCount!!
+    }
+
+
 
     init {
-        //todo we could create a local cache for repo.getAllTodosByTimestamp()
+        _filteredTodos.addSource(_allTodos) {
+            combineForFilteredTodosMediator(_allTodos, filterMode)
+        }
         _filteredTodos.addSource(filterMode) {
-            combineFilterResult(allTodos(), filterMode)
+            combineForFilteredTodosMediator(_allTodos, filterMode)
         }
-        _filteredTodos.addSource(allTodos()) {
-            combineFilterResult(allTodos(), filterMode)
-        }
+
         filterMode.value = TodoFilterMode.ALL
     }
-
-    val allTodosAreComplete = Transformations.switchMap(allTodos()){
-        val retval = MutableLiveData<Boolean>()
-        var todoOrExceptionList = it.data
-        if (todoOrExceptionList == null) {
-            retval.value = false
-        } else {
-            retval.value = todoOrExceptionList.all { todoOrException ->
-                if (todoOrException.data != null) {
-                    todoOrException.data.complete
-                } else {
-                    false
-                }
-            }
-        }
-        retval
-    }
-
-
-    //TODO refactor: allTodosComplete and this fn are really similar, maybe something can be factored
-    // out.
-    val incompleteCount = Transformations.switchMap(allTodos()){
-        val retval = MutableLiveData< DataOrException<Int, Exception>>()
-        var todoOrExceptionList = it.data
-        if (todoOrExceptionList == null) {
-            retval.value = DataOrException(0, it.exception)
-        } else {
-            var incompleteCount = todoOrExceptionList.count { todoOrException ->
-                if (todoOrException.data != null) {
-                    !todoOrException.data.complete
-                } else {
-                    false
-                }
-            }
-            retval.value = DataOrException(incompleteCount, null)
-        }
-        retval
-    }
-
 }
 
