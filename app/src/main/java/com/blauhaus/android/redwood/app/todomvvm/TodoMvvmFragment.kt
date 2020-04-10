@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.*
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -19,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 import com.blauhaus.android.redwood.app.R
 import com.blauhaus.android.redwood.app.login.LoginViewModel
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.todomvvm_fragment_main.*
 import kotlinx.android.synthetic.main.todomvvm_rv_item_todos_list.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -30,6 +32,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class TodoMvvmFragment() : Fragment() {
     private val loginViewModel by viewModel<LoginViewModel>()
     private val todoViewModel by viewModel<TodoViewModel>()
+
     val TAG = "TODO_FRAG"
     var rvAdapter:TodoListAdapter? = null
 
@@ -45,7 +48,7 @@ class TodoMvvmFragment() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        loginViewModel.authenticationState.observe(this, Observer {
+        loginViewModel.authenticationState.observe(viewLifecycleOwner, Observer {
             todoViewModel.setAuthState(it)
             if (it == LoginViewModel.AuthenticationState.UNAUTHENTICATED) {
                 findNavController().navigate(R.id.action_global_loginFragment)
@@ -69,7 +72,7 @@ class TodoMvvmFragment() : Fragment() {
     }
 
     fun bindObservers() {
-       todoViewModel._filteredTodos.observe(this, Observer{
+       todoViewModel._filteredTodos.observe(viewLifecycleOwner, Observer{
             var todos = it.map { todoOrException ->
                     if( todoOrException.data == null) {
                         handleException("error with individual Todo", todoOrException.exception)
@@ -83,7 +86,7 @@ class TodoMvvmFragment() : Fragment() {
             }
         )
 
-        todoViewModel.filterMode.observe (this, Observer {
+        todoViewModel.filterMode.observe (viewLifecycleOwner, Observer {
             when (it) {
                 TodoViewModel.TodoFilterMode.ACTIVE -> {
                     all_btn.setBackgroundResource(0)
@@ -105,7 +108,7 @@ class TodoMvvmFragment() : Fragment() {
             }
         })
 
-        todoViewModel.allTodosAreComplete().observe(this, Observer {
+        todoViewModel.allTodosAreComplete().observe(viewLifecycleOwner, Observer {
             if (it) {
                 toggle_all_completed_btn.setImageDrawable(resources.getDrawable(R.drawable.ic_keyboard_arrow_down_active))  //TODO FIXME
             } else {
@@ -113,7 +116,7 @@ class TodoMvvmFragment() : Fragment() {
             }
         })
 
-        todoViewModel.incompleteCount().observe(this, Observer {
+        todoViewModel.incompleteCount().observe(viewLifecycleOwner, Observer {
             todo_count.text = getString(R.string.items_left, it)
         })
 

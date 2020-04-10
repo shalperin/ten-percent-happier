@@ -1,5 +1,6 @@
 package com.blauhaus.android.redwood.app.todomvvm
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.blauhaus.android.redwood.app.common.DataOrException
 import com.google.firebase.Timestamp
@@ -23,6 +24,24 @@ class TodoFirestoreRepository(val firestore: FirebaseFirestore, val auth: Fireba
     val FIELD_COMPLETE = "complete"
     val FIELD_TEXT = "text"
 
+    val CACHE_KEY_ALL_TODOS = "todo_query"
+
+    var userCache = mutableMapOf<String, Any>()
+
+    init {
+        auth.addAuthStateListener {
+            if (it.currentUser == null) {
+                Log.d(TAG, "invalidating repo in-memory cache")
+                invalidateUserCache()
+            }
+        }
+    }
+
+    fun invalidateUserCache() {
+        userCache  = mutableMapOf<String, Any>()
+
+    }
+
     fun allTodosQuery(): Query {
         var uid = auth.uid.toString()
         return firestore.collection(PATH_ROOT)
@@ -31,7 +50,6 @@ class TodoFirestoreRepository(val firestore: FirebaseFirestore, val auth: Fireba
             .document(uid)
             .collection(PATH_TODOS)
             .orderBy(FIELD_TIMESTAMP, Query.Direction.DESCENDING)
-
     }
 
     override fun getTodo(todoId: String): TodoLiveData {
@@ -45,13 +63,13 @@ class TodoFirestoreRepository(val firestore: FirebaseFirestore, val auth: Fireba
     }
 
     fun executeTodosQuery(query: Query) : LiveData<ListOrException<TodoOrException>> {
+
         return Transformations.map( TodoQueryLiveData(query) ) {
             if (it.data == null) {
                 var exception = it.exception
                 ListOrException(null, exception)
             } else {
                 var list = it.data.map{ snapshot -> deserializeTodo(snapshot)}
-
                 ListOrException(
                     list,
                     null
@@ -61,7 +79,12 @@ class TodoFirestoreRepository(val firestore: FirebaseFirestore, val auth: Fireba
     }
 
     override fun getAllTodosByTimestamp() : LiveData<ListOrException<TodoOrException>> {
-        return executeTodosQuery(allTodosQuery())
+        Log.d(TAG, "getAllTodosByTimestamp()")
+        if (!userCache.containsKey(CACHE_KEY_ALL_TODOS)) {
+            Log.d(TAG, "getAllTodosByTimestamp cache miss")
+            userCache.put(CACHE_KEY_ALL_TODOS,  executeTodosQuery(allTodosQuery()))
+        }
+        return userCache[CACHE_KEY_ALL_TODOS] as LiveData<ListOrException<TodoOrException>>
     }
 
     override fun toggleTodoComplete(id: String, complete:Boolean) {
