@@ -72,8 +72,8 @@ class StatsFragment : Fragment() {
         model.medalClass.observe (this, Observer {
 
             val drawable = when(it.first) {
-                is StatsViewModel.MedalClass.Gold -> R.drawable.gold
-                is StatsViewModel.MedalClass.Bronze -> R.drawable.bronze
+                is StatsViewModel.MedalClass.Gold -> R.drawable.meditation_gold_medal
+                is StatsViewModel.MedalClass.Bronze -> R.drawable.meditation_bronze_medal
                 is StatsViewModel.MedalClass.Silver -> R.drawable.silver
                 else -> null
             }

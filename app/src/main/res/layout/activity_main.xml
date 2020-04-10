@@ -23,7 +23,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_arrow_back"
+                android:src="@drawable/common_ic_arrow_back"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -69,7 +69,7 @@
         android:layout_marginBottom="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:src="@drawable/ic_noun_day_and_night_990003"
+        android:src="@drawable/common_ic_noun_day_and_night"
         android:id="@+id/daynightfab"
         />
 

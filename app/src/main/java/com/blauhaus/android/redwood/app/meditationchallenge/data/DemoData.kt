@@ -138,7 +138,7 @@ val globalStatsData = GlobalStats(54580, 12707803, 19)
 
 // nice use of named fields.
 val currentSessionData = Content(
-    image = R.drawable.josephgoldstein,
+    image = R.drawable.meditation_josephgoldstein,
     title = "Meditate With Joseph",
     pretitle = "UP NEXT",
     description = "A beginners mindfulness medition focusing on breath following with Joseph Goldstein.  Joseph Goldstein is founder of the Insight Meditation Society in Barre Mass.",
@@ -147,7 +147,7 @@ val currentSessionData = Content(
 )
 
 val challengeUpdateData = Content(
-    image = R.drawable.dog_party_hat,
+    image = R.drawable.meditation_dog_party_hat,
     title = "The challenge is over, but you just got started!",
     pretitle = "CONGRATS",
     description = "Great job in working through the meditation challenge.  Hopefully this is a jumping off point for your meditation practice, and that you will keep finding this app useful.  Thanks for participating!"

@@ -20,7 +20,7 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="40dp"
-                android:background="@drawable/medal"
+                android:background="@drawable/meditation_medal"
                 android:scaleType="centerCrop"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"

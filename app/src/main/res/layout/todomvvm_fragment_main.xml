@@ -35,7 +35,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_keyboard_arrow_down"
+            android:src="@drawable/todo_ic_keyboard_arrow_down"
             android:id="@+id/toggle_all_completed_btn"
             android:background="@color/todo_input"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -113,7 +113,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginRight="24dp"
-            android:background="@drawable/active_todo_filter_bg"
+            android:background="@drawable/todo_active_filter_background"
             />
 
         <TextView

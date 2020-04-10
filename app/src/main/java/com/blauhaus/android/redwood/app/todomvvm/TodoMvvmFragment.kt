@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import android.widget.Toast
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.*
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -20,7 +19,6 @@ import androidx.recyclerview.widget.RecyclerView
 
 import com.blauhaus.android.redwood.app.R
 import com.blauhaus.android.redwood.app.login.LoginViewModel
-import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.todomvvm_fragment_main.*
 import kotlinx.android.synthetic.main.todomvvm_rv_item_todos_list.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -91,16 +89,16 @@ class TodoMvvmFragment() : Fragment() {
                 TodoViewModel.TodoFilterMode.ACTIVE -> {
                     all_btn.setBackgroundResource(0)
                     completed_btn.setBackgroundResource(0)
-                    active_btn.setBackgroundResource(R.drawable.active_todo_filter_bg)
+                    active_btn.setBackgroundResource(R.drawable.todo_active_filter_background)
                 }
                 TodoViewModel.TodoFilterMode.COMPLETED -> {
                     all_btn.setBackgroundResource(0)
-                    completed_btn.setBackgroundResource(R.drawable.active_todo_filter_bg)
+                    completed_btn.setBackgroundResource(R.drawable.todo_active_filter_background)
                     active_btn.setBackgroundResource(0)
 
                 }
                 TodoViewModel.TodoFilterMode.ALL -> {
-                    all_btn.setBackgroundResource(R.drawable.active_todo_filter_bg)
+                    all_btn.setBackgroundResource(R.drawable.todo_active_filter_background)
                     completed_btn.setBackgroundResource(0)
                     active_btn.setBackgroundResource(0)
 
@@ -110,9 +108,9 @@ class TodoMvvmFragment() : Fragment() {
 
         todoViewModel.allTodosAreComplete().observe(viewLifecycleOwner, Observer {
             if (it) {
-                toggle_all_completed_btn.setImageDrawable(resources.getDrawable(R.drawable.ic_keyboard_arrow_down_active))  //TODO FIXME
+                toggle_all_completed_btn.setImageDrawable(resources.getDrawable(R.drawable.todo_ic_keyboard_arrow_down_active))  //TODO FIXME
             } else {
-                toggle_all_completed_btn.setImageDrawable(resources.getDrawable(R.drawable.ic_keyboard_arrow_down))
+                toggle_all_completed_btn.setImageDrawable(resources.getDrawable(R.drawable.todo_ic_keyboard_arrow_down))
             }
         })
 
