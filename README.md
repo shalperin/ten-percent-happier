@@ -1,6 +1,6 @@
 
-# "Redwood" Demos and UI Clones
-### By Sam Shimi Halperin
+# Sam Shimi Halperin: Demos and UI Clones
+## Project "Redwood"
 
 Intro:
 ======
