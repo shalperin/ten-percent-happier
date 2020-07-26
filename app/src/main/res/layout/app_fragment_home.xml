@@ -7,50 +7,59 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/home"
+            android:padding="40dp"
     >
 
+    <TextView
+        android:textSize="24dp"
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sam Shimi Halperin: Demos and UI Clones"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:textColor="#000" />
 
-    <Button
+
+    <TextView
         android:id="@+id/launch_meditation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="90dp"
-        android:text="Inspired by ''10% Happier''"
+        android:layout_marginTop="50dp"
+        android:text="Ten Percent Happier: Meditation Challenge"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:rotation="45"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        android:background="@color/colorPrimary"
+        android:padding="@dimen/text_padding"
+        android:textColor="#fff"
         />
 
-
-    <Button
+    <TextView
         android:id="@+id/launch_todo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="50dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginLeft="20dp"
-        android:text="Inspired by ''Todo MVC''"
+        android:text="TODO MVC: To Do List"
         app:layout_constraintTop_toBottomOf="@id/launch_meditation"
         app:layout_constraintLeft_toLeftOf="@id/launch_meditation"
         android:rotation="0"
-
+        android:background="@color/colorPrimary"
+        android:padding="@dimen/text_padding"
+        android:textColor="#fff"
         />
 
     <TextView
         android:id="@+id/auth_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="98dp"
-        android:layout_marginLeft="150dp"
+        android:layout_marginTop="50dp"
         android:background="@color/colorAccent"
         android:padding="@dimen/text_padding"
         android:textColor="#fff"
         app:layout_constraintLeft_toLeftOf="@id/launch_meditation"
-
         app:layout_constraintTop_toBottomOf="@id/launch_todo"
         tools:text="@string/login_button_text"
-        android:rotation="20"
         />
 
 

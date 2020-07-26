@@ -14,9 +14,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        daynightfab.setOnClickListener{
-            toggleDayNight()
-        }
+//        daynightfab.setOnClickListener{
+//            toggleDayNight()
+//        }
 
         go_home.setOnClickListener {
             findNavController(R.id.nav_host_fragment).navigate(R.id.action_global_homeFragment)

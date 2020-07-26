@@ -23,10 +23,6 @@ import kotlinx.android.synthetic.main.todomvvm_fragment_main.*
 import kotlinx.android.synthetic.main.todomvvm_rv_item_todos_list.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-
-/**
- * A simple [Fragment] subclass.
- */
 class TodoMvvmFragment() : Fragment() {
     private val loginViewModel by viewModel<LoginViewModel>()
     private val todoViewModel by viewModel<TodoViewModel>()
