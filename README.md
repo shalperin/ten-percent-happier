@@ -5,7 +5,7 @@
 Intro:
 ======
 There is a tradition in Fine Arts education of copying master works in order to get the muscle memory for good technique.  Android isn't painting, but it has been useful to more or less clone UI elements that
-I like into these little demo apps.
+I like into these little demo apps.  It has been helpful to implement other people's designs, which bounds the project to a successful clone, rather than having open-ended original designs.  Fastidiousness about pixel-perfect interpretations quickly becomes gratuitous compulsivity when not bounded by a "finished" state.
 
 To Build:
 =========
