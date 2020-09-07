@@ -49,11 +49,11 @@ class DayView : ImageView {
                 0, 0
             ).apply {
                 try {
-                    metVector = getResourceId(R.styleable.DayView_metVector, R.drawable.ic_last4weeks_circle_met)
-                    notMetVector = getResourceId(R.styleable.DayView_notMetVector, R.drawable.ic_last4weeks_x_mark)
-                    notMetTodayVector = getResourceId(R.styleable.DayView_notMetTodayVector, R.drawable.ic_last4weeks_stroked_circle)
-                    futureVector = getResourceId(R.styleable.DayView_futureVector, R.drawable.ic_last4weeks_circle_future)
-                    metTodayVector = getResourceId(R.styleable.DayView_metTodayVector, R.drawable.ic_last4weeks_check_circle)
+                    metVector = getResourceId(R.styleable.DayView_metVector, R.drawable.ic_abstract_calendar_circle_met)
+                    notMetVector = getResourceId(R.styleable.DayView_notMetVector, R.drawable.ic_abstract_calendar_x_mark)
+                    notMetTodayVector = getResourceId(R.styleable.DayView_notMetTodayVector, R.drawable.ic_abstract_calendar_stroked_circle)
+                    futureVector = getResourceId(R.styleable.DayView_futureVector, R.drawable.ic_abstract_calendar_circle_future)
+                    metTodayVector = getResourceId(R.styleable.DayView_metTodayVector, R.drawable.ic_abstract_calendar_check_circle)
                 } finally {
                     recycle()
                 }

@@ -27,7 +27,8 @@ class TodoMvvmFragment() : Fragment() {
     private val loginViewModel by viewModel<LoginViewModel>()
     private val todoViewModel by viewModel<TodoViewModel>()
 
-    val TAG = "TODO_FRAG"
+    private val TAG = TodoMvvmFragment::class.java.simpleName
+
     var rvAdapter:TodoListAdapter? = null
 
 

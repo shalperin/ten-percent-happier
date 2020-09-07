@@ -16,8 +16,8 @@ import androidx.lifecycle.Observer
 import androidx.viewpager.widget.ViewPager
 import com.blauhaus.android.redwood.components.barchart.BarChartFragment
 import com.blauhaus.android.redwood.components.barchart.BarChartViewModel
-import com.blauhaus.android.redwood.components.abstractcalendar.LastFourWeeksFragment
-import com.blauhaus.android.redwood.components.abstractcalendar.LastFourWeeksViewModel
+import com.blauhaus.android.redwood.components.abstractcalendar.AbstractCalendarFragment
+import com.blauhaus.android.redwood.components.abstractcalendar.AbstractCalendarViewModel
 import com.blauhaus.android.redwood.app.R
 import kotlinx.android.synthetic.main.meditation_fragment_stats_pager.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -25,12 +25,12 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class StatsFragment : Fragment() {
     val barChartViewModel by viewModel<BarChartViewModel>()
-    val last4ViewModel by viewModel<LastFourWeeksViewModel>()
+    val last4ViewModel by viewModel<AbstractCalendarViewModel>()
     val model by viewModel<StatsViewModel>()
 
     private val BAR_CHART_ID = "1"
     private val LAST4_WEEKS_POSITION_IN_VIEW_PAGER = 0
-    private val frag1 = LastFourWeeksFragment()
+    private val frag1 = AbstractCalendarFragment()
     private val frag2 = BarChartFragment.newInstance(BAR_CHART_ID)
     private val frag3 = GlobalStatsFragment()
 

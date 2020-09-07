@@ -1,6 +1,7 @@
 package com.blauhaus.android.redwood.app
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -10,13 +11,11 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.view.*
 
 class MainActivity : AppCompatActivity() {
+    private val TAG = MainActivity::class.java.simpleName
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-//        daynightfab.setOnClickListener{
-//            toggleDayNight()
-//        }
 
         go_home.setOnClickListener {
             findNavController(R.id.nav_host_fragment).navigate(R.id.action_global_homeFragment)

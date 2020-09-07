@@ -10,13 +10,13 @@ import com.blauhaus.android.redwood.R
 import kotlinx.android.synthetic.main.fragment_last_four_weeks.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class LastFourWeeksFragment : Fragment() {
-    private val model: LastFourWeeksViewModel by viewModel()
+class AbstractCalendarFragment : Fragment() {
+    private val model: AbstractCalendarViewModel by viewModel()
 
     lateinit var views: List<DayView>
 
     companion object {
-        fun newInstance() = LastFourWeeksFragment()
+        fun newInstance() = AbstractCalendarFragment()
     }
 
 
@@ -36,9 +36,12 @@ class LastFourWeeksFragment : Fragment() {
             day25, day26, day27)
     }
 
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        //TODO this code belongs in OnViewCreated, onActivityCreated is deprecated.
+        //Should also use viewLifecycleOwner...
         model.dayData.observe(this, Observer { states ->
             views.forEach{it.show(DayView.ViewState.Future())}
             views.zip(states).forEach{ (day, state) ->

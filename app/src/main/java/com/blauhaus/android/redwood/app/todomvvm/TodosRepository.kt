@@ -15,7 +15,8 @@ import java.util.*
 typealias ListOrException<T> = DataOrException<List<T>, Exception>
 
 class TodoFirestoreRepository(val firestore: FirebaseFirestore, val auth: FirebaseAuth): ITodoRepository {
-    val TAG = "TODO-REPO"
+    private val TAG = TodoFirestoreRepository::class.java.simpleName
+
     val PATH_ROOT = "todoMVVM"
     val PATH_APPDATA = "appdata"
     val PATH_USERS = "users"
@@ -37,19 +38,31 @@ class TodoFirestoreRepository(val firestore: FirebaseFirestore, val auth: Fireba
         }
     }
 
-    fun invalidateUserCache() {
+    private fun invalidateUserCache() {
         userCache  = mutableMapOf<String, Any>()
 
     }
 
-    fun allTodosQuery(): Query {
-        var uid = auth.uid.toString()
+    private fun allTodosQuery(): Query {
+        val uid = auth.uid.toString()
         return firestore.collection(PATH_ROOT)
             .document(PATH_APPDATA)
             .collection(PATH_USERS)
             .document(uid)
             .collection(PATH_TODOS)
             .orderBy(FIELD_TIMESTAMP, Query.Direction.DESCENDING)
+    }
+
+    private fun executeTodosQuery(query: Query) : LiveData<ListOrException<TodoOrException>> {
+        return Transformations.map( TodoQueryLiveData(query) ) {
+            if (it.data == null) {
+                val exception = it.exception
+                ListOrException(null, exception)
+            } else {
+                val list = it.data.map{ snapshot -> deserializeTodo(snapshot)}
+                ListOrException(list, null)
+            }
+        }
     }
 
     override fun getTodo(todoId: String): TodoLiveData {
@@ -60,22 +73,6 @@ class TodoFirestoreRepository(val firestore: FirebaseFirestore, val auth: Fireba
             .collection(PATH_TODOS)
             .document(todoId)
         return TodoLiveData(ref)
-    }
-
-    fun executeTodosQuery(query: Query) : LiveData<ListOrException<TodoOrException>> {
-
-        return Transformations.map( TodoQueryLiveData(query) ) {
-            if (it.data == null) {
-                var exception = it.exception
-                ListOrException(null, exception)
-            } else {
-                var list = it.data.map{ snapshot -> deserializeTodo(snapshot)}
-                ListOrException(
-                    list,
-                    null
-                )
-            }
-        }
     }
 
     override fun getAllTodosByTimestamp() : LiveData<ListOrException<TodoOrException>> {

@@ -5,7 +5,8 @@ import com.blauhaus.android.redwood.app.common.DataOrException
 import com.blauhaus.android.redwood.app.login.LoginViewModel
 
 class TodoViewModel(val repo: ITodoRepository): ViewModel() {
-    var TAG = "TODO_ViewModel"
+    private var TAG = TodoViewModel::class.java.simpleName
+
     enum class TodoFilterMode { ALL, COMPLETED, ACTIVE }
     val _filteredTodos = MediatorLiveData<List<TodoOrException>>()
     var _incompleteCount:LiveData<Int>? = null

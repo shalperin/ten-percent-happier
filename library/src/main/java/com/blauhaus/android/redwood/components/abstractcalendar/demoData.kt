@@ -1,7 +1,7 @@
 package com.blauhaus.android.redwood.components.abstractcalendar
 
 
-val demoLastFourWeeksData = listOf(
+val demoAbstractCalendarData = listOf(
     DayView.ViewState.Skipped(),
     DayView.ViewState.Met(),
     DayView.ViewState.Skipped(),
